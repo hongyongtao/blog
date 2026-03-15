@@ -2,7 +2,9 @@
  * CopyRight 
  * https://github.com/bh-lay/blog
  */
- (function(){
+if (typeof window === 'undefined' || typeof document === 'undefined') {
+    // 在 Hexo Node 渲染阶段不执行浏览器相关脚本
+} else (function(){
     // 卡片宽度
     const cardWidth = 800
     const footerHeight = 250

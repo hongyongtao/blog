@@ -1,4 +1,6 @@
-(function(){
+if (typeof window === 'undefined' || typeof document === 'undefined') {
+    // 在 Hexo Node 渲染阶段不执行浏览器相关脚本
+} else (function(){
     function AjaxRequest(opts){
         this.type         = opts.type || "post";
         this.url          = opts.url;
