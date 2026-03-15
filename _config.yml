@@ -1,0 +1,165 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 洪致知的个人网站
+subtitle: ''
+description: '洪致知,个人网站,博客,技术成长'
+keywords:
+author: 洪致知
+language: zh-CN
+timezone: 'Asia/Shanghai'
+
+# URL
+## 使用 GitHub Pages 时可用下方地址；若已绑定自定义域名，改为你的域名即可
+url: https://www.hongyongtao.com
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: 
+  - visit/test.md
+
+# Writing
+new_post_name: :year/:title.md
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: true
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+category_map:
+tag_map:
+  Atom: atom
+  Java: java
+  JDK: jdk
+  AOP: aop
+  IOC: ioc
+  Mybatis: mybatis
+  Spring: spring
+  CAS: cas
+  volatile: volatile
+  反射: reflect
+  异常: exception
+  译文集: translation
+  多线程: multithreading
+  并行: parallelism
+  生活: live
+  并发编程: concurrent-programming
+  面向对象: object-oriented
+  人生目标: life-goal
+  旅游: travel
+  动态代理: dynamic-proxy
+  一文读懂: easy-to-read
+  洪致知: hongyongtao
+  科技周刊: weekly
+  美团: meituan
+  算法: algorithm
+  马拉松: marathon
+  跑步: runnning
+  裁员: layoffs
+  焦虑: anxious
+  理性: rational
+  人工智能: artificial-intelligence
+  虚拟现实: vr
+  增强现实: ar
+  假期: vacation
+  母亲节: momsday
+  程序员: programmer
+  中年危机: midlife-crisis
+  开源: open-source
+  读书: reading
+  时间: time
+  实验: trial
+  竹白: zhubai
+  竹白百科: zhubai-wiki
+  黑客: hacker
+  画家: painter
+  汇报: report
+  深圳: shenzhen
+  灏灏: leo
+  人生伴侣: soulmate
+  一家三口: family
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: simpleblock
+##theme: landscape
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: ''
+  
+# Hexo RSS
+feed:
+  type: atom
+  path: atom.xml
+  limit: 30
+  
+ 
+  

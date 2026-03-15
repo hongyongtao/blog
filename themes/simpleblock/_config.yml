@@ -1,0 +1,70 @@
+## Services
+google_analytics: 'G-XWB09PF43E'
+giscus: 1
+share_card: 1
+biglate_analytics: 1
+biglate_ajax: 1
+
+## Meta
+rss: /atom.xml
+favicon: /avatars/v1.ico
+icon: /avatars/v1.ico
+source_url: 'https://github.com/hongyongtao/blog/blob/master/source/'
+license:
+  name: 'CC BY-NC-SA 3.0'
+  url: 'http://creativecommons.org/licenses/by-nc-sa/3.0/cn'
+
+## Menus
+menus:
+  '关于我': /about
+  '简历': /resume
+  '在读书单': /booklist
+  '在听播客': /podcasts
+  '技术日志': /list
+  '生活掠影': /live
+  '日常叨叨叨': /happened
+  '订阅我': /feed
+  
+right_menus:
+  '科技周刊': /weekly
+  '访问统计': /visit
+  'Github':
+    target: '_blank'
+    href: 'https://github.com/hongyongtao/blog'
+
+
+## Banners && Widgets 
+banners:
+  jade: |
+    | 2025-01-14：
+    | 职业、家庭、认知之拐点，或成人生关键之转折。
+
+widgets:
+  -
+    markdown: |
+      Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。
+
+      CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a>
+
+  -
+    markdown: |
+      欢迎通过以下方式联系我：<br/>
+      GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+      CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+      Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> 
+
+  -
+    tags: true
+
+  -
+    archives: true
+
+  -
+    copyright: true
+
+## SNS (Work in progress)
+sns:
+  qq: ''
+  mobile: ''
+  github: 'hongyongtao'
+

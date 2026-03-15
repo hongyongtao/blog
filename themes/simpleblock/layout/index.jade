@@ -1,0 +1,113 @@
+extends base
+
+block head
+  if is_tag()
+    title 标签：#{page.tag} | #{config.title}
+  else if page.category
+    title 分类：#{page.category} | #{config.title}
+  else if page.year && page.month
+    title 归档：#{page.year} 年 #{page.month} 月 | #{config.title}
+  else if !page.posts
+    title #{page.title} | #{config.title}
+  else
+    title= config.title
+
+mixin article(post)
+  article
+    header
+      if page.posts
+        h2
+          a(href=url_for(post.path))= post.title
+      else
+        small.right
+          a(target='_blank', href=sourceOfPost(post, theme.source_url)) 查看源代码
+        h1= post.title
+
+    .article-meta.clearfix
+      div.post-meta-avatars
+        figure.post-meta-avatar
+          a(target='_blank', href='/about')
+            if post.avatar
+              img(src=post.avatar)
+            else 
+              img(src='/images/post/me/avatar.jpg')
+      if post.author
+        author.left= post.author
+      else 
+        author.left= '洪致知'
+      time.left= post.date.format(config.date_format)
+
+      if page.posts
+      else 
+         img.img-visitor(src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog."+url_for(post.path),align="left")
+
+      if post.categories
+        ul.tags.left
+          - post.categories.each(function(category) {
+            li
+              a(href=url_for(category.path))= category.name
+          - });
+
+      if post.tags
+        ul.tags.right
+          - post.tags.each(function(tag) {
+            li
+              a(href=url_for(tag.path))= tag.name
+          - });
+    if page.posts
+      div.preview
+        img(src=post.preview)
+      .markdown-body!= post.introduce 
+      div.introduce-center
+        a(href=url_for(post.path))= '阅读全文 >> '
+    else 
+      .markdown-body!= post.content
+
+    if !page.posts && theme.giscus
+      share-info
+        #qrcode
+        .share-card
+        sharetitle=post.title
+        shareintroduce=post.introduce
+        shareimg=post.preview
+        author=post.author 
+
+    if !page.posts && theme.giscus
+      .giscus
+
+    if page.posts && theme.giscus
+      .giscus-none
+        .giscus
+
+  if !page.posts && post.appends
+    for append in formatArray(post.appends)
+      .article-widget
+        +widget-inter(append)
+
+block body
+  for banner in formatArray(theme.banners)
+    .article-widget
+      +widget-inter(banner)
+
+  if is_tag()
+    .article-widget
+      strong 标签 ##{page.tag}
+
+  if page.category
+    .article-widget
+      strong 分类 ##{page.category}
+
+  if page.year && page.month
+    .article-widget
+      strong 归档 #{page.year} 年 #{page.month} 月
+
+  if page.posts
+    - page.posts.each(function(post) {
+      +article(post)
+    - });
+
+    .archive-pagination
+      .paginator!= fixPaginator(paginator({prev_text: '«', next_text: '»'}))
+
+  else
+    +article(page)
