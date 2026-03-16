@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="https://www.hongyongtao.com/atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>洪致知的个人网站</title>
   
@@ -787,3 +788,4 @@ width=&quot;100%&quot; height=&quot;600px&quot; scrolling=&quot;no&quot; border=
   </entry>
   
 </feed>
+
