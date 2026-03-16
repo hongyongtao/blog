@@ -1,0 +1,335 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>无聊科技正经事周刊（第3期）：美团的推荐算法，是在玩火吗？ | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">订阅我</a></nav><nav class="right menus-right"><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">2025-01-14：
+职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2022%2Fweekly-3.md">查看源代码</a></small><h1>无聊科技正经事周刊（第3期）：美团的推荐算法，是在玩火吗？</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/images/post/me/avatar.jpg"/></a></figure></div><author class="left">潘深练</author><time class="left">2022-04-20</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2022/04/20/weekly-3/" align="left" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/weekly/">科技周刊</a></li><li><a href="/tags/meituan/">美团</a></li><li><a href="/tags/algorithm/">算法</a></li></ul></div><div class="markdown-body"><p>这里记录每周值得分享的科技内容，周三发布。</p>
+<p>本刊开源（GitHub: <a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog">hongyongtao/blog</a>），欢迎投稿，推荐或自荐文章/软件/资源，请<a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog/issues">提交 issue</a> 。</p>
+<h2 id="封面图"><a href="#封面图" class="headerlink" title="封面图"></a>封面图</h2><p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/cover.jpg"></p>
+<p>欧盟正在建设一条价值 110 亿美元的穿越阿尔卑斯山的隧道。（<a target="_blank" rel="noopener" href="https://interestingengineering.com/video/eu-tunnel-candinavia-mediterranean">via</a>）</p>
+<h2 id="本周话题：美团的推荐算法，是在玩火吗？"><a href="#本周话题：美团的推荐算法，是在玩火吗？" class="headerlink" title="本周话题：美团的推荐算法，是在玩火吗？"></a>本周话题：美团的推荐算法，是在玩火吗？</h2><p><strong>美团算法推荐</strong></p>
+<p>从今年3、4月份开始，周围陆续有男性朋友说自己的美团首页，频繁被推荐一些类 “色/情” 擦边的营销产品服务，还调侃说美团真懂自己，当然，我并没太在意。</p>
+<p>但是，最近发现自己的美团首页也充斥着这类打着 “单身无人”、“男士专享”、“纯/欲”、“私/密空间”、“乳/式按摩” 、“宅/欲”、“解/压”、“技/师” 等极具诱导标签的营销产品服务。</p>
+<p>于是我好奇的找了一个小范围的微信群，问了一句：“ <strong>@所有人</strong>  <strong>你们把美团的首页截图一下，看看有啥？</strong>“ </p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-1.jpg"></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-2.jpg"></p>
+<p>结果惊呼，几乎所有男性伙伴们，在美团首页都能看到此类产品服务的推荐信息，我列贴部分：</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-002.jpg"></p>
+<p>我相信大部分男性，今天打开美团首页，依然能看到此类推荐的产品服务。</p>
+<p>当然，不止是 <strong>美团</strong>，很多互联网平台，依靠自身大流量优势，吸纳海量用户，收集用户个人信息、浏览记录、地理位置、交易行为、兴趣爱好、联系方式等等，进行最大程度的商业化利用。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-7.jpg"></p>
+<p>在提供便利的同时，也出现了例如大数据“杀熟”、流量造假、诱导沉迷等不合理的问题给我们的生活增添不少烦恼。而更有甚者，通过算法推荐展示低俗信息吸引眼球、诱导过度消费、推荐类色/情信息诱导未成年，甚至使用一些突破人性道德伦理的营销方式来达成交易，这些行为，都是在法律边缘试探。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-010.jpg"></p>
+<ul>
+<li>针对已婚妈妈，过度推荐儿童消费</li>
+<li>针对未成年，推荐游戏、甚至色/情类信息</li>
+<li>针对老年人，推荐保健品、理财类</li>
+<li>针对男性，当然就是以上的解压/放松、单身/按摩、私密/宅诱等等。</li>
+<li>我们每天都在接收骚扰电话、你孩子姓名、年龄、学历等等都可能被恶意侵犯、利用。</li>
+</ul>
+<p>难道我们，只能眼睁睁看着自己的信息被互联网平台无限滥用和过度消费吗？</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-3.jpeg"></p>
+<p>当然不是！<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1726154077510563255">算法，需依法！</a></p>
+<p>国家早已给 “算法” 立规矩！3月1日起，<a target="_blank" rel="noopener" href="http://www.cac.gov.cn/2022-01/04/c_1642894606364259.htm">《互联网信息服务算法推荐管理规定》</a>正式实施。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-6.jpg"></p>
+<p><strong>互联网清朗行动</strong></p>
+<p>早在 2004 年 ，国家就陆续推出过许多管理行动通知以及管理规定，包括但不仅限于算法分级分类治理、网络安全、信息服务，以及算法推荐备案治理等。</p>
+<p>一直以来，国家在加强互联网信息服务算法推荐管理，以及推动互联网信息服务算法综合治理专项行动方面做了很多工作。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-004.jpg"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cac.gov.cn/2022-02/25/c_1647395666889023.htm">关于互联网信息服务算法备案系统上线的通告</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cac.gov.cn/2022-03/01/c_1647766971713631.htm">加强算法风险全流程治理 创设算法规范“中国方案”</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cac.gov.cn/2022-03/02/c_1647826979822123.htm">专家解读｜规范算法推荐 发展科技法理</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cac.gov.cn/2022-04/08/c_1651028524542025.htm">关于开展“清朗·2022年算法综合治理”专项行动的通知</a></li>
+</ul>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-003.jpg"></p>
+<p>并且，重点检查具有较强舆论属性或社会动员能力的大型网站、平台及产品，包括：</p>
+<ul>
+<li>督促企业利用算法加大 <strong>正能量传播</strong></li>
+<li>处置 <strong>违法和不良</strong> 信息</li>
+<li>整治 <strong>算法滥用</strong> 乱象</li>
+<li>积极开展 <strong>算法备案</strong></li>
+<li>推动 <strong>算法</strong> 综合治理工作的常态化和规范化</li>
+<li>营造 <strong>风清气正</strong> 的网络空间</li>
+</ul>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-8.jpg"></p>
+<p>因此，美团等平台有可能确实在玩火、在打擦边球。（<a target="_blank" rel="noopener" href="http://www.wyaq.com/youxi/zhishi/2080.html">via</a>）</p>
+<p>但是，不管如何，我倒是好奇一个问题？未来这些大互联网平台的算法，我们普通人能够干预或参与吗？</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-4.jpg"></p>
+<p>恰巧，这两天网上很多人在讨论马斯克入股、收购 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Twitter/2443267">推特</a>，而其中主要在讨论一个很有意思的言论：“如果埃隆·马斯克能够以 430 亿美元成功收购 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Twitter/2443267">Twitter</a> ，他希望 Twitter 的算法能够公开，以确保平台公平“。简单来说，就是马斯克认为：<strong>Twitter 应该开放算法！</strong> 这个言论在引起很激烈的讨论，特别是在我们 IT 人群当中，更有意思的是，发明推特的人也认同这个想法！</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/topic-001-5.jpg"></p>
+<p>然后，我发现有一篇文章 <a target="_blank" rel="noopener" href="https://every.to/divinations/elon-is-right-twitter-should-open-up-the-algorithm">《马斯克是对的：Twitter 应该把算法开源》</a> ，还针对马斯克的观点做了一些实际分析。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-011.jpg"></p>
+<p>作者认为如果开放算法，有利于增加透明度和为用户创造更多选择，将会是一件好事，并从几个维度去分析讨论：</p>
+<ul>
+<li>增加使用率</li>
+<li>减少骚扰</li>
+<li>重建信任</li>
+</ul>
+<p>我很赞同作者的观点，而且我认为，如果包括美团在内的互联网平台，未来都能开放算法，那对于苦互联网平台久矣的网民来说，绝对会是一件开创性的好事，虽然对像美团此类大平台并不需要再去考虑扩大用户规模、或者说让用户保持信任之类的行为（由于市场已经基本垄断），所以仅剩下的一个直接好处，那就是避免算法被平台滥用，导致我们受到无尽的骚扰与侵犯，导致我们裸露在毫无节制的各种算法当中，仅此而已。</p>
+<p>基本，以上就是我简单的看法，不知道大家怎么想，对于如今大平台的算法与推荐，是否感到厌恶？</p>
+<h2 id="科技动态"><a href="#科技动态" class="headerlink" title="科技动态"></a>科技动态</h2><p>1、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A5%9E%E8%88%9F%E5%8D%81%E4%B8%89%E5%8F%B7">英雄归来！中国神舟十三号载人飞船历时半年，完成创纪录任务后载3名机组人员安全降落</a>（中文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-016.jpg"></p>
+<p><strong>发射成功</strong></p>
+<p>2021年10月16日0时23分，搭载神舟十三号载人飞船的长征二号F遥十三运载火箭在酒泉卫星发射中心按照预定时间精准点火发射，约582秒后，神舟十三号载人飞船与火箭成功分离，进入预定轨道，顺利将翟志刚、王亚平、叶光富3名航天员送入太空，飞行乘组状态良好，发射取得圆满成功。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015.jpg"></p>
+<p><strong>在轨半年</strong></p>
+<p>神舟十三号机组人员在轨道上度过了六个月。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-017.jpg"></p>
+<p>神舟十三号任务将实现五个方面的任务目标，与神舟十二号任务相比，神舟十三号任务主要有以下几方面不同：</p>
+<ul>
+<li>一是载人飞船将采用自主快速交会对接的方式，首次径向停靠空间站；</li>
+<li>二是届时中国空间站将实现核心舱、2艘货运飞船、1艘载人飞船共4个飞行器组合运行；</li>
+<li>三是航天员将首次在轨驻留6个月，这也是空间站运营期间航天员乘组常态化驻留周期；</li>
+<li>四是中国女航天员将首次进驻中国空间站，航天员王亚平也将会成为中国首位实施出舱活动的女航天员，而神舟十三乘组也将包括中国首次出舱的男女航天员；</li>
+<li>五是在神舟十二号任务的基础上，进一步开展更多的空间科学实验与技术试验，产出高水平科学成果；</li>
+<li>六是实施任务的飞船、火箭均在发射场直接由应急待命的备份状态转为发射状态。</li>
+</ul>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-014.jpg"></p>
+<p>神舟十三号飞船标识。</p>
+<p><strong>生活与工作</strong></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-1.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-2.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-3.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-4.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-5.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-6.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-7.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-8.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-9.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-10.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-11.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-12.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-13.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-14.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-20.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-21.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-22.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-23.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-24.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-25.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-26.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-27.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-28.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-29.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-30.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-015-31.jpg"> </p>
+<p><a target="_blank" rel="noopener" href="http://www.xinhuanet.com/science/2022-04/15/c_1310559996.htm">via</a> </p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-013.jpg"><br><strong>成功着陆</strong></p>
+<p>2022年4月16日9时56分，神舟十三号载人飞船返回舱在东风着陆场成功着陆。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-012.jpg"><br>航天员翟志刚、王亚平、叶光富（左至右)安全顺利出舱 （<a target="_blank" rel="noopener" href="http://paper.people.com.cn/rmrb/html/2022-04/17/nw.D110000renmrb_20220417_2-01.htm">新华社</a> )</p>
+<p><strong>新起点，新记录</strong></p>
+<p>神舟十三号载人飞行任务取得圆满成功， 中国航天，又站在了一个新的起点。 </p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-011.jpg"></p>
+<p>致敬航天英雄。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://news.cision.com/chalmers/r/converting-solar-energy-to-electricity-on-demand,c3540525">一种新的储能系统可以将太阳能储存近二十年</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-001.jpg"></p>
+<p><strong>转储太阳能</strong></p>
+<p>瑞典查尔姆斯理工大学 Kasper Moth-Poulsen 教授团队设计了一种能源系统，可以将太阳能储存长达 18 年。</p>
+<p>这项新技术基于查尔姆斯理工大学开发的太阳能系统 MOST——分子太阳能热能储存系统。这项技术是基于一种特殊设计的分子，当它与阳光接触时会改变形状，该研究在早期阶段提出时就已经引起了全世界的极大兴趣。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-002.jpg"></p>
+<p><strong>按需释放储能</strong></p>
+<p>瑞典研究团队把存储有太阳能的 MOST 材料（降冰片二烯），运到中国上海，经过中国上海交通大学胡志宇教授、李涛教授团队，成功利用 MEMS-TEG 发电芯片进行了 <strong>按需</strong> 放热发电的实验室演示，首次实现了分子太阳能至热能储存释放继而转换为电能。</p>
+<p><strong>思考</strong></p>
+<p>像我们平时给充电宝充满电，过一段时间再用发现没电了，蓝牙耳机也是如此，是否未来也能改用这类储能系统，让充电宝、蓝牙耳机等等，也能放上18年。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://news.cision.com/chalmers/r/converting-solar-energy-to-electricity-on-demand,c3540525">瑞典查尔姆斯理工大学报道</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S266638642200056X">《细胞报告物理科学》杂志</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.thepaper.cn/newsDetail_forward_17195963">CellPress细胞科学-CRPS：实现太阳能异地存储且按需发电的新型绿色能源技术</a></li>
+</ul>
+<p>3、<a target="_blank" rel="noopener" href="https://www.visualcapitalist.com/radiation-emissions-of-popular-smartphones/">流行的智能手机发出多少辐射？</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-000.jpg"></p>
+<p>智能手机已经成为我们日常生活中不可或缺的一部分，从工作和学校到日常任务，这些手持设备已将一切尽在掌握之中。大多数人每天在手机上花费5-6 个小时。而且，鉴于我们的手机会散发出微量的辐射，我们每天都会将自己暴露在辐射中数小时。</p>
+<p>但是不同的手机发出的辐射量不同，在德国联邦辐射防护办公室收集的数据的帮助下，我们可视化了当今市场上一些流行的智能手机的辐射排放。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-001.jpg"></p>
+<p><strong>摩托罗拉 Edge 2020</strong> 的辐射发射最高，SAR 值为每公斤1.79 瓦的辐射。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-002.jpg"></p>
+<p>SAR值最低的智能手机是 <strong>中兴 Blade V10</strong>，每公斤辐射0.13瓦。</p>
+<ul>
+<li>虽然，目前没有重要的研究证明手机辐射的有害影响。</li>
+<li>但是，长时间接触智能设备的人，至少可以量化他们的辐射暴露量，并选择哪些品牌可以满足他们的需求。</li>
+</ul>
+<p>4、<a target="_blank" rel="noopener" href="https://interestingengineering.com/video/build-miniature-refrigerator">使用基本材料制作微型冰箱的方法</a>（英文，视频）</p>
+<p>第 1 步：准备主要电子设备</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-004.jpg"></p>
+<p>第2步：制作冰箱的主壳</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-005.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-006.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-007.jpg"></p>
+<p>第 3 步：继续构建主冰箱</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-008.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-009.jpg"></p>
+<p>第4步：完成冰箱</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-010.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/keji-003.jpg"></p>
+<h2 id="灵感"><a href="#灵感" class="headerlink" title="灵感"></a>灵感</h2><p>1、<a target="_blank" rel="noopener" href="https://codepen.io/wyattnolen/pen/zYPWrdg">多边形动物变形（纯CSS）</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-003.jpg"></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/wyattnolen">Wyatt Nolen</a> 创建了一个很酷的动画，它使用 div 叠层、路径裁剪和 CSS 动画，就实现了两个多边形动物之间的转换效果。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.wpr.org/u-s-citizens-can-now-choose-gender-x-their-passport-applications">美国公民现在可以在护照申请中选择性别“X”</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-004.jpg"></p>
+<p>美国增加第三个性别选项，除了以前可用的“F”和“M”选项外，申请护照的美国公民现在可以在他们的申请中选择性别“X”，以使护照对那些认定为双性、未指定或其他性别认同的人更具包容性。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://pointerpointer.com/">超无聊的网站：鼠标指针指示器</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-005.png"></p>
+<p>打开网站之后，移动鼠标，网站就会读取一张照片，照片里会有人的手指正好指着你的鼠标……</p>
+<p>开发者真的太无聊了，哈哈哈哈哈。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-006.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-007.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-008.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/linggan-009.jpg"></p>
+<p>虽然很无聊，但又觉得手指识别得很精准，反正我是玩了快20分钟。</p>
+<p>当然，我建议你去玩一下：<a target="_blank" rel="noopener" href="https://pointerpointer.com/">https://pointerpointer.com/</a></p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><p>1、<a target="_blank" rel="noopener" href="https://www.csoonline.com/article/2117843/what-is-phishing-examples-types-and-techniques.html">什么是网络钓鱼？示例、类型和技术</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-002.jpg"></p>
+<p>网络钓鱼是一种网络攻击，它使用伪装的电子邮件来诱骗收件人放弃信息、下载恶意软件或采取其他一些所需的行动。</p>
+<p>作为最古老的网络攻击类型之一，网络钓鱼 <a target="_blank" rel="noopener" href="https://www.computerworld.com/article/2575094/sidebar--the-origins-of-phishing.html">可以追溯到 1990 年代</a>，目前它仍然是最广泛和最有害的网络攻击之一，网络钓鱼攻击方式和技术也变得越来越复杂。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-003.jpg"></p>
+<p>一些 <strong>轰动一时</strong> 的网络钓鱼诈骗：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/2014_celebrity_nude_photo_leak">名人LUO照泄露</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cbsnews.com/news/the-phishing-email-that-hacked-the-account-of-john-podesta/">希拉里竞选团队邮件外泄</a></li>
+</ul>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-001.png"></p>
+<p>文章详细介绍了网络钓鱼的攻击类型、攻击原理以及相关防御手段。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html">《请不要再将数据库称作CP或AP (Please stop calling databases CP or AP)》</a>（英文，推荐）</p>
+<p>Jeff Hodges 在他那篇精彩的博客文章 <a target="_blank" rel="noopener" href="https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/">Distributed Systems for Young Bloods（面向年轻人的分布式系统）</a> 中，建议我们用 CAP 定理来描述和评论系统。 很多人都听取了这个建议，描述他们的系统为”CP”、“AP” 或者有时候 “CA”。</p>
+<p>而 <a target="_blank" rel="noopener" href="https://martin.kleppmann.com/">Martin Kleppmann</a> 教授对 Jeff Hodges 关于 CAP 定理的观点持不同意见，他认为 CAP 定理过于精简，且被广泛误解，导致它对描述一个系统没有多大用处. 。因此 Martin Kleppmann 教授恳请大家最好还是放弃 CAP 定理并停止引用和讨论. 并且要用更精确的术语来权衡系统。</p>
+<p>参与 <strong>分布式系统相关设计</strong> 的研发同学，应该关注这个话题。  </p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-004.jpg"></p>
+<p>Martin Kleppmann 教授是我认为巨牛的一位教授、软件工程师和企业家，而且还出过音乐作品。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-005.jpg"></p>
+<p>他出版的这本书 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/30329536/">《数据密集型应用系统设计》(中文版)</a> ，在国内豆瓣评分高达 9.7 分，本书几乎涵盖大部分分布式系统的应用设计场景，以及背后或底层的原理，深入浅出，初学者、高手，都会有所收获，特别推荐大家！</p>
+<p>另外，本文你也可以通过中译版 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55053121">《请不要再将数据库称作CP或AP》</a> 进行阅读。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://spectrum.ieee.org/software-engineer-salary-2657117801">5 张图表了解 2022 年的软件工程工资（数据来源Hired）</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-006.jpg"></p>
+<p>或许 <a target="_blank" rel="noopener" href="https://hired.com/2022-state-of-software-engineers/">Hired 统计的数据</a> 无法代表国内的实际情况，但是技术岗位趋势，值得参考。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-007.jpg"></p>
+<p>网络安全人才短缺持续加剧，后端工程师排在第七。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-008.jpg"></p>
+<p>Go 语言成为最热门最受欢迎的技术技能。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-009.jpg"></p>
+<p>Python 和  JavaScript 最受工程师的喜爱，Java 仅排第三。当然，如果把国内并入统计，很大可能就是 Java 语言最热门。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/article-010.jpg"></p>
+<p>希望通过软件拯救世界的排名中，第一大领域是公共卫生，接着是思考教育、未来的工作和气候变化三大话题。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>1、<a target="_blank" rel="noopener" href="https://chalk.ist/">Chalk.ist：超颜值的源码图片生成器</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-001.jpg"></p>
+<p>一款可以快速将您的源代码变成漂亮图片的工具。支持自定义主题、样式、边距等。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-003.jpg"></p>
+<p>目前支持的语言包括 Json、YAML、HTML、Markdown、Twig、JavaScript、TypeScript、CSS、SCSS等。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-002.jpg"></p>
+<p>我小试一下，代码编写还支持语法提示，很良心的一款高颜值源码图片生成器，点一个赞。</p>
+<p>当然如果你不喜欢这种图像风格，可以尝试这款 <a target="_blank" rel="noopener" href="https://carbon.now.sh/">Carbon</a> ，相比 Chalk.ist ，Carbon 提供了更高粒度的定制化，试试吧，或许你会喜欢。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-004.jpg"></p>
+<p>2、<a target="_blank" rel="noopener" href="https://khushmeen.com/icons.html">Doodle Icons：400 多个免费手绘图标</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-005.jpg"></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-006.jpg"></p>
+<p>Doodle Icons 是一款很特别的手绘图标，可以在 PNG 和 SVG 格式以及 Figma 中使用，提供 15 类图标，可以在任何类型的项目中免费使用。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://giscus.app/zh-CN">giscus：基于github的评论系统</a> （10分钟就集成到我的<a href="https://www.hongyongtao.com/">个人网站</a>）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-007.jpg"></p>
+<p>giscus 是基于 github 的一款开源评论系统，基本有以下几个特性：</p>
+<ul>
+<li>开源。🌏</li>
+<li>无跟踪，无广告，永久免费。📡 🚫</li>
+<li>无需数据库。全部数据均储存在 GitHub Discussions 中。:octocat:</li>
+<li>支持自定义主题！🌗</li>
+<li>支持多种语言。🌐</li>
+<li>高度可配置。🔧</li>
+<li>自动从 GitHub 拉取新评论与编辑。🔃</li>
+<li>可自建服务！🤳</li>
+</ul>
+<p>对于开放型的网站而言，giscus 是个不错的选择，特别是像我这类开源项目基本都托管在 <a target="_blank" rel="noopener" href="https://github.com/senlypan">github</a> 的人，就特别合适。根据 <a target="_blank" rel="noopener" href="https://giscus.app/zh-CN">giscus 使用指南</a> ，前前后后花了我不到10分钟的时间，完成了集成、调试、上线发布，下图是我的 github 启用评论系统后的效果。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-009.jpg"></p>
+<p>至于我们网站集成之后的效果，也很简单，指定 .class 容器集成就可以，个人还挺满意，你可以来 <a target="_blank" rel="noopener" href="https://www.panshenlian.com/weekly/">我的网站</a> 看看效果吧，如下图，支持点赞评论等。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-008.jpg"></p>
+<p>不过 <strong>缺点</strong> 也很明显，就是用户只能通过 github 账号登录并评价。当然！如果你和我一样是技术类的网站，那其实问题不大，github 账号都是人手一个，所以也能接受。</p>
+<p>4、<a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/gradient-generator/">Gradient Generator：一个在线  CSS 渐变效果生成工具</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-010.jpg"></p>
+<p>一个在线工具，可帮助您生成可在 CSS 中使用的丰富、漂亮的渐变效果。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/tools-011.jpg"></p>
+<ul>
+<li>支持直接复制 CSS 代码</li>
+<li>支持把已设计好的 CSS 代码通过 URL 链接进行分享</li>
+</ul>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、<a target="_blank" rel="noopener" href="https://hackernoon.com/nodejs-vs-net-core---which-is-the-ultimate-server-side-development-platform">NodeJS 与 .NET Core——哪个是终极服务器端开发平台？</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-002.jpg"></p>
+<p>2022 年最流行的两个服务器端开发平台是 Node.js 和 .NET Core。</p>
+<p>本文就 Node.js 和 .NET Core 的语言特性、核心优势、使用场景、性能表现、安全性、生态以及差异性等方面进行了讲解比对。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.mssqltips.com/sqlservertip/7217/functions-in-python-code-samples/">15 个重要的 Python 内置函数</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-001.png"></p>
+<p>文中介绍了 Python 中的各种内置函数，这些函数在使用 Python 时非常有用，例如 iter、len、help、hash、map、print 等等。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://hackernoon.com/filebase-building-web3-with-web3">Filebase：使用 Web3 构建 Web3</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-003.jpg"></p>
+<p>Filebase 是世界上第一个由去 <strong>中心化存储网络</strong> 提供支持的对象存储平台，将多个网络统一在一个与 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/s3/1409766?fr=aladdin">S3</a> 兼容的 API 下，使去中心化存储易于访问和使用。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-004.jpg"></p>
+<p>国内使用 Filebase 结合 Amazon S3 可能不太允许，但是去中心化存储方案或许会给我们带来一种不同的思考方式。这是 <a target="_blank" rel="noopener" href="https://docs.filebase.com/">Filebase 文档</a> 。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-005.jpg"></p>
+<p>4、<a target="_blank" rel="noopener" href="https://basicappleguy.com/basicappleblog/macbook-pro-schematics">MacBook Pro 的真实结构图壁纸</a></p>
+<p>桌面壁纸上直接展示透视之后的真机结构的想法其实见过蛮多了，这个 M1 MBP 的版本也是这个思路，不过做得还挺严谨，14 寸和 16 寸机型的壁纸都不一样，看似是按照实际来的~</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-006.jpg"></p>
+<p>M1 Pro（在银色 14 英寸 Pro 上显示）壁纸</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-009.jpg"></p>
+<p>M1 Max（在 16 英寸深空灰色 Pro 上显示）壁纸</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-010.jpg"></p>
+<p>MacBook Pro 上的每个风扇都由 90 个不同的组件组成</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-007.jpg"></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-008.jpg"></p>
+<p>打开 <a target="_blank" rel="noopener" href="https://basicappleguy.com/basicappleblog/macbook-pro-schematics">MacBook Pro 的真实结构图壁纸</a> 看看吧，严谨精致。</p>
+<p>5、<a target="_blank" rel="noopener" href="https://bevyengine.org/news/bevy-0-7/">Bevy 0.7：用 Rust 构建的面向数据的游戏引擎</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-011.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/source-012.jpg"></p>
+<p>Bevy 0.7 是一款用 Rust 构建的面向数据的游戏引擎，永远免费和开源。您可以在 GitHub 上获取完整的 <a target="_blank" rel="noopener" href="https://github.com/bevyengine/bevy">源代码</a>，或者可以查看 <a target="_blank" rel="noopener" href="https://bevyengine.org/learn/book/getting-started/">快速入门指南</a> 开始使用。</p>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>1、<a target="_blank" rel="noopener" href="https://www.odditycentral.com/foods/japanese-restaurant-goes-viral-for-serving-dessert-shaped-like-pieces-of-plaster.html">日本餐厅因提供像石膏一样形状的甜点而风靡一时</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-001.jpg"></p>
+<p>东京银座皇家花园酒店的 Opuses 餐厅最近因为一种形状像墙灰泥的有趣甜点而引起了很多关注。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-002.jpg"></p>
+<p>Opuses 甜点实际上是由覆盖着这些石膏状蛋白酥皮的冰淇淋组成，虽然不太像冰淇淋。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-003.jpg"></p>
+<p>对比一下我们国内的炒酸奶</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-004.jpg"></p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.nature.org/en-us/get-involved/how-to-help/photo-contest/2021-winners/">欣赏大自然保护协会 2021 年摄影大赛的精彩获奖者</a>（英文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-007.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-008.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-005.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-006.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-009.jpg"><br><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/photo-010.jpg"></p>
+<h2 id="播客"><a href="#播客" class="headerlink" title="播客"></a>播客</h2><p>1、<a target="_blank" rel="noopener" href="https://www.ximalaya.com/sound/393522524">和Vue.js的创造者尤雨溪聊开源软件</a>（中文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-001.jpg"></p>
+<p>开源软件影响了我们生活的方方面面，从我们手机的安卓操作系统，到上网使用的 Chrome 浏览器；从前端开发者使用的 React, Vue，再到后端进行大数据存储和处理的 Hadoop , 以及人工智能的 Tensorflow , MXNet 等等。</p>
+<p>这期播客邀请到了 Vue.js 的创造者，也是全球开源社区的领军人物 <a target="_blank" rel="noopener" href="https://twitter.com/youyuxi">尤雨溪（Evan You）</a> 来和大家聊一聊开源软件这个话题。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/avocadotoastlive/avocadotoast.live">牛油果烤面包</a> 也是个开源的项目，音乐播客也开源！</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.ximalaya.com/sound/520233485">互联网是否欺骗了我们</a>（中文）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-002.jpg"></p>
+<p>本期播客，相征迎来了他的一位老朋友，对于大家来说，也是一位新朋友。如果你喜欢听播客，又恰好喜欢音乐，多少一定有过耳闻的这位—重轻老师。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-005.jpg"></p>
+<p>他广为人知的身份，是机核电台 GADIO 的常驻嘉宾。同时，重轻也是不定期更新的播客《不在场》的主理人、音乐科技领域的 UP 主。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-006.jpg"></p>
+<p>本期节目，这俩互联网 “punk 主义” 爱好者，就从当下大热的 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%89%BE%E5%B0%94%E7%99%BB%E6%B3%95%E7%8E%AF/57233820">《艾尔登法环》</a> 聊起，咱们坐下来，好好掰扯掰扯，这互联网到底是工具，还是满是腥臊味儿的大浴缸。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-003.jpg"></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/boke-004.jpg"></p>
+<p>你打开手机，就是为了舒服一下？在工具的恶和对人类的反向塑造的同时，我们真的手无寸铁、束手就擒了吗？那个体究竟还能做点儿什么来对抗着看不见的巨物和网络呢？</p>
+<h2 id="文摘"><a href="#文摘" class="headerlink" title="文摘"></a>文摘</h2><p>1、<a target="_blank" rel="noopener" href="https://wx.zsxq.com/dweb2/index/group/88855458825252">《开源的 Why 和 How 》</a> （付费知识星球：云谦和他的朋友们）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/post-004.jpg"></p>
+<p>（ <a target="_blank" rel="noopener" href="https://sorrycc.com/">陈成</a>，花名云谦，阿里 &amp; 蚂蚁 10 年 + 老前端，ZJU，P8，Umi &amp; Dva 等开源库作者，蚂蚁中台框架 Owner，「MDH 前端周刊」作者，初级路亚爱好者，游戏收藏师。）</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/post-003.jpg"></p>
+<p>《开源的 Why 和 How 》文章主要分享了两个主题：</p>
+<ul>
+<li>为什么做开源？</li>
+<li>怎么做开源？</li>
+</ul>
+<p>开源的驱动力最开始可能来自于个人分享欲以及获得的成就感，但回过头看，开源相比闭源的投资回报率高出很多，包括社区、影响力、代码、人才、需求、灰度等方面都有不同的收获，老外对此有个的定义，叫 <strong>「工程经济学」</strong>。</p>
+<p>陈成老师认为优秀的开源包括三个技能点：</p>
+<ul>
+<li>代码</li>
+<li>文档</li>
+<li>社区</li>
+</ul>
+<p>过硬的代码、丰富的文档，以及活跃的社区，按照 4:3:3 的时间精力分配，能让一个优秀的开源项目保持在一定的健康状态。</p>
+<p>当然，仅推荐前端开发或全栈开发的伙伴关注订阅，其他专注后端研发等同学暂不推荐订阅该知识星球（由于该知识星球主要涉及前端技能、知识、方法论、工作、学习、以及招聘面试晋升等）。</p>
+<p>如果你希望了解更多关于开源的话题，或许你可以看看知乎的一个圆桌收录：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/269033309">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</a> </li>
+</ul>
+<p>2、<a target="_blank" rel="noopener" href="https://www.cio.com/article/190888/5-famous-analytics-and-ai-disasters.html">7 种著名的分析和 AI 灾难</a></p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/post-001.jpg"></p>
+<p>2017 年，<a target="_blank" rel="noopener" href="https://www.economist.com/leaders/2017/05/06/the-worlds-most-valuable-resource-is-no-longer-oil-but-data">《经济学人》宣布</a>，数据已超石油，成为世界上最宝贵的资源。</p>
+<p><img src="http://weekly.panshenlian.com/_media/images/2022/issue-3/post-002.jpg"></p>
+<p>各个行业的组织已经并将继续在数据和分析方面进行大量投资，但就像石油一样，数据和分析也有其阴暗面。</p>
+<p>从机器学习算法驱动的分析和行动中获得的洞察力，可以为组织带来竞争优势，但在声誉、收入甚至生命方面，一些错误可能需要付出高昂的代价。</p>
+<p>以下是过去十年中一些备受瞩目的分析和人工智能错误，以说明可能出现的问题。</p>
+<ul>
+<li>AI 算法能识别一切，而 COVID-19 例外</li>
+<li>Zillow 减记数百万美元，由于算法购房灾难而裁员</li>
+<li>英国因超出 Microsoft Excel 中的数据限制而丢失近 16,000 例冠状病毒病例</li>
+<li>医疗保健算法未能标记黑人患者</li>
+<li>数据集训练微软聊天机器人吐出种族主义推文</li>
+<li>亚马逊人工智能招聘工具只推荐男性</li>
+<li>目标分析侵犯隐私（针对怀孕预测进行营销）</li>
+</ul>
+<h2 id="言论"><a href="#言论" class="headerlink" title="言论"></a>言论</h2><p>1、</p>
+<p>人们常说，互联网使教育民主化：人类的所有知识都可以通过谷歌搜索到！然而，获得信息只是成功了一半，您还需要将原始信息转换为可用的技能。</p>
+<p>学习如何有效地学习非常重要，尤其是作为软件开发人员，学习新事物实际上就是我们必须具备的！如果您能学会快速掌握新的语言、框架、工具，那么您将能够比普通开发人员更有效率。</p>
+<p>这是一种超能力，这种超能力包括但不仅限于：主动试错、心态培养、目标动机、间隔重复、习惯养成、公开学习、技能网络 …</p>
+<p>– <a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/blog/how-to-learn-stuff-quickly/">《如何快速学习东西》</a></p>
+<p>2、</p>
+<p>互联网做得太出色了，以至于很多人把它看做某种像太平洋一样的自然资源，而非人造的。你还记得上一个达到如此规模而又如此健壮的技术是什么？</p>
+<p>– <a target="_blank" rel="noopener" href="https://complexevents.com/2012/07/16/interview-with-alan-kay/">Alan Kay，Dr.Dobb 杂志采访（2012）</a></p>
+<h2 id="首发订阅"><a href="#首发订阅" class="headerlink" title="首发订阅"></a>首发订阅</h2><p>这里记录每周值得分享的科技内容，周三发布，首发在</p>
+<ul>
+<li><a href="https://www.hongyongtao.com/weekly">洪致知个人网站</a></li>
+<li>微信公众号：第一次当爸爸吖</li>
+<li>其他平台会延后一周发布</li>
+</ul>
+<p>微信搜索“第一次当爸爸吖”或者扫描二维码，即可订阅。</p>
+<p><img src="https://www.hongyongtao.com/images/post/wechat/v3.jpg"></p>
+<p>本刊开源（GitHub: <a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog">hongyongtao/blog</a>），欢迎投稿，推荐或自荐文章/软件/资源，请<a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog/issues">提交 issue</a> 。</p>
+<p>（完）</p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>无聊科技正经事周刊（第3期）：美团的推荐算法，是在玩火吗？</sharetitle><shareintroduce>欧盟正在建设一条价值 110 亿美元的穿越阿尔卑斯山的隧道。
+</shareintroduce><shareimg>http://weekly.panshenlian.com/_media/images/2022/issue-3/cover.jpg</shareimg><author>潘深练</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/" rel="tag">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/family/" rel="tag">一家三口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soulmate/" rel="tag">人生伴侣</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trial/" rel="tag">实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/report/" rel="tag">汇报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shenzhen/" rel="tag">深圳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leo/" rel="tag">灏灏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai/" rel="tag">竹白</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai-wiki/" rel="tag">竹白百科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-oriented/" rel="tag">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-03-16.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/biglate-ajax.js"></script><script src="https://www.panshenlian.com/scripts/plugin/jquery-3.6.0.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/biglate-analytics.js"></script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>

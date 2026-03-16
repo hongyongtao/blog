@@ -1,0 +1,308 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>无聊科技正经事周刊（第8期）：让子弹飞一会儿，用长期的眼光看中国开源 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">订阅我</a></nav><nav class="right menus-right"><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">2025-01-14：
+职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2022%2Fweekly-8.md">查看源代码</a></small><h1>无聊科技正经事周刊（第8期）：让子弹飞一会儿，用长期的眼光看中国开源</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/images/post/me/avatar.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2022-05-25</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2022/05/25/weekly-8/" align="left" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/weekly/">科技周刊</a></li><li><a href="/tags/open-source/">开源</a></li></ul></div><div class="markdown-body"><p>这里记录每周值得分享的科技内容，周三发布。</p>
+<p>本刊开源（GitHub: <a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog">hongyongtao/blog</a>），欢迎投稿，推荐或自荐文章/软件/资源，请<a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog/issues">提交 issue</a> 。</p>
+<h2 id="封面图"><a href="#封面图" class="headerlink" title="封面图"></a>封面图</h2><p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/cover.jpg" alt="封面图"> </p>
+<p>位于墨尔本北菲茨罗伊的一处草屋建筑。（<a target="_blank" rel="noopener" href="https://thedesignfiles.net/2022/05/architecture-we-should-be-so-lucky-multiplicity/">via</a>）</p>
+<h2 id="本周话题：让子弹飞一会儿，用长期的眼光看中国开源"><a href="#本周话题：让子弹飞一会儿，用长期的眼光看中国开源" class="headerlink" title="本周话题：让子弹飞一会儿，用长期的眼光看中国开源"></a>本周话题：让子弹飞一会儿，用长期的眼光看中国开源</h2><p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/topic-001.jpg" alt="topic"> </p>
+<p><strong>突然闭源，沸沸扬扬</strong></p>
+<p>5月18日，中国开源代码托管平台 Gitee 上的开源仓库（项目），在访客访问时提示仅限仓库成员可见，并声明需要仓库管理员提交公开仓库访问申请，经平台人工审核通过后，才可再次公开访问。简而言之，以前公开的开源代码仓库，现在需要先审后开。</p>
+<p>此举瞬间在网上掀起一阵热议，其中不乏激昂者，觉得此举荒唐！与开源理念相悖！也不乏调侃者，认为这是在自己掐自己，雪上加霜！更不乏玻璃心，断定中国开源已死！</p>
+<p>显然，大家在宣泄情绪，这是人类对抗新变化/维持现状的一种体内平衡方式，带有感性标签。本质上许多人都能看懂，此举并没有多大玄机，但同时又有许多人看不明白，至于吗？</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/topic-002.jpg" alt="topic"> </p>
+<p><strong>开源越界，没有法外之地</strong></p>
+<p>在好奇心驱使下，我们像极了一个翻石头的孩子，开始猜测 Gitee 行为背后的可能性：</p>
+<ul>
+<li>有人提交了不恰当言论，甚至造谣..</li>
+<li>有人破坏了公平规则，公开抢菜、抢票、抢苗代码..</li>
+<li>有人公开了某些特殊词库、某些非法影音资料..</li>
+<li>有人发布了危害未成年的相关代码，造成不良影响..</li>
+<li>有人把企业私有代码公开于众..</li>
+<li>More…</li>
+</ul>
+<p>总之，大概率是有人越了界，侵了权，违了规，过去平台野蛮放任的作风，如今需要适度往回收一收，需要卡个小口，把这群害码筛查过滤一遍，让恶人无处作恶，甚者追究责任。</p>
+<p>内容平台就必然存在违规风险，所以审核是一种必不可少的监管方式。短期一看，平台和用户都有点小难受，但从长远的角度分析，既保障了开源软件事业长远稳健可控，又夯实了开源平台持续良性向好。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/topic-003.jpg" alt="topic"> </p>
+<p><strong>开源危机，卡脖子的事</strong></p>
+<p>此前俄罗斯在 Github 上被卡脖子的事实，让国人更加坚信：开源虽无边界，但平台有国界。其中，无论是大面上的开源还是具体至于芯片，国际多方的激烈竞争都加速了这一事实，所以国家层面的大力推进支持自然不必说，在这样的背景下，Gitee 纵使有千万种理由可以吐槽，也始终作为我们国人开源事业的砥砺者，现阶段毫无疑问似个婴儿，学步之初难免磕碰跌倒、甚至做出愚蠢之事，因此更需要外部的支持力量，譬如你我，去额外呵护、耐心栽培，促使他茁壮成长、补质补短、寻求突破，甚至超越，社区起来了，人才进来了，质量拔高了，依赖消减了，我们才有可能翻盘，才有赢面。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/topic-004.jpg" alt="topic"> </p>
+<p><strong>别急，让子弹飞一会儿</strong></p>
+<p>从18日至今，不到一周时间，今早（25日）我看 Gitee 上的项目基本已正常可见。</p>
+<p>Gitee 做出的无奈最优解，自始至终冷静从容，反过来作为开源社区的一份力量，你我显然需要更加成熟，同样秉持这份心态，让子弹飞一会儿，莫着急，给点过程，不能说立刻见效，这也是一种心态，懂了，我们这一代代人，才有谱。</p>
+<p>毫无疑问，Gitee 此次审核事件，很可能会成为一段争议的历史，在后人口中传开议论，而置于事件旋涡中心的你我，到底是义愤填膺、冷嘲热讽、还是心平气和…</p>
+<h2 id="科技动态"><a href="#科技动态" class="headerlink" title="科技动态"></a>科技动态</h2><p>1、<a target="_blank" rel="noopener" href="https://appleinsider.com/articles/22/05/23/iphone-14-to-get-high-end-front-camera-with-built-in-autofocus">iPhone 14 将配备内置自动对焦的“高端”前置摄像头</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-001.jpg" alt="iPhone"> </p>
+<p>（据称）即将面世的iPhone 14和 iPhone 14 Pro 可能配备内置自动对焦功能的高端自拍相机，该相机配置将交由韩国 LG Innotek 组装。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-002.jpg" alt="iPhone"> </p>
+<p>据ET News 报道，这一变化是由于苹果将前置摄像头归类为 “高端” 组件而不是 “低端” 组件，因此供应商从中国换为韩国。</p>
+<p>iPhone 14 升级前置摄像头，支持自动对焦功能，以增强 FaceTime 通话和自拍功能，而且可能采用更大的光圈，可以为 iPhone 机型提供更好的人脸识别功能。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.odditycentral.com/news/people-are-getting-cosmetic-voice-surgery-to-change-the-way-they-sound.html">人们正在接受美容语音手术以改变他们的发声方式</a>（英文）</p>
+<p>何曾几时你希望自己拥有一副深沉嗓音，如今这是一个可实现的目标，土耳其的外科医生 Kursat Yelken 可以提供帮助。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-006.jpg" alt="美容语音手术"> </p>
+<p>(<a target="_blank" rel="noopener" href="https://pixabay.com/ro/photos/%c5%a3ip%c4%83t-strig%c4%83t-femeie-fric%c4%83-furie-4751647/">via</a>)</p>
+<p>Kursat Yelken 博士从事声音加深手术 15 年，并称该手术的需求一直在增加。目前，他每年为 100 至 150 人服务，从希望听起来更自信的高管到希望让自己的声音与新性别相匹配的跨性别者。</p>
+<p>这位在哈佛医学院接受过培训的土耳其医生可以根据患者的喜好调整患者的音调和语调，使他们的声音更深或更高。</p>
+<p>Yelken 博士用外行的术语解释了这个过程，他说它首先在颈部下部切开一个切口，然后在甲状腺软骨上创建一个“软骨岛”，该软骨岛也被推回以发出声音更深。该操作是在局部麻醉期间进行的，因此患者可以通过尝试他们的新声音来选择希望的音调和音色。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://appleinsider.com/articles/22/05/21/apple-store-opens-in-wuhan-with-chinas-first-apple-pickup-area">武汉 Apple Store 开业，开设中国首个 Apple Pickup 到店取货区域的零售店</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-003.jpg" alt="Store"> </p>
+<p>Apple 武汉零售店于 5 月 21 日 (周六) 在湖北正式开幕，位于武汉国际广场购物中心 C 座 2F 。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-004.jpg" alt="Store"> </p>
+<p>这是中国首个设立专属 Apple Pickup 到店取货区域的零售店。至此，苹果大中华区 Apple Store 零售店总数达到 54 家。店内拥有 128 人组成的零售店团队，可以通过多种语言与顾客交流，包括中文手语和英文手语。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-005.jpg" alt="Store"> </p>
+<p>该商店是中国第一家设有专门的 Apple Pickup 区域的商店，因此客户可以快速轻松地获得在线订单。Today at Apple 课程也将在场地提供，涵盖的主题包括摄影、摄像、艺术与设计、音乐和编程。</p>
+<p>4、<a target="_blank" rel="noopener" href="https://interestingengineering.com/moon-volcanoes-volcanic-water">月球火山可能喷出 18 万亿磅的火山水</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-007.jpg" alt="月球火山"> </p>
+<p>月球过去猛烈的火山活动可能为宇航员在未来的任务中提供重要的生命续航。</p>
+<p>月球上那些特征性的黑色斑点，也称为月海，起源于数十亿年前，当时月球表面发生了一系列火山爆发。</p>
+<p>现在，加拿大大学博尔德分校（CUBoulder）研究人员的一篇新论文预测，这些火山可能还留下了冰盖，部分冰盖的厚度可能高达数百英尺，这些冰盖可以用于饮用水和火箭推进剂。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/keji-008.jpg" alt="月球火山"> </p>
+<p>美国宇航局的阿尔特弥斯计划旨在建立人类在月球上的存在，这可以作为未来火星任务的垫脚石，自 1972 年以来的首次载人登月预计将在 2025 年左右进行。</p>
+<h2 id="灵感"><a href="#灵感" class="headerlink" title="灵感"></a>灵感</h2><p>1、<a target="_blank" rel="noopener" href="https://elements.visualcapitalist.com/ranked-top-10-ev-battery-makers/">排名：前 10 名电动汽车电池制造商</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-001.jpg" alt="电动汽车电池制造商"> </p>
+<p>▲ 统计数据早于 2021年 10 月</p>
+<p>随着消费者对电动汽车 (EV) 的兴趣日益浓厚，锂离子 EV 电池市场现在是每年约 270 亿美元的业务。</p>
+<p>业内专家表示，高需求提振了电池制造商的利润，给市场带来了激烈的竞争。到 2027 年，随着消费者接受更实惠的电动汽车，市场可能进一步增长到 1270 亿美元。</p>
+<p>作为汽车零部件的制造强国之外，亚洲正迅速成为电池领域创新的温床。</p>
+<p>市场份额排名前 10 的电动汽车电池制造商都将总部设在亚洲国家，集中在<strong>中国、日本和韩国</strong>。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-002.jpg" alt="电动汽车电池制造商"></p>
+<p>▲ 前三大电池制造商——CATL（<strong>宁德时代</strong>）、LG 和松下——占据了电动汽车电池制造市场近 70% 的份额。</p>
+<p><strong>电动汽车的巅峰可能已经过去，但是全面电动化趋势却是必然</strong>，基本有几点原因：</p>
+<ul>
+<li>推广政策（环境与清洁能源）</li>
+<li>消费意识（认知与诉求）</li>
+<li>多元型号（制造商与受众）</li>
+<li>电池价格（创新与竞争优势）</li>
+<li>more</li>
+</ul>
+<p>当然，电动化趋势的阻碍原因也同时存在：</p>
+<ul>
+<li>电池金属供应（大环境与局部紧张）</li>
+<li>充电基础设备（普及与便利）</li>
+<li>充电时间（技术突破）</li>
+<li>续航里程（焦虑与改进）</li>
+<li>more</li>
+</ul>
+<p>2、<a target="_blank" rel="noopener" href="https://ciechanow.ski/mechanical-watch/">可视化图解机械表工作原理</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-003.jpg" alt="机械表"></p>
+<p>在现代便携式设备的世界中，很难相信仅仅在几十年前，最方便的计时方式是<strong>机械表</strong>。</p>
+<p>与石英表和智能表不同，机械表<strong>无需</strong>使用任何电池或其他电子元件即可运行。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-004.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-005.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-006.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-007.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-008.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-009.jpg" alt="机械表"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-010.jpg" alt="机械表"></p>
+<p>文章使用可交互的 <strong>3D 动画</strong>效果演示了机械表工作原理、零部件组装过程等。</p>
+<p>特别是你可以拖动动画来改变你的<strong>视角</strong>，并且使用滑块来查看内部运行机制，动画设计得无比到位。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://codepen.io/kaz_hashimoto/pen/KKQdMrY">CSS 太阳光线穿过窗户</a></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-011.jpg" alt="CSS"></p>
+<p>工程师 Kazuhiro Hashimoto 编写了一个令人惊叹的、可定制的动画场景——太阳光线穿过窗户。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/linggan-012.jpg" alt="CSS"></p>
+<p>当然，如果你喜欢这套效果，可直接复制 HTML、CSS、JS ，可能对你的设计有些许启发。</p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><p>1、<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Oo9JNMTMNzaIWizOdYXGkw">35岁从大厂裸辞，我该何去何从</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-001.jpg" alt="大厂裸辞"></p>
+<p>最近从陈成老师那看到一位阿里的12年老兵裸辞，可以简单看看、听听，可能不适合大部分人。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://raft.github.io/">Raft 共识算法介绍（极致内容）</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-004.jpg" alt="Raft"></p>
+<p>相信设计分布式系统的工程师们都了解共识的核心作用，网络间通信的服务只要涉及多节点，并希望对外提供统一的能力，那各节点间必然需要达成一种共识，而达成共识就需要有一种普遍任何的共识机制，所以共识算法，支撑这一切。</p>
+<p>不仅仅是分布式系统，区块链等领域的实现，都基于共识。</p>
+<p>▼ 其中，你可能了解过 NWR、Gossip、Paxos、Zab 等协议/算法，但在这里如果你详细了解以下关于 Raft 的介绍、可视化过程以及相关论文之后，无论是原始的 Gossip 还是其它共识变种，你都会融通，基本大差不差，不过是边界差异。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-002.jpg" alt="Raft"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-005.jpg" alt="Raft"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-003.jpg" alt="Raft"></p>
+<p>▲ Raft 算法可视化动画设计得简单明了，建议你尝试体验，有助于了解主观下线、选举等共识达成过程。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://leovan.me/cn/2022/05/rating-and-ranking-algorithms/">评分和排名算法 (Rating &amp; Ranking Algorithms)</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-006.jpg" alt="评分和排名算法"></p>
+<p>投票是对不同选项或个体的排序，在投票中我们关注更多是<strong>相对位置</strong>这样定性的结论，例如：积分前三名的同学才能进入下一环节。但有的时候我们不光想知道不同选项之间的先后顺序，还想了解不同选项之间的<strong>差异大小</strong>，这时我们就需要<strong>设计更精细的方法</strong>进行定量分析。</p>
+<p>范叶亮划分出四种具体的评分排名，并分别罗列典型网站案例：</p>
+<ul>
+<li>基础评分和排名</li>
+<li>考虑时间的评分和排名</li>
+<li>不考虑时间的评分和排名</li>
+<li>比赛评分和排名</li>
+</ul>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-007.jpg" alt="评分和排名算法"></p>
+<p>▲ 其中，个人对于考虑时间的评分和排名类目中的 <strong>Hacker News</strong> 计算公式极为好奇。</p>
+<p>Hacker News 是一个可以发布帖子的网络社区，每个帖子前面有一个向上的三角形，如果用户觉得这个内容好，点击一下即可投票。根据得票数，系统自动统计出热门文章排行榜。</p>
+<p>Hacker News 使用分数计算公式如下：</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-008.jpg" alt="评分和排名算法"></p>
+<p>其中，<strong>P</strong> 表示帖子的得票数，减去 <strong>1</strong> 表示忽略发帖人的投票；<strong>T</strong> 表示当前距离发帖的时间（单位为小时），加上 <strong>2</strong> 是为了防止最新的帖子分母过小；<strong>G</strong> 为重力因子，即将帖子排名被往下拉的力量，默认值为 <strong>1.8</strong>。</p>
+<p>在其他条件不变的情况下，更多的票数可以获得更高的分数，如果不希望“高票数”帖子和“低票数”帖子之间差距过大，可以在式 <strong>(1)</strong> 的分子中添加小于 <strong>1</strong> 的指数，例如： (P-1)^0.8 。在其他条件不变的情况下，随着时间不断流逝，帖子的分数会不断降低，经过 <strong>24 小时</strong> 后，几乎所有帖子的分数都将小于 <strong>1</strong>。重力因子对于分数的影响如下图所示：</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-009.jpg" alt="评分和排名算法"></p>
+<p>不难看出， <strong>G</strong> 值越大，曲线越陡峭，排名下降的速度越快，意味着排行榜的更新速度越快。</p>
+<p>4、<a target="_blank" rel="noopener" href="http://ifeve.com/%E5%85%B3%E4%BA%8E%E8%AF%81%E4%B9%A6%E8%BF%99%E9%87%8C%E6%9C%89%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87-md/">关于证书,这里有你想知道的一切</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-010.jpg" alt="关于证书"></p>
+<p>在HTTPS开发中，你是否被各种证书搞得晕头转向？</p>
+<p>.pem证书?<br>.der证书?<br>X.509证书？</p>
+<p>本文带你理清这些证书叫法背后的含义。</p>
+<p>5、<a target="_blank" rel="noopener" href="https://hackernoon.com/how-to-make-a-great-looking-website-even-if-you-cant-design">如何搭建一个漂亮的网站，即使你不会设计</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-012.jpg" alt="网站"></p>
+<p>本指南介绍了用于设计网站的工具、技术和资源，100% 免费，帮你快速搭建一个有趣/有创意的网站。</p>
+<p>6、<a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=31438426">一个相当优秀的开发者的孤独感</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/article-013.jpg" alt="10x"></p>
+<p>一个 “相当优秀” 的10x 开发者的孤独自述，33 岁才入行，目前 42 岁。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>1、<a target="_blank" rel="noopener" href="https://uiverse.io/">uiverse.io：精美的免费开源 UI 组件库</a></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-001.jpg" alt="uiverse"></p>
+<p>uiverse.io，一款精美的 UI 组件库，免费开源</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-002.jpg" alt="uiverse"></p>
+<p>▲ 平台有很多顶级设计师，你也可以设计组件</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-003.jpg" alt="uiverse"></p>
+<p>▲ 看到喜欢合适的组件，可直接复制使用 HTML 和 CSS 代码</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.shrink.media/upload">Shrink.media：极致压缩图像大小的在线工具</a></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-004.jpg" alt="Shrink"></p>
+<p>Shrink.media，一款免费压缩图像大小的在线工具，通过智能压缩和缩小尺寸来减小图像的文件大小，并支持免费下载压缩后的图像</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-005.jpg" alt="Shrink"></p>
+<p>▲ 压缩前后对比，从360kb至12.35kb，效果满意</p>
+<p>3、<a target="_blank" rel="noopener" href="https://www.typelit.io/">TypeLit.io：一个练习打字的网站</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-006.jpg" alt="TypeLit"></p>
+<p>通过练习你最喜欢的文学作品来提高你的打字速度。支持：英语/荷兰语/芬兰/法语/德语/意大利语/葡萄牙语/俄语/西班牙语。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-007.jpg" alt="TypeLit"></p>
+<p>除了网站提供的经典文学作品，目前发布了最新功能，支持<strong>自带书籍</strong>，其实就是允许你导入未加密的 EPUB、PDF 和 TXT 文件，然后开始你的打字练习。</p>
+<p>当然，这个功能收费，5 刀/月，如果你只是练习打字（字母/单词），那其实免费版本足够使用了。</p>
+<p>4、<a target="_blank" rel="noopener" href="https://github.com/rzashakeri/beautify-github-profile">beautify-github-profile：美化你的 GitHub 个人资料</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-008.jpg" alt="beautify"></p>
+<p>beautify-github-profile 仓库提供了一整套工具和指南，帮助你设计出一个更漂亮、更有吸引力的 github 个人资料展示页。</p>
+<p>5、<a target="_blank" rel="noopener" href="https://apitracker.io/">API Tracker：一个API的追踪器</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/tools-009.jpg" alt="apitracker"></p>
+<p>apitracker.io ，可以发现最好的 API 和开发者资源，包括跟踪 API 规范、开发人员体验、API 文档、SDK、开发人员文档、IDE 支持、平台强度、身份验证和 API 样式。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、<a target="_blank" rel="noopener" href="https://myfirstnft.info/">我的第一个NFT</a>（中文/英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-005.jpg" alt="NFT"></p>
+<p>如果你想：理解 NFT 的价值、了解 web3、制作一个免费的 NFT..建议你先Mark为敬。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-006.jpg" alt="NFT"></p>
+<p>教程体验极致，舒适度五星。</p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.bookstack.cn/">书栈网</a></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-001.jpg" alt="书栈网"></p>
+<p>书栈网，汇集了众多 IT 程序员互联网开源编程书籍，囊括小程序、前端、后端、移动端、云计算、大数据、区块链、机器学习、人工智能和面试笔试等相关书籍。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-002.jpg" alt="书栈网"></p>
+<p>特别你所希望看到的面经算法、编程电子书。</p>
+<p>3、<a target="_blank" rel="noopener" href="https://global.canon/zh/c-museum/camera-series.html">佳能相机博物馆</a></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-003.jpg" alt="佳能"></p>
+<p>佳能相机博物馆，从 30 年代的胶片相机到目前的数码相机，一应俱全。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-004.jpg" alt="佳能"></p>
+<p>支持搜索，排序，相机种类极多。</p>
+<p>4、<a target="_blank" rel="noopener" href="https://sideproject.guide/">Side Project 指南</a>（中文）</p>
+<p>工作之余，很多程序员喜欢用代码建造一些小工具。有时候是为了解决一些自己或者朋友遇到的小问题，有时候是为了好玩儿。我们这行，通常称之为 Side Project。 </p>
+<p>不过可不能小看这些小工具。许多伟大的产品诞生于程序员的 Side Project。比如 GitHub, Unsplash, Instagram, 等等等等。</p>
+<p>每次开启一个项目，虽然是 Side Project, 但内心其实隐隐也在期待着，这个 Side Project 或许可以帮到除自己以外的人？或许可能，这个产品价值足够高，甚至带来经济回报？然而现实是，99% 的 Side Project 都永远停留在自娱自乐的情况。</p>
+<p>经历三个阶段：从 热情满满 到 无人问津 最后 弃坑。</p>
+<p>Side Project 指南详细介绍了如何提升 Side Project 的存活概率、每次开启一个新项目都应该问自己下面四个问题：</p>
+<ul>
+<li>如何判断一个点子的好坏？</li>
+<li>如何快速把 Side Project 做出来？</li>
+<li>如何让更多人知道这个 Side Project？</li>
+<li>如何把 Side Project 变成能为自己带来收入的产品？</li>
+</ul>
+<p>5、<a target="_blank" rel="noopener" href="https://landscape.cncf.io/">CNCF（云原生计算基金会）全景一览</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-007.jpg" alt="CNCF"></p>
+<p>▲ CNCF 全景一览</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-008.jpg" alt="CNCF"></p>
+<p>▲ CNCF 成员</p>
+<p>本资源不做介绍，懂的都懂，不懂的不懂，仅列为自己收藏的一副星辰大海图。</p>
+<p>6、<a target="_blank" rel="noopener" href="https://awesomeindie.com/">Awesome Indie，一个发现独立开发者产品的网站</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-009.jpg" alt="Awesome"></p>
+<p>一个发现独立开发者产品的网站，上周上榜 ProductHunt #1 的一个产品。</p>
+<p>7、<a target="_blank" rel="noopener" href="https://www.devdum.com/">DevDum - 200多个面向 Web 开发人员的资源导航网站</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-010.jpg" alt="Awesome"></p>
+<p>像素风格，挺特别。</p>
+<p>8、<a target="_blank" rel="noopener" href="https://hackertalk.net/">黑客说</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/source-011.jpg" alt="黑客说"></p>
+<p>国产技术交流社区，有点 Twitter 风格，试运营中，暂时没看到有吸引我的点，如果想达到优质技术交流水平，很难很难。</p>
+<h2 id="播客"><a href="#播客" class="headerlink" title="播客"></a>播客</h2><p>1、<a target="_blank" rel="noopener" href="https://www.ximalaya.com/sound/531293360">什么是 DAO？与创始人和资深参与者聊聊 DAO</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/boke-001.jpg" alt="DAO"></p>
+<p>有人说 <strong>DAO</strong> 是 <strong>公司制度的未来</strong>，也有人对此不屑一顾。可究竟什么是 DAO，仍然众说纷纭。</p>
+<p>本期节目我们请到了 DAOrayaki 的创始人 Wendy 与 Bankless、fwb、Seed Club 等 DAO 的资深参与者王超来一起来聊聊 DAO 背后的故事。</p>
+<p>本期节目我们聊到了：</p>
+<ul>
+<li><ol>
+<li>DAORayiki 的来龙去脉；王超为什么加入这些 DAO</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>为什么选择 DAO 的形式、什么是 DAO？DAO 究竟是怎么运作的？</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>汉洋是做开源的，我们之前的开源项目和 DAO 有哪些区别呢？它是一个老的事情套上了新的名词，还是一件全新的事情？</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>如何加入一个 DAO？</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>DAO 怎么挣钱？</li>
+</ol>
+</li>
+</ul>
+<p>2、<a target="_blank" rel="noopener" href="http://tv.cctv.com/2022/04/25/VIDAtlLjsM5mDyjKGNMcNTPZ220425.shtml">CCTV记录片《码农的异想世界》</a>（中文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/boke-002.jpg" alt="码农的异想世界"></p>
+<p>在外人眼中，程序员们（自嘲码农）仿佛永远穿着格子衫、大裤衩，捋着堪忧的发量、不善与人言辞。本片通过采访不同岗位的码农，听他们讲述自己与字符相作、乏善可陈的生活和闪闪发光的科学梦想。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/boke-003.jpg" alt="码农的异想世界"></p>
+<p><strong>目前已播出剧集</strong>：</p>
+<ul>
+<li>《码农的异想世界》 第1集</li>
+</ul>
+<p>本集主要内容： 这些行色匆匆的脚步，奔忙在中国互联网行业最密集的地方——西二旗，脚步的主人们有一个共同的代号——码农，他们肩上并未扛着锄头，头脑却耕耘在数码的田野里。每天的高峰时刻，6万多码农，进出于这个北京最繁忙的地铁站。</p>
+<ul>
+<li>《码农的异想世界》 第2集</li>
+</ul>
+<p>本集主要内容： 肖玮，一名音频算法工程师，也就是我们俗称的“码农”、“程序员”。他正在研发的AI降噪算法，如果技术可行，将为听力衰减的老人提供辅听，从而提升声音的清晰度和可懂度。</p>
+<ul>
+<li>《码农的异想世界》 第3集</li>
+</ul>
+<p>本集主要内容： 每一位码农都有两个身份：现实世界的程序员、异想世界中的造物者。程序员专注于编写代码，而造物者负责构建起一个虚幻的世界，这个虚幻的世界可以很小，可以很大，也可以无穷大。他们在现实与异想世界间穿梭，凭借一行行代码，实现内心最深处的愿望。</p>
+<h2 id="文摘"><a href="#文摘" class="headerlink" title="文摘"></a>文摘</h2><p>1、<a target="_blank" rel="noopener" href="https://tinyprojects.dev/posts/i_spent_two_years_launching_tiny_projects">我花了 2 年时间启动的小型项目</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/post-001.jpg" alt="i_spent_two_years_launching_tiny_projects"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/post-002.jpg" alt="i_spent_two_years_launching_tiny_projects"></p>
+<p>作者介绍自己两年间落地八个想法，其中部分项目持续盈利，特别是分享了自己在构建这些小型互联网项目方面所学到的知识以及成果。</p>
+<p>这是他的小项目，例如：</p>
+<ul>
+<li>个人网站 tinyprojects.dev</li>
+<li>收集购入大厂域名，例如 netflix.soy</li>
+<li>Android 版大逃杀游戏</li>
+<li> 小型电子商务商店 oneitem.store</li>
+<li>一个非常正常的社交网络平台 Snormal</li>
+<li>稀有用户名 Earlyname</li>
+<li>emoji 域名电子邮件服务</li>
+<li>纸质网站 Paper Website</li>
+</ul>
+<p>特别羡慕这种生活工作方式，这也是为何我希望成为ZY职业者的初心。</p>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>1、<a target="_blank" rel="noopener" href="https://twitter.com/wenquai/status/1527312285152452608">DALL-E 可以让奇幻小说栩栩如生</a>（英文）</p>
+<p>OpenAI 前不久公开的 DALL-E，可以为每个段落都动态生成一组独特生动的图像。</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/photo-001.jpg" alt="DALL-E"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/photo-002.jpg" alt="DALL-E"></p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/photo-003.jpg" alt="DALL-E"></p>
+<p>2、<a target="_blank" rel="noopener" href="https://www.odditycentral.com/travel/car-sickness-hell-a-winding-mountain-road-with-600-hairpin-turns.html">帕米尔高原天空公路</a>（英文）</p>
+<p><img src="https://www.hongyongtao.com/_media/images/2022/issue-8/cover1.jpg" alt="帕米尔高原天空公路"> </p>
+<p>帕米尔高原天空公路最高点海拔4269m。它最初长 36 公里（22 英里），但后来延长到 75 公里。</p>
+<h2 id="言论"><a href="#言论" class="headerlink" title="言论"></a>言论</h2><p>1、</p>
+<p>中国发展太快了，随着全球格局的变化，未来面临的发展机会和挑战都会越来越多。对于我们这一代技术人来说，只要顺应时代的变化，未来的机会只会更多。</p>
+<p>对于新一代的开发者来说，我认为未来的领域会更加集中在用技术和算法进一步改造各种传统的行业，例如：汽车、物联网，以及用技术将人类社会朝着数字化的虚拟世界发展。所以，我推荐大家关注自动驾驶、人工智能、产业互联网、推荐系统、虚拟现实等领域，可能会有新的行业红利出现。</p>
+<p>– <a target="_blank" rel="noopener" href="https://blog.devtang.com/2022/05/22/startup-10th-year-summary/">《我的移动开发程序人生 - 写在创业十周年》</a></p>
+<p>2、</p>
+<p>面向未来不一定是软件开发的目标，而是影响设计的众多 “能力” 之一。</p>
+<p>在这个范围内过度纠正可能会导致不必要的工作、技术债务和令人困惑的抽象。</p>
+<p>不过，找到最佳点可以节省你的时间和精力。</p>
+<p>– <a target="_blank" rel="noopener" href="https://stackoverflow.blog/2022/05/19/crystal-balls-and-clairvoyance-future-proofing-in-a-world-of-inevitable-change/">《水晶球和千里眼：在万变的世界中面向未来》</a></p>
+<p>3、</p>
+<p>如果某种语言的某个特性有时会出现问题，并且可以用另一个更可靠的特性来替换它，那么请始终使用更可靠的特性。</p>
+<p>– <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Douglas%20Crockford/5960317">Douglas Crockford（道格拉斯·克罗克福德）</a></p>
+<h2 id="首发订阅"><a href="#首发订阅" class="headerlink" title="首发订阅"></a>首发订阅</h2><p>这里记录每周值得分享的科技内容，周三发布，首发在</p>
+<ul>
+<li><a href="https://www.hongyongtao.com/">洪致知个人网站</a></li>
+<li>微信公众号：第一次当爸爸吖</li>
+</ul>
+<p>本刊开源（GitHub: <a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog">hongyongtao/blog</a>），欢迎投稿，推荐或自荐文章/软件/资源，请<a target="_blank" rel="noopener" href="https://github.com/hongyongtao/blog/issues">提交 issue</a> 。</p>
+<p>（完）</p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>无聊科技正经事周刊（第8期）：让子弹飞一会儿，用长期的眼光看中国开源</sharetitle><shareintroduce>位于墨尔本北菲茨罗伊的一处草屋建筑。
+</shareintroduce><shareimg>https://www.hongyongtao.com/_media/images/2022/issue-8/cover.jpg</shareimg><author>洪致知</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/" rel="tag">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/family/" rel="tag">一家三口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soulmate/" rel="tag">人生伴侣</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trial/" rel="tag">实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/report/" rel="tag">汇报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shenzhen/" rel="tag">深圳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leo/" rel="tag">灏灏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai/" rel="tag">竹白</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai-wiki/" rel="tag">竹白百科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-oriented/" rel="tag">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-03-16.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/biglate-ajax.js"></script><script src="https://www.panshenlian.com/scripts/plugin/jquery-3.6.0.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/biglate-analytics.js"></script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>

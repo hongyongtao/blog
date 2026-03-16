@@ -1,0 +1,918 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>Mybatis系列全解（四）：全网最全！Mybatis配置文件XML全貌详解 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">订阅我</a></nav><nav class="right menus-right"><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">2025-01-14：
+职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2020%2Fmybatis-004-xml-config-file.md">查看源代码</a></small><h1>Mybatis系列全解（四）：全网最全！Mybatis配置文件XML全貌详解</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/images/post/me/avatar.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2020-12-10</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2020/12/10/mybatis-004-xml-config-file/" align="left" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/mybatis/">Mybatis</a></li></ul></div><div class="markdown-body"><p><img src="https://www.panshenlian.com/images/post/java/mybatis/title/04-title.jpg"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/4db7093706a82aa09e4e4bb5e9c93d1d.png"></p>
+<p>做大事和做小事的难度是一样的。两者都会消耗你的时间和精力，所以如果决心做事，就要做大事，要确保你的梦想值得追求，未来的收获可以配得上你的努力。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/d2f0a18e1d4b92c98b8bf219766381f3.png"></p>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一篇文章 <strong>《Mybatis系列全解（三）：Mybatis简单CRUD使用介绍》</strong> ，我们基本上手了 Mybatis 的增删改查操作，也感受到 Mybatis 的简单高效舒美，但是肯定有部分朋友对于 Mybatis 的配置文件只是了解基本组成和大致用法，尚无一套完整的结构记忆，所以本篇文章我们将详细的介绍 Mybatis 的配置全貌，毕竟 Mybatis 的配置文件对于整个 Mybatis 体系的构建与支撑有着深远的影响。</p>
+<p><strong>Mybatis 全解系列脑图全览一直在更新哦</strong></p>
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:100%; height:500px;" src="https://www.processon.com/embed/5fb88348f346fb5f0e298069"></iframe>
+
+
+<h4 id="Mybaits系列全解-传送门"><a href="#Mybaits系列全解-传送门" class="headerlink" title="Mybaits系列全解 ( 传送门 )"></a>Mybaits系列全解 ( 传送门 )</h4><ul>
+<li><a href="/2020/11/16/mybatis-001-hand-write-frame/">Mybatis系列全解（一）：手写一套持久层框架</a></li>
+<li><a href="/2020/11/28/mybatis-002-introduct-and-environment-construction/">Mybatis系列全解（二）：Mybatis简介与环境搭建</a></li>
+<li><a href="/2020/12/01/mybatis-003-usage-for-crud/">Mybatis系列全解（三）：Mybatis简单CRUD使用介绍</a></li>
+<li><a href="/2020/12/10/mybatis-004-xml-config-file/">Mybatis系列全解（四）：全网最全！Mybatis配置文件XML全貌详解</a></li>
+<li><a href="/2020/12/18/mybatis-005-mapping-file/">Mybatis系列全解（五）：全网最全！详解Mybatis的Mapper映射文件</a></li>
+<li><a href="/2021/01/11/mybatis-006-core-api/">Mybatis系列全解（六）：Mybatis最硬核的API你知道几个？</a></li>
+<li><a href="/2021/01/25/mybatis-007-two-impl-of-dao-layer">Mybatis系列全解（七）：全息视角看Dao层两种实现方式之传统与代理？</a></li>
+<li><a href="/2021/03/04/mybatis-008-dynamic-sql">Mybatis系列全解（八）：Mybatis的9大动态SQL标签你知道几个？</a></li>
+<li>Mybatis系列全解（九）：Mybatis的复杂映射</li>
+<li>Mybatis系列全解（十）：Mybatis注解开发</li>
+<li>Mybatis系列全解（十一）：Mybatis缓存全解</li>
+<li>Mybatis系列全解（十二）：Mybatis插件开发</li>
+<li>Mybatis系列全解（十三）：Mybatis代码生成器</li>
+<li>Mybatis系列全解（十四）：Spring集成Mybatis</li>
+<li>Mybatis系列全解（十五）：SpringBoot集成Mybatis</li>
+<li>Mybatis系列全解（十六）：Mybatis源码剖析</li>
+</ul>
+<h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><p>1、为什么要使用配置文件</p>
+<p>2、Mybatis 配置全貌</p>
+<p>3、XML 核心配置</p>
+<p>4、XML 映射文件</p>
+<p>5、总结</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/78a36bf5b4f6c5b660ec41cc90d1e52d.png"></p>
+<h4 id="为什么要使用配置文件"><a href="#为什么要使用配置文件" class="headerlink" title="为什么要使用配置文件"></a>为什么要使用配置文件</h4><p>试想，如果没有配置文件，我们的应用程序将只能沿着固定的姿态运行，几乎不能做任何动态的调整，那么这不是一套完美的设计，因为我们希望拥有更宽更灵活的操作空间和更多的兼容度，同时也能解决硬编码等问题，所以我们需要有配置文件，对应用程序进行参数预设和设置初始化工作。</p>
+<p><strong>那我们为何钟情XML</strong>？</p>
+<blockquote>
+<p>首先，当然是 XML 配置文件本身就足够优秀，格式规范，存储小，跨平台，读取快…等等，所谓窈窕淑女，谁人不爱。</p>
+<p>其次，也是一个重要影响因素，就是各大领域大佬的支持，像微软、像Java系…等等，世上本无路，只是走的人多了，也就成了路 （ 这句话是鲁迅老先生说的）。</p>
+</blockquote>
+<p><strong>所以，Mybatis选择搭配XML配置，实属合理。</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/30ec400a6ee06546af3fdfa8923d31ff.png"></p>
+<h4 id="Mybatis-配置全貌"><a href="#Mybatis-配置全貌" class="headerlink" title="Mybatis 配置全貌"></a>Mybatis 配置全貌</h4><p>Mybatis框架本身，理论上就一个配置文件，其实也只需要一个配置文件，即mybatis-config.xml （当然文件名允许自由命名），只不过这个配置文件其中的一个属性mappers(映射器)，由于可能产生过多的SQL映射文件，于是我们物理上单独拓展出来，允许使用者定义任意数量的 xxxMapper.xml 映射文件。</p>
+<blockquote>
+<p>把SQL映射文件单独配置，是有好处的，一是灵活度上允许任意拓展，二也避免了其它无需经常变动的属性配置遭遇误改。</p>
+</blockquote>
+<p><strong>我们看看Mybatis官网给出的配置文件层次结构：</strong></p>
+<ul>
+<li>configuration（配置）<ul>
+<li>properties（属性）</li>
+<li>settings（设置）</li>
+<li>typeAliases（类型别名）<ul>
+<li><em>三种别名定义方式</em></li>
+</ul>
+</li>
+<li>typeHandlers（类型处理器）<ul>
+<li><em>自定义类型处理器</em></li>
+</ul>
+</li>
+<li>objectFactory（对象工厂）</li>
+<li>plugins（插件）</li>
+<li>environments（环境配置）<ul>
+<li>environment（环境变量）<ul>
+<li>transactionManager（事务管理器）</li>
+<li>dataSource（数据源）<ul>
+<li><em>三种支持数据源与自定义数据源</em> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>databaseIdProvider（数据库厂商标识）</li>
+<li>mappers（映射器）</li>
+</ul>
+</li>
+</ul>
+<p><strong>实际配置文件XML内容如下，除了约束头 &lt;?xml&gt; 与 &lt;!DOCTYPE&gt;，</strong></p>
+<p><strong>其余标签元素都是 Mybatis 的核心配置属性 ：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 1、属性：例如jdbc.properties --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 2、设置：定义全局性设置，例如开启二级缓存 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 3、类型名称：为一些类定义别名 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">&quot;com.panshenlian.pojo.User&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;user&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">typeAlias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 4、类型处理器：定义Java类型与数据库中的数据类型之间的转换关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 5、对象工厂 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">objectFactory</span> <span class="attr">type</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">objectFactory</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 6、插件：mybatis的插件，支持自定义插件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 7、环境：配置mybatis的环境 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 环境变量：支持多套环境变量，例如开发环境、生产环境 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 事务管理器：默认JDBC --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 数据源：使用连接池，并加载mysql驱动连接数据库 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 8、数据库厂商标识 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">databaseIdProvider</span> <span class="attr">type</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">databaseIdProvider</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 9、映射器：指定映射文件或者映射类 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;UserMapper.xml&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>必须注意：Mybatis配置文件的属性位置顺序是 <strong>固定</strong> 的，不允许 <strong>颠倒顺序</strong>，否则 Mybatis 在解析 XML 文件的时候就会抛出异常，这个与 Mybatis 框架启动加载配置信息顺序有关，后续我们源码分析会讲到。</p>
+</blockquote>
+<p><strong>以上基本能够清晰看明白 Mybatis 配置文件的层次结构关系，我们简单画一张脑图：</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201208231009604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01yUmlnaHRfc2VubHlwYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>基本是需要我们掌握 9 大顶级元素配置，其中标记 <strong>橘红色</strong> 的属性配置，由于涉及 <strong>插件</strong> 和 <strong>动态SQL</strong> ，插件配置可以应用于分页与功能增强等，动态SQL例如 if 标签、where 标签、foreach标签等，初步理解为应用于SQL语句拼接。这两块属于 Mybatis 的两个特性，我们后续单独详细进行梳理讨论。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/6046a59b498ec911b5218ec06beec6e2.png"></p>
+<h4 id="XML-核心配置"><a href="#XML-核心配置" class="headerlink" title="XML 核心配置"></a>XML 核心配置</h4><p>我们的核心配置文件 configuration（配置）作为最顶级节点，其余 9 大属性都必须嵌套在其内，对于内部 9 大节点，我们逐一讲解：</p>
+<h5 id="1、properties（属性）"><a href="#1、properties（属性）" class="headerlink" title="1、properties（属性）"></a>1、properties（属性）</h5><hr>
+<p>属性标签，显而易见就是提供属性配置，可进行动态替换，一般可以在 Java 属性文件中配置，例如 jdbc.properties 配置文件 ，或通过 properties 元素标签中的子元素 property 来指定配置。</p>
+<p>举例我们需要配置数据源信息，采用 property 标签可以这样配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/myDB&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;user1&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>设置好的属性可以在整个配置文件中用来替换需要动态配置的属性值。比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>或者我们使用  Java 中的属性配置文件，把属性配置元素具体化到一个属性文件中，并且使用属性文件的 key 名作为占位符。例如 jdbc.properties </p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">driver</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="attr">url</span>=<span class="string">jdbc\:mysql\://127.0.0.1\:3306/myDB</span></span><br><span class="line"><span class="attr">username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">123456</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用时我们把属性文件引入，并使用文件中定义的占位符，例如 db.driver ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 引入属性配置文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://img-blog.csdnimg.cn/2020120823102835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01yUmlnaHRfc2VubHlwYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>但是问题来了，当我们既使用 *.properties 配置文件，同时又设置了 property 元素值，Mybatis 会使用哪边配置的属性值呢？ 例如这种情况 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/myDB&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;user1&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里，如果在 property 标签元素与 jdbc.properties 文件中同时存在相同属性，那么属性文件将会覆盖 property 标签元素的属性，例如最终 username属性值会使用 jdbc.properties 文件中设置的 <strong>root</strong>，而不会使用属性元素设置的 <strong>user1</strong> 。这样实际为配置提供了诸多灵活选择。</p>
+<p>另外，properties 元素允许配置 resource 属性或 url 属性，<strong>只能二选一</strong>，要么使用 resource 指定本地的配置文件，要么使用 url 指定远程的配置文件，因为 Mybatis 在加载配置时，如果发现 url 与 resource 同时存在，会抛出异常禁止。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置resource--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;xxx.properties&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置url--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">url</span>=<span class="string">&quot;http://xxxx&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>还有一种情况，像 Mybatis 在解析配置的时候，也可以在 Java 代码中构建属性 java.util.Properties 属性对象并传递到  SqlSessionFactoryBuilder.build() 方法中，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建属性对象</span></span><br><span class="line"><span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">props.setProperty(<span class="string">&quot;driver&quot;</span>,<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>); </span><br><span class="line">props.setProperty(<span class="string">&quot;url&quot;</span>,<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/myDB&quot;</span>); </span><br><span class="line">props.setProperty(<span class="string">&quot;username&quot;</span>,<span class="string">&quot;user1&quot;</span>); </span><br><span class="line">props.setProperty(<span class="string">&quot;password&quot;</span>,<span class="string">&quot;123456&quot;</span>);  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 传递属性构建 SqlSessionFactory</span></span><br><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(reader, props);</span><br></pre></td></tr></table></figure>
+
+<p>那么这三种方式都允许配置，那在属性配置重复的情况下，优先级别是怎样呢？</p>
+<p><strong>properties 优先级</strong></p>
+<p>1、第一优先级：在 Java 代码中构建的 properties 属性对象；</p>
+<p>2、第二优先级：通过属性 resource 或 url 读取到的本地文件或远程文件；</p>
+<p>3、第三优先级：直接在 properties 内部子标签元素 property 中设置的属性。 </p>
+<blockquote>
+<p>注意，在实际开发中，为了避免给后期维护造成困扰，建议使用单一种配置方式。</p>
+</blockquote>
+<h5 id="2、settings（设置）"><a href="#2、settings（设置）" class="headerlink" title="2、settings（设置）"></a>2、settings（设置）</h5><hr>
+<p>settings 标签元素，是 MyBatis 中极为重要的调整设置，它们会动态改变 MyBatis 的运行时行为，这些配置就像 Mybatis 内置的许多功能，当你需要使用时可以根据需要灵活调整，并且 settings 能配置的东西特别多，我们先来一起看看，一个完整的属性配置示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;lazyLoadingEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;multipleResultSetsEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;useColumnLabel&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;useGeneratedKeys&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;autoMappingBehavior&quot;</span> <span class="attr">value</span>=<span class="string">&quot;PARTIAL&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;autoMappingUnknownColumnBehavior&quot;</span> <span class="attr">value</span>=<span class="string">&quot;WARNING&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;defaultExecutorType&quot;</span> <span class="attr">value</span>=<span class="string">&quot;SIMPLE&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;defaultStatementTimeout&quot;</span> <span class="attr">value</span>=<span class="string">&quot;25&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;defaultFetchSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;safeRowBoundsEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;localCacheScope&quot;</span> <span class="attr">value</span>=<span class="string">&quot;SESSION&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;jdbcTypeForNull&quot;</span> <span class="attr">value</span>=<span class="string">&quot;OTHER&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;lazyLoadTriggerMethods&quot;</span> <span class="attr">value</span>=<span class="string">&quot;equals,clone,hashCode,toString&quot;</span>/&gt;</span></span><br><span class="line">  &lt;... more .../&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>属性cacheEnabled</strong></p>
+<ul>
+<li>全局性地开启或关闭所有映射器配置文件中已配置的任何缓存</li>
+<li>支持 true | false    </li>
+<li>默认 true</li>
+</ul>
+</li>
+<li><p><strong>属性lazyLoadingEnabled</strong>    </p>
+<ul>
+<li>延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置 <strong>fetchType</strong> 属性来覆盖该项的开关状态。    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 aggressiveLazyLoading</strong></p>
+<ul>
+<li>开启时，任一方法的调用都会加载该对象的所有延迟加载属性。 否则，每个延迟加载属性会按需加载（参考 <strong>lazyLoadTriggerMethods</strong>)。    </li>
+<li>支持 true | false    </li>
+<li>默认 false （在 3.4.1 及之前的版本中默认为 true）</li>
+</ul>
+</li>
+<li><p><strong>属性 multipleResultSetsEnabled</strong></p>
+<ul>
+<li>是否允许单个语句返回多结果集（需要数据库驱动支持）。    </li>
+<li>支持 true | false    </li>
+<li>默认 true</li>
+</ul>
+</li>
+<li><p><strong>属性 useColumnLabel</strong></p>
+<ul>
+<li>使用列标签代替列名。实际表现依赖于数据库驱动，具体可参考数据库驱动的相关文档，或通过对比测试来观察。    </li>
+<li>支持 true | false    </li>
+<li>默认 true</li>
+</ul>
+</li>
+<li><p><strong>属性 useGeneratedKeys</strong></p>
+<ul>
+<li>允许 JDBC 支持自动生成主键，需要数据库驱动支持。如果设置为 true，将强制使用自动生成主键。尽管一些数据库驱动不支持此特性，但仍可正常工作（如 <strong>Derby</strong>）。    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 autoMappingBehavior</strong></p>
+<ul>
+<li>指定 MyBatis 应如何自动映射列到字段或属性。 NONE 表示关闭自动映射；PARTIAL 只会自动映射没有定义嵌套结果映射的字段。 FULL 会自动映射任何复杂的结果集（无论是否嵌套）。    </li>
+<li>支持 NONE, PARTIAL, FULL    </li>
+<li>默认 PARTIAL</li>
+</ul>
+</li>
+<li><p><strong>属性 autoMappingUnknownColumnBehavior</strong></p>
+<ul>
+<li>指定发现自动映射目标未知列（或未知属性类型）的行为。<ul>
+<li>NONE: 不做任何反应</li>
+<li>WARNING: 输出警告日志（ <em>org.apache.ibatis.session.AutoMappingUnknownColumnBehavior</em> 的日志等级必须设置为 WARN）</li>
+<li>FAILING: 映射失败 (抛出 SqlSessionException)    </li>
+</ul>
+</li>
+<li>支持 NONE, WARNING, FAILING    </li>
+<li>默认 NONE</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultExecutorType</strong></p>
+<ul>
+<li>配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（PreparedStatement）； BATCH 执行器不仅重用语句还会执行批量更新。    </li>
+<li>支持 SIMPLE REUSE BATCH    </li>
+<li>默认 SIMPLE</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultStatementTimeout</strong></p>
+<ul>
+<li>设置超时时间，它决定数据库驱动等待数据库响应的秒数。</li>
+<li>支持 任意正整数    </li>
+<li>默认 未设置 (null)</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultFetchSize</strong></p>
+<ul>
+<li>动的结果集获取数量（fetchSize）设置一个建议值。此参数只可以在查询设置中被覆盖。</li>
+<li>支持 任意正整数    </li>
+<li>默认 未设置 (null)</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultResultSetType</strong></p>
+<ul>
+<li>指定语句默认的滚动策略。（新增于 3.5.2）    </li>
+<li>支持 FORWARD_ONLY | SCROLL_SENSITIVE | SCROLL_INSENSITIVE | DEFAULT（等同于未设置）    </li>
+<li>默认 未设置 (null)</li>
+</ul>
+</li>
+<li><p><strong>属性 safeRowBoundsEnabled</strong></p>
+<ul>
+<li>是否允许在嵌套语句中使用分页（RowBounds）。如果允许使用则设置为 false。    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 safeResultHandlerEnabled</strong></p>
+<ul>
+<li>是否允许在嵌套语句中使用结果处理器（ResultHandler）。如果允许使用则设置为 false。</li>
+<li>支持 true | false    </li>
+<li>默认 true</li>
+</ul>
+</li>
+<li><p><strong>属性 mapUnderscoreToCamelCase</strong></p>
+<ul>
+<li>是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 localCacheScope</strong></p>
+<ul>
+<li>MyBatis 利用本地缓存机制（Local Cache）防止循环引用和加速重复的嵌套查询。 默认值为 SESSION，会缓存一个会话中执行的所有查询。 若设置值为 STATEMENT，本地缓存将仅用于执行语句，对相同 SqlSession 的不同查询将不会进行缓存。    </li>
+<li>支持 SESSION | STATEMENT    </li>
+<li>默认 SESSION</li>
+</ul>
+</li>
+<li><p><strong>属性 jdbcTypeForNull</strong></p>
+<ul>
+<li>当没有为参数指定特定的 JDBC 类型时，空值的默认 JDBC 类型。 某些数据库驱动需要指定列的 JDBC 类型，多数情况直接用一般类型即可，比如 NULL、VARCHAR 或 OTHER。    </li>
+<li>JdbcType 常量，常用值：NULL、VARCHAR 或 OTHER。    </li>
+<li>默认 OTHER</li>
+</ul>
+</li>
+<li><p><strong>属性 lazyLoadTriggerMethods</strong></p>
+<ul>
+<li>指定对象的哪些方法触发一次延迟加载。    </li>
+<li>支持 用逗号分隔的方法列表。    </li>
+<li>默认 equals,clone,hashCode,toString</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultScriptingLanguage</strong></p>
+<ul>
+<li>指定动态 SQL 生成使用的默认脚本语言。    </li>
+<li>支持 一个类型别名或全限定类名。</li>
+<li>默认 <em>org.apache.ibatis.scripting.xmltags.XMLLanguageDriver</em></li>
+</ul>
+</li>
+<li><p><strong>属性 defaultEnumTypeHandler</strong></p>
+<ul>
+<li>指定 Enum 使用的默认 TypeHandler 。（新增于 3.4.5）    </li>
+<li>支持 一个类型别名或全限定类名。    </li>
+<li>默认 <em>org.apache.ibatis.type.EnumTypeHandler</em></li>
+</ul>
+</li>
+<li><p><strong>属性 callSettersOnNulls</strong></p>
+<ul>
+<li>指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，这在依赖于 Map.keySet() 或 null 值进行初始化时比较有用。注意基本类型（int、boolean 等）是不能设置成 null 的。    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 returnInstanceForEmptyRow</strong></p>
+<ul>
+<li>当返回行的所有列都是空时，MyBatis默认返回 null。 当开启这个设置时，MyBatis会返回一个空实例。 请注意，它也适用于嵌套的结果集（如集合或关联）。（新增于 3.4.2）    </li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 logPrefix</strong></p>
+<ul>
+<li>指定 MyBatis 增加到日志名称的前缀。    </li>
+<li>支持 任何字符串    </li>
+<li>默认 未设置</li>
+</ul>
+</li>
+<li><p><strong>属性 logImpl</strong></p>
+<ul>
+<li>指定 MyBatis 所用日志的具体实现，未指定时将自动查找。</li>
+<li>支持 SLF4J | LOG4J | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING | NO_LOGGING    </li>
+<li>默认 未设置</li>
+</ul>
+</li>
+<li><p><strong>属性 proxyFactory</strong></p>
+<ul>
+<li>指定 Mybatis 创建可延迟加载对象所用到的代理工具。    </li>
+<li>支持 CGLIB | JAVASSIST    </li>
+<li>默认 JAVASSIST （<strong>MyBatis 3.3 以上</strong>）</li>
+</ul>
+</li>
+<li><p><strong>属性 vfsImpl</strong></p>
+<ul>
+<li>指定 VFS 的实现    </li>
+<li>支持 自定义 VFS 的实现的类全限定名，以逗号分隔。    </li>
+<li>默认 未设置</li>
+</ul>
+</li>
+<li><p><strong>属性 useActualParamName</strong></p>
+<ul>
+<li>允许使用方法签名中的名称作为语句参数名称。 为了使用该特性，你的项目必须采用 Java 8 编译，并且加上 -parameters 选项。（新增于 3.4.1）    </li>
+<li>支持 true | false    </li>
+<li>默认 true</li>
+</ul>
+</li>
+<li><p><strong>属性 configurationFactory</strong></p>
+<ul>
+<li>指定一个提供 Configuration 实例的类。 这个被返回的 Configuration 实例用来加载被反序列化对象的延迟加载属性值。 这个类必须包含一个签名为static Configuration getConfiguration() 的方法。（新增于 3.2.3）    </li>
+<li>支持 一个类型别名或完全限定类名。    </li>
+<li>默认 未设置</li>
+</ul>
+</li>
+<li><p><strong>属性 shrinkWhitespacesInSql</strong></p>
+<ul>
+<li>从SQL中删除多余的空格字符。请注意，这也会影响SQL中的文字字符串。 (新增于 3.5.5)</li>
+<li>支持 true | false    </li>
+<li>默认 false</li>
+</ul>
+</li>
+<li><p><strong>属性 defaultSqlProviderType</strong></p>
+<ul>
+<li>指定一个本身拥查询方法的类（ 从 3.5.6 开始 ），这个类可以配置在注解 @SelectProvider 的 type 属性值上。</li>
+<li>支持 一个类型别名或完全限定类名。</li>
+<li>默认 未设置</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>settings 支持了特别多功能支持，其实常规开发中使用到的属性项不会特别多，除非项目有特殊要求，所以建议大家把这些设置当做字典即可，<strong>不必详记</strong> 每一个属性使用，需要时翻阅研读。</p>
+</blockquote>
+<h5 id="3、typeAliases（类型别名）"><a href="#3、typeAliases（类型别名）" class="headerlink" title="3、typeAliases（类型别名）"></a>3、typeAliases（类型别名）</h5><hr>
+<p>类型别名可以给 Java 类型设置一个简称。 它仅用于 XML 配置，意在降低冗余的全限定类名书写，因为书写类的全限定名太长了，我们希望有一个简称来指代它。类型别名在 Mybatis 中分为 <strong>系统内置</strong> 和 <strong>用户自定义</strong> 两类，Mybatis 会在解析配置文件时把 typeAliases 实例存储进入 Configuration 对象中，需要使用时直接获取。</p>
+<p>一般我们可以自定义别名，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Author&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Author&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Blog&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Blog&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>像这样配置时，我们就可以在任何需要使用 domain.blog.Author 的地方，直接使用别名 author 。</p>
+<p>但是，如果遇到项目中特别多 Java 类需要配置别名，怎么更快的设置呢？</p>
+<p>可以指定一个包名进行扫描，MyBatis 会在包名下面扫描需要的 Java Bean，比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;domain.blog&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>每一个在包 domain.blog 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。 比如 domain.blog.Author 的别名为 author；若有 <strong>注解</strong> ，则别名为其自定义的注解值。见下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias(&quot;myAuthor&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Author</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Mybatis 已经为许多常见的 Java 类型内建了相应的类型别名。下面就是一些为常见的 Java 类型内建的类型别名。它们都是不区分大小写的，注意，为了应对原始类型的命名重复，采取了特殊的命名风格，可以发现 <strong>基本类型</strong> 的别名前缀都有下划线  <strong>‘_’</strong>，而基本类型的 <strong>包装类</strong> 则没有，这个需要注意：</p>
+<ul>
+<li>别名 _byte，对应的类型是：byte</li>
+<li>别名 _long，对应的类型是：long</li>
+<li>别名 _short，对应的类型是：short</li>
+<li>别名 _int，对应的类型是：int</li>
+<li>别名 _integer，对应的类型是：int</li>
+<li>别名 _double，对应的类型是：double</li>
+<li>别名 _float，对应的类型是：float</li>
+<li>别名 _boolean，对应的类型是：boolean</li>
+<li>别名 string，对应的类型是：String</li>
+<li>别名 byte，对应的类型是：Byte</li>
+<li>别名 long，对应的类型是：Long</li>
+<li>别名 short，对应的类型是：Short</li>
+<li>别名 int，对应的类型是：Integer</li>
+<li>别名 integer，对应的类型是：Integer</li>
+<li>别名 double，对应的类型是：Double</li>
+<li>别名 float，对应的类型是：Float</li>
+<li>别名 boolean，对应的类型是：Boolean</li>
+<li>别名 date，对应的类型是：Date</li>
+<li>别名 decimal，对应的类型是：BigDecimal</li>
+<li>别名 bigdecimal，对应的类型是：BigDecimal</li>
+<li>别名 object，对应的类型是：Object</li>
+<li>别名 map，对应的类型是：Map</li>
+<li>别名 hashmap，对应的类型是：HashMap</li>
+<li>别名 list，对应的类型是：List</li>
+<li>别名 arraylist，对应的类型是：ArrayList</li>
+<li>别名 collection，对应的类型是：Collection</li>
+<li>别名 iterator，对应的类型是：Iterator</li>
+</ul>
+<p><strong>我们可以通过源码查看内置的类型别名的注册信息。</strong></p>
+<p>具体源码路径在 org.apache.ibatis.type.TypeAliasRegistry # TypeAliasRegistry() ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">TypeAliasRegistry</span><span class="params">()</span> &#123;</span><br><span class="line">    registerAlias(<span class="string">&quot;string&quot;</span>, String.class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;byte&quot;</span>, Byte.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;long&quot;</span>, Long.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;short&quot;</span>, Short.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;int&quot;</span>, Integer.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;integer&quot;</span>, Integer.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;double&quot;</span>, Double.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;float&quot;</span>, Float.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;boolean&quot;</span>, Boolean.class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;byte[]&quot;</span>, Byte[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;long[]&quot;</span>, Long[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;short[]&quot;</span>, Short[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;int[]&quot;</span>, Integer[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;integer[]&quot;</span>, Integer[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;double[]&quot;</span>, Double[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;float[]&quot;</span>, Float[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;boolean[]&quot;</span>, Boolean[].class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;_byte&quot;</span>, <span class="type">byte</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_long&quot;</span>, <span class="type">long</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_short&quot;</span>, <span class="type">short</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_int&quot;</span>, <span class="type">int</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_integer&quot;</span>, <span class="type">int</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_double&quot;</span>, <span class="type">double</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_float&quot;</span>, <span class="type">float</span>.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_boolean&quot;</span>, <span class="type">boolean</span>.class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;_byte[]&quot;</span>, <span class="type">byte</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_long[]&quot;</span>, <span class="type">long</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_short[]&quot;</span>, <span class="type">short</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_int[]&quot;</span>, <span class="type">int</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_integer[]&quot;</span>, <span class="type">int</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_double[]&quot;</span>, <span class="type">double</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_float[]&quot;</span>, <span class="type">float</span>[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;_boolean[]&quot;</span>, <span class="type">boolean</span>[].class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;date&quot;</span>, Date.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;decimal&quot;</span>, BigDecimal.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;bigdecimal&quot;</span>, BigDecimal.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;biginteger&quot;</span>, BigInteger.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;object&quot;</span>, Object.class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;date[]&quot;</span>, Date[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;decimal[]&quot;</span>, BigDecimal[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;bigdecimal[]&quot;</span>, BigDecimal[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;biginteger[]&quot;</span>, BigInteger[].class);</span><br><span class="line">    registerAlias(<span class="string">&quot;object[]&quot;</span>, Object[].class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;map&quot;</span>, Map.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;hashmap&quot;</span>, HashMap.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;list&quot;</span>, List.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;arraylist&quot;</span>, ArrayList.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;collection&quot;</span>, Collection.class);</span><br><span class="line">    registerAlias(<span class="string">&quot;iterator&quot;</span>, Iterator.class);</span><br><span class="line"></span><br><span class="line">    registerAlias(<span class="string">&quot;ResultSet&quot;</span>, ResultSet.class);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>别名是不区分大小写的，同时也支持数组类型，只需要加 “[]” 即可使用，比如 Long 数组别名我们可以用 long[] 直接代替，例如在实际开发中，int 、INT 、integer 、INTEGER 都是代表 Integer ， 这里主要由于 MyBatis 在注册别名的时候会全部转为小写字母进行存储，另外以上列表 <strong>无需牢记</strong>，仅仅在需要使用的时候查阅即可，基本也都可以看得明白。</p>
+</blockquote>
+<h5 id="4、typeHandlers（类型处理器）"><a href="#4、typeHandlers（类型处理器）" class="headerlink" title="4、typeHandlers（类型处理器）"></a>4、typeHandlers（类型处理器）</h5><hr>
+<p>MyBatis 在设置预处理SQL语句（PreparedStatement）中所需要的 <strong>参数</strong> 或从 <strong>结果集</strong> ResultSet 中获取对象时， 都会用类型处理器将获取到的值以合适的方式转换成 Java 类型。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201208231131325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01yUmlnaHRfc2VubHlwYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>类型处理器，主要用于处理 Java 类型与 JDBC 类型的映射匹配关系处理，下表描述了一些默认的类型处理器。</strong></p>
+<ul>
+<li>类型处理器 BooleanTypeHandler    <ul>
+<li>Java 类型：java.lang.Boolean, boolean    </li>
+<li>JDBC 类型：数据库兼容的 BOOLEAN</li>
+</ul>
+</li>
+<li>类型处理器 ByteTypeHandler    <ul>
+<li>Java 类型：java.lang.Byte, byte    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 BYTE</li>
+</ul>
+</li>
+<li>类型处理器 ShortTypeHandler    <ul>
+<li>Java 类型：java.lang.Short, short    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 SMALLINT</li>
+</ul>
+</li>
+<li>类型处理器 IntegerTypeHandler    <ul>
+<li>Java 类型：java.lang.Integer, int    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 INTEGER</li>
+</ul>
+</li>
+<li>类型处理器 LongTypeHandler    <ul>
+<li>Java 类型：java.lang.Long, long    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 BIGINT</li>
+</ul>
+</li>
+<li>类型处理器 FloatTypeHandler    <ul>
+<li>Java 类型：java.lang.Float, float    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 FLOAT</li>
+</ul>
+</li>
+<li>类型处理器 DoubleTypeHandler    <ul>
+<li>Java 类型：java.lang.Double, double    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 DOUBLE</li>
+</ul>
+</li>
+<li>类型处理器 BigDecimalTypeHandler    <ul>
+<li>Java 类型：java.math.BigDecimal    </li>
+<li>JDBC 类型：数据库兼容的 NUMERIC 或 DECIMAL</li>
+</ul>
+</li>
+<li>类型处理器 StringTypeHandler    <ul>
+<li>Java 类型：java.lang.String    </li>
+<li>JDBC 类型：CHAR, VARCHAR</li>
+</ul>
+</li>
+<li>类型处理器 ClobReaderTypeHandler    <ul>
+<li>Java 类型：java.io.Reader    </li>
+<li>JDBC 类型：-</li>
+</ul>
+</li>
+<li>类型处理器 ClobTypeHandler    <ul>
+<li>Java 类型：java.lang.String    </li>
+<li>JDBC 类型：CLOB, LONGVARCHAR</li>
+</ul>
+</li>
+<li>类型处理器 NStringTypeHandler    <ul>
+<li>Java 类型：java.lang.String    </li>
+<li>JDBC 类型：NVARCHAR, NCHAR</li>
+</ul>
+</li>
+<li>类型处理器 NClobTypeHandler    <ul>
+<li>Java 类型：java.lang.String    </li>
+<li>JDBC 类型：NCLOB</li>
+</ul>
+</li>
+<li>类型处理器 BlobInputStreamTypeHandler    <ul>
+<li>Java 类型：java.io.InputStream    </li>
+<li>JDBC 类型：-</li>
+</ul>
+</li>
+<li>类型处理器 ByteArrayTypeHandler    <ul>
+<li>Java 类型：byte[]    </li>
+<li>JDBC 类型：数据库兼容的字节流类型</li>
+</ul>
+</li>
+<li>类型处理器 BlobTypeHandler    <ul>
+<li>Java 类型：byte[]    </li>
+<li>JDBC 类型：BLOB, LONGVARBINARY</li>
+</ul>
+</li>
+<li>类型处理器 DateTypeHandler    <ul>
+<li>Java 类型：java.util.Date    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 DateOnlyTypeHandler    <ul>
+<li>Java 类型：java.util.Date    </li>
+<li>JDBC 类型：DATE</li>
+</ul>
+</li>
+<li>类型处理器 TimeOnlyTypeHandler    <ul>
+<li>Java 类型：java.util.Date    </li>
+<li>JDBC 类型：TIME</li>
+</ul>
+</li>
+<li>类型处理器 SqlTimestampTypeHandler    <ul>
+<li>Java 类型：java.sql.Timestamp    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 SqlDateTypeHandler    <ul>
+<li>Java 类型：java.sql.Date    </li>
+<li>JDBC 类型：DATE</li>
+</ul>
+</li>
+<li>类型处理器 SqlTimeTypeHandler    <ul>
+<li>Java 类型：java.sql.Time    </li>
+<li>JDBC 类型：TIME</li>
+</ul>
+</li>
+<li>类型处理器 ObjectTypeHandler    <ul>
+<li>Java 类型：Any    </li>
+<li>JDBC 类型：OTHER 或未指定类型</li>
+</ul>
+</li>
+<li>类型处理器 EnumTypeHandler    <ul>
+<li>Java 类型：Enumeration Type    </li>
+<li>JDBC 类型：VARCHAR 或任何兼容的字符串类型，用来存储枚举的名称（而不是索引序数值）</li>
+</ul>
+</li>
+<li>类型处理器 EnumOrdinalTypeHandler    <ul>
+<li>Java 类型：Enumeration Type    </li>
+<li>JDBC 类型：任何兼容的 NUMERIC 或 DOUBLE 类型，用来存储枚举的序数值（而不是名称）。</li>
+</ul>
+</li>
+<li>类型处理器 SqlxmlTypeHandler    <ul>
+<li>Java 类型：java.lang.String    </li>
+<li>JDBC 类型：SQLXML</li>
+</ul>
+</li>
+<li>类型处理器 InstantTypeHandler    <ul>
+<li>Java 类型：java.time.Instant    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 LocalDateTimeTypeHandler    <ul>
+<li>Java 类型：java.time.LocalDateTime    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 LocalDateTypeHandler    <ul>
+<li>Java 类型：java.time.LocalDate    </li>
+<li>JDBC 类型：DATE</li>
+</ul>
+</li>
+<li>类型处理器 LocalTimeTypeHandler    <ul>
+<li>Java 类型：java.time.LocalTime    </li>
+<li>JDBC 类型：TIME</li>
+</ul>
+</li>
+<li>类型处理器 OffsetDateTimeTypeHandler    <ul>
+<li>Java 类型：java.time.OffsetDateTime    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 OffsetTimeTypeHandler    <ul>
+<li>Java 类型：java.time.OffsetTime    </li>
+<li>JDBC 类型：TIME</li>
+</ul>
+</li>
+<li>类型处理器 ZonedDateTimeTypeHandler    <ul>
+<li>Java 类型：java.time.ZonedDateTime    </li>
+<li>JDBC 类型：TIMESTAMP</li>
+</ul>
+</li>
+<li>类型处理器 YearTypeHandler    <ul>
+<li>Java 类型：java.time.Year    </li>
+<li>JDBC 类型：INTEGER</li>
+</ul>
+</li>
+<li>类型处理器 MonthTypeHandler    <ul>
+<li>Java 类型：java.time.Month    </li>
+<li>JDBC 类型：INTEGER</li>
+</ul>
+</li>
+<li>类型处理器 YearMonthTypeHandler    <ul>
+<li>Java 类型：java.time.YearMonth    </li>
+<li>JDBC 类型：VARCHAR 或 LONGVARCHAR</li>
+</ul>
+</li>
+<li>类型处理器 JapaneseDateTypeHandler    <ul>
+<li>Java 类型：java.time.chrono.JapaneseDate    </li>
+<li>JDBC 类型：DATE</li>
+</ul>
+</li>
+</ul>
+<p><strong>我们可以通过源码查看内置的类型别名的注册信息。</strong></p>
+<p>具体源码路径在 org.apache.ibatis.type.TypeHandlerRegistry # TypeHandlerRegistry() ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">TypeHandlerRegistry</span><span class="params">()</span> &#123;</span><br><span class="line">   register(Boolean.class, <span class="keyword">new</span> <span class="title class_">BooleanTypeHandler</span>());</span><br><span class="line">   register(<span class="type">boolean</span>.class, <span class="keyword">new</span> <span class="title class_">BooleanTypeHandler</span>());</span><br><span class="line">   register(JdbcType.BOOLEAN, <span class="keyword">new</span> <span class="title class_">BooleanTypeHandler</span>());</span><br><span class="line">   register(JdbcType.BIT, <span class="keyword">new</span> <span class="title class_">BooleanTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Byte.class, <span class="keyword">new</span> <span class="title class_">ByteTypeHandler</span>());</span><br><span class="line">   register(<span class="type">byte</span>.class, <span class="keyword">new</span> <span class="title class_">ByteTypeHandler</span>());</span><br><span class="line">   register(JdbcType.TINYINT, <span class="keyword">new</span> <span class="title class_">ByteTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Short.class, <span class="keyword">new</span> <span class="title class_">ShortTypeHandler</span>());</span><br><span class="line">   register(<span class="type">short</span>.class, <span class="keyword">new</span> <span class="title class_">ShortTypeHandler</span>());</span><br><span class="line">   register(JdbcType.SMALLINT, <span class="keyword">new</span> <span class="title class_">ShortTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Integer.class, <span class="keyword">new</span> <span class="title class_">IntegerTypeHandler</span>());</span><br><span class="line">   register(<span class="type">int</span>.class, <span class="keyword">new</span> <span class="title class_">IntegerTypeHandler</span>());</span><br><span class="line">   register(JdbcType.INTEGER, <span class="keyword">new</span> <span class="title class_">IntegerTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Long.class, <span class="keyword">new</span> <span class="title class_">LongTypeHandler</span>());</span><br><span class="line">   register(<span class="type">long</span>.class, <span class="keyword">new</span> <span class="title class_">LongTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Float.class, <span class="keyword">new</span> <span class="title class_">FloatTypeHandler</span>());</span><br><span class="line">   register(<span class="type">float</span>.class, <span class="keyword">new</span> <span class="title class_">FloatTypeHandler</span>());</span><br><span class="line">   register(JdbcType.FLOAT, <span class="keyword">new</span> <span class="title class_">FloatTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Double.class, <span class="keyword">new</span> <span class="title class_">DoubleTypeHandler</span>());</span><br><span class="line">   register(<span class="type">double</span>.class, <span class="keyword">new</span> <span class="title class_">DoubleTypeHandler</span>());</span><br><span class="line">   register(JdbcType.DOUBLE, <span class="keyword">new</span> <span class="title class_">DoubleTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Reader.class, <span class="keyword">new</span> <span class="title class_">ClobReaderTypeHandler</span>());</span><br><span class="line">   register(String.class, <span class="keyword">new</span> <span class="title class_">StringTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.CHAR, <span class="keyword">new</span> <span class="title class_">StringTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.CLOB, <span class="keyword">new</span> <span class="title class_">ClobTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.VARCHAR, <span class="keyword">new</span> <span class="title class_">StringTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.LONGVARCHAR, <span class="keyword">new</span> <span class="title class_">ClobTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.NVARCHAR, <span class="keyword">new</span> <span class="title class_">NStringTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.NCHAR, <span class="keyword">new</span> <span class="title class_">NStringTypeHandler</span>());</span><br><span class="line">   register(String.class, JdbcType.NCLOB, <span class="keyword">new</span> <span class="title class_">NClobTypeHandler</span>());</span><br><span class="line">   register(JdbcType.CHAR, <span class="keyword">new</span> <span class="title class_">StringTypeHandler</span>());</span><br><span class="line">   register(JdbcType.VARCHAR, <span class="keyword">new</span> <span class="title class_">StringTypeHandler</span>());</span><br><span class="line">   register(JdbcType.CLOB, <span class="keyword">new</span> <span class="title class_">ClobTypeHandler</span>());</span><br><span class="line">   register(JdbcType.LONGVARCHAR, <span class="keyword">new</span> <span class="title class_">ClobTypeHandler</span>());</span><br><span class="line">   register(JdbcType.NVARCHAR, <span class="keyword">new</span> <span class="title class_">NStringTypeHandler</span>());</span><br><span class="line">   register(JdbcType.NCHAR, <span class="keyword">new</span> <span class="title class_">NStringTypeHandler</span>());</span><br><span class="line">   register(JdbcType.NCLOB, <span class="keyword">new</span> <span class="title class_">NClobTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Object.class, JdbcType.ARRAY, <span class="keyword">new</span> <span class="title class_">ArrayTypeHandler</span>());</span><br><span class="line">   register(JdbcType.ARRAY, <span class="keyword">new</span> <span class="title class_">ArrayTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(BigInteger.class, <span class="keyword">new</span> <span class="title class_">BigIntegerTypeHandler</span>());</span><br><span class="line">   register(JdbcType.BIGINT, <span class="keyword">new</span> <span class="title class_">LongTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(BigDecimal.class, <span class="keyword">new</span> <span class="title class_">BigDecimalTypeHandler</span>());</span><br><span class="line">   register(JdbcType.REAL, <span class="keyword">new</span> <span class="title class_">BigDecimalTypeHandler</span>());</span><br><span class="line">   register(JdbcType.DECIMAL, <span class="keyword">new</span> <span class="title class_">BigDecimalTypeHandler</span>());</span><br><span class="line">   register(JdbcType.NUMERIC, <span class="keyword">new</span> <span class="title class_">BigDecimalTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(InputStream.class, <span class="keyword">new</span> <span class="title class_">BlobInputStreamTypeHandler</span>());</span><br><span class="line">   register(Byte[].class, <span class="keyword">new</span> <span class="title class_">ByteObjectArrayTypeHandler</span>());</span><br><span class="line">   register(Byte[].class, JdbcType.BLOB, <span class="keyword">new</span> <span class="title class_">BlobByteObjectArrayTypeHandler</span>());</span><br><span class="line">   register(Byte[].class, JdbcType.LONGVARBINARY, <span class="keyword">new</span> <span class="title class_">BlobByteObjectArrayTypeHandler</span>());</span><br><span class="line">   register(<span class="type">byte</span>[].class, <span class="keyword">new</span> <span class="title class_">ByteArrayTypeHandler</span>());</span><br><span class="line">   register(<span class="type">byte</span>[].class, JdbcType.BLOB, <span class="keyword">new</span> <span class="title class_">BlobTypeHandler</span>());</span><br><span class="line">   register(<span class="type">byte</span>[].class, JdbcType.LONGVARBINARY, <span class="keyword">new</span> <span class="title class_">BlobTypeHandler</span>());</span><br><span class="line">   register(JdbcType.LONGVARBINARY, <span class="keyword">new</span> <span class="title class_">BlobTypeHandler</span>());</span><br><span class="line">   register(JdbcType.BLOB, <span class="keyword">new</span> <span class="title class_">BlobTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(Object.class, UNKNOWN_TYPE_HANDLER);</span><br><span class="line">   register(Object.class, JdbcType.OTHER, UNKNOWN_TYPE_HANDLER);</span><br><span class="line">   register(JdbcType.OTHER, UNKNOWN_TYPE_HANDLER);</span><br><span class="line"></span><br><span class="line">   register(Date.class, <span class="keyword">new</span> <span class="title class_">DateTypeHandler</span>());</span><br><span class="line">   register(Date.class, JdbcType.DATE, <span class="keyword">new</span> <span class="title class_">DateOnlyTypeHandler</span>());</span><br><span class="line">   register(Date.class, JdbcType.TIME, <span class="keyword">new</span> <span class="title class_">TimeOnlyTypeHandler</span>());</span><br><span class="line">   register(JdbcType.TIMESTAMP, <span class="keyword">new</span> <span class="title class_">DateTypeHandler</span>());</span><br><span class="line">   register(JdbcType.DATE, <span class="keyword">new</span> <span class="title class_">DateOnlyTypeHandler</span>());</span><br><span class="line">   register(JdbcType.TIME, <span class="keyword">new</span> <span class="title class_">TimeOnlyTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   register(java.sql.Date.class, <span class="keyword">new</span> <span class="title class_">SqlDateTypeHandler</span>());</span><br><span class="line">   register(java.sql.Time.class, <span class="keyword">new</span> <span class="title class_">SqlTimeTypeHandler</span>());</span><br><span class="line">   register(java.sql.Timestamp.class, <span class="keyword">new</span> <span class="title class_">SqlTimestampTypeHandler</span>());</span><br><span class="line"></span><br><span class="line">   <span class="comment">// mybatis-typehandlers-jsr310</span></span><br><span class="line">   <span class="keyword">if</span> (Jdk.dateAndTimeApiExists) &#123;</span><br><span class="line">     Java8TypeHandlersRegistrar.registerDateAndTimeHandlers(<span class="built_in">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// issue #273</span></span><br><span class="line">   register(Character.class, <span class="keyword">new</span> <span class="title class_">CharacterTypeHandler</span>());</span><br><span class="line">   register(<span class="type">char</span>.class, <span class="keyword">new</span> <span class="title class_">CharacterTypeHandler</span>());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> 从 3.4.5 开始，MyBatis 默认支持 JSR-310（日期和时间 API） ,可以在以上源码上看到新增支持。</p>
+</blockquote>
+<p><strong>一般，你可以重写已有的类型处理器</strong>，</p>
+<p><strong>或根据业务需要创建你自己的类型处理器，</strong></p>
+<p><strong>以处理不支持的类型或非标准的类型。</strong> </p>
+<p>具体做法为：</p>
+<p>1、实现 <code>org.apache.ibatis.type.TypeHandler</code> 接口；</p>
+<p>2、继承 <code>org.apache.ibatis.type.BaseTypeHandler</code> 类。</p>
+<blockquote>
+<p>本身 BaseTypeHandler 类作为抽象类就已经实现了 TypeHandler 接口。</p>
+</blockquote>
+<p>所以我们看到接口 TypeHandler  定义了四个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">TypeHandler</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">setParameter</span><span class="params">(PreparedStatement ps, <span class="type">int</span> i, T parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line"></span><br><span class="line">  T <span class="title function_">getResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line"></span><br><span class="line">  T <span class="title function_">getResult</span><span class="params">(ResultSet rs, <span class="type">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line"></span><br><span class="line">  T <span class="title function_">getResult</span><span class="params">(CallableStatement cs, <span class="type">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>从方法名 <strong>setParameter</strong> 和  <strong>getResult</strong> 我们就可以知道，是发生在预编译时设置参数（增删改查传入参数）与查询结果集后转换为 Java 类型时，类型处理器发挥作用。</p>
+<p>具体实现如下，先自定义类型处理器类 MyExampleTypeHandler ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyExampleTypeHandler.java</span></span><br><span class="line"><span class="meta">@MappedJdbcTypes(JdbcType.VARCHAR)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyExampleTypeHandler</span> <span class="keyword">extends</span> <span class="title class_">BaseTypeHandler</span>&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNonNullParameter</span><span class="params">(PreparedStatement ps, <span class="type">int</span> i, String parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    ps.setString(i, parameter);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getNullableResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    <span class="keyword">return</span> rs.getString(columnName);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getNullableResult</span><span class="params">(ResultSet rs, <span class="type">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    <span class="keyword">return</span> rs.getString(columnIndex);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getNullableResult</span><span class="params">(CallableStatement cs, <span class="type">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    <span class="keyword">return</span> cs.getString(columnIndex);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>自定义类已设定：JdbcType.VARCHAR 与 String 类做映射转换（<strong>注解和泛型已体现</strong>）。</p>
+<p>其次，在核心配置文件中设置类型处理器：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">handler</span>=<span class="string">&quot;org.mybatis.example.MyExampleTypeHandler&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>或者不使用注解方式的话，取消 @MappedJdbcTypes(JdbcType.VARCHAR) 注解，直接在 xml 配置中指定 jdbcType 与 javaType 映射 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">jdbcType</span>=<span class="string">&quot;VARCHAR&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;string&quot;</span> <span class="attr">handler</span>=<span class="string">&quot;org.mybatis.example.MyExampleTypeHandler&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> 记住， typeHandler 的配置方式优先级高于注解配置方式。</p>
+</blockquote>
+<p>这里，自定义类型处理器将会覆盖已有的处理 Java 字符串 类型的属性以及 VARCHAR 类型的参数和结果的类型处理器，基本以上步骤就已经自定了 <strong>JdbcType.VARCHAR</strong> 与 <strong>String</strong>类做映射转换。</p>
+<p><strong>其实到这里，我们基本也就完成了类型处理器的自定义转换，但是有一种情况，就是我们希望我们自定义的类型处理器只处理某一个 Java 实体中的 JdbcType.VARCHAR 与 String 类映射转换，其它实体的处理还是使用系统内置的转换，很简单，我们只需要把以上两步都去掉，在自定义类型处理类的注解@javaType和@MappedJdbcTypes都移除，配置文件中把 typehandler 属性配置移除，直接在映射文件中编写：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;MyResultMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.panshenlian.pojo.User&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- id为int类型，但是没指定自定义类型处理器，不受影响--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- username为String类型，但是没指定自定义类型处理器，不受影响--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;username&quot;</span> <span class="attr">property</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- password为String类型，但是没指定自定义类型处理器，不受影响--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;password&quot;</span> <span class="attr">property</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- birthday为String类型，指定自定义类型处理器，受影响！--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;birthday&quot;</span> <span class="attr">property</span>=<span class="string">&quot;birthday&quot;</span>  <span class="attr">typeHandler</span>=<span class="string">&quot;com.panshenlian.typeHandler.MyStringHandler&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.panshenlian.pojo.User&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;MyResultMap&quot;</span>&gt;</span></span><br><span class="line">    select * from User</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>User 实体参考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.panshenlian.pojo;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: panshenlian</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 用户实体</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: Create in 2:08 2020/12/07</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUsername</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPassword</span><span class="params">(String password)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getBirthday</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBirthday</span><span class="params">(String birthday)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.birthday = birthday;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最终自定义类型处理器，只会对 birthday 字段产生影响，其余字段均不受影响。</p>
+<blockquote>
+<p>自定义类型处理器很灵活，只有当指定对应的 Java 类型和 Jdbc 类型时，处理器才会具体生效，否则 Mybatis 会默认匹配系统内置的类型处理器。</p>
+</blockquote>
+<p>另外，当我们自定义很多类型处理器时，系统支持配置包扫描的方式查找类型处理器：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.mybatis.example&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> 注意在使用自动发现功能的时候，只能通过注解方式来指定 JDBC 的类型。</p>
+</blockquote>
+<p>你可以创建能够处理多个类的泛型类型处理器。为了使用泛型类型处理器， 需要增加一个接受该类的 class 作为参数的构造器，这样 MyBatis 会在构造一个类型处理器实例的时候传入一个具体的类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//GenericTypeHandler.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericTypeHandler</span>&lt;E <span class="keyword">extends</span> <span class="title class_">MyObject</span>&gt; <span class="keyword">extends</span> <span class="title class_">BaseTypeHandler</span>&lt;E&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Class&lt;E&gt; type;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">GenericTypeHandler</span><span class="params">(Class&lt;E&gt; type)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (type == <span class="literal">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Type argument cannot be null&quot;</span>);</span><br><span class="line">    <span class="built_in">this</span>.type = type;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>处理枚举类型</strong></p>
+<p>若想映射枚举类型 <code>Enum</code>，则需要从 <code>EnumTypeHandler</code> 或者 <code>EnumOrdinalTypeHandler</code> 中选择一个来使用。</p>
+<p>比如说我们想存储取近似值时用到的舍入模式。默认情况下，MyBatis 会利用 <code>EnumTypeHandler</code> 来把 <code>Enum</code> 值转换成对应的名字。</p>
+<blockquote>
+<p><strong>注意 <code>EnumTypeHandler</code> 在某种意义上来说是比较特别的，其它的处理器只针对某个特定的类，而它不同，它会处理任意继承了 <code>Enum</code> 的类。</strong></p>
+<p>不过，我们可能不想存储名字，相反我们的 DBA 会坚持使用整形值代码。那也一样简单：在配置文件中把 <code>EnumOrdinalTypeHandler</code> 加到 <code>typeHandlers</code> 中即可， 这样每个 <code>RoundingMode</code> 将通过他们的序数值来映射成对应的整形数值。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeHandler</span> <span class="attr">handler</span>=<span class="string">&quot;org.apache.ibatis.type.EnumOrdinalTypeHandler&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;java.math.RoundingMode&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>但要是你想在一个地方将 <code>Enum</code> 映射成字符串，在另外一个地方映射成整形值呢？</p>
+<p>自动映射器（auto-mapper）会自动地选用 <code>EnumOrdinalTypeHandler</code> 来处理枚举类型， 所以如果我们想用普通的 <code>EnumTypeHandler</code>，就必须要显式地为那些 SQL 语句设置要使用的类型处理器。</p>
+<blockquote>
+<p>下一篇文章我们才开始介绍映射器 mapper.xml 文件，如果你首次阅读映射器概念，可能需要先跳过这里先去了解 mapper.xml 文件配置，再回头过来看。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">    <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">    <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.Mapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		select * from users</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span>&gt;</span></span><br><span class="line">	    insert into users (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">typeHandler</span>=<span class="string">&quot;org.apache.ibatis.type.EnumTypeHandler&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser2&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		select * from users2</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert2&quot;</span>&gt;</span></span><br><span class="line">	    insert into users2 (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode, typeHandler=org.apache.ibatis.type.EnumTypeHandler&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意，这里的 select 语句强制使用 <code>resultMap</code> 来代替 <code>resultType</code>。</p>
+<h5 id="5、objectFactory（对象工厂）"><a href="#5、objectFactory（对象工厂）" class="headerlink" title="5、objectFactory（对象工厂）"></a>5、objectFactory（对象工厂）</h5><hr>
+<p>每次 MyBatis 创建结果对象的新实例时，它都会使用一个对象工厂（ObjectFactory）实例来完成实例化工作。 默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认无参构造方法，要么通过存在的参数映射来调用带有参数的构造方法。 如果想覆盖对象工厂的默认行为，可以通过创建自己的对象工厂来实现。比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ExampleObjectFactory.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExampleObjectFactory</span> <span class="keyword">extends</span> <span class="title class_">DefaultObjectFactory</span> &#123;</span><br><span class="line">      <span class="keyword">public</span> Object <span class="title function_">create</span><span class="params">(Class type)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.create(type);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span> Object <span class="title function_">create</span><span class="params">(Class type, List constructorArgTypes, List constructorArgs)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.create(type, constructorArgTypes, constructorArgs);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties properties)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setProperties(properties);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span>  <span class="type">boolean</span> <span class="title function_">isCollection</span><span class="params">(Class type)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Collection.class.isAssignableFrom(type);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">objectFactory</span> <span class="attr">type</span>=<span class="string">&quot;org.mybatis.example.ExampleObjectFactory&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;someProperty&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">objectFactory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>ObjectFactory 接口很简单，它包含两个创建用的方法，一个是处理默认构造方法的，另外一个是处理带参数的构造方法的。 最后，setProperties 方法可以被用来配置 ObjectFactory，在初始化你的 ObjectFactory 实例后， objectFactory 元素体中定义的属性会被传递给 setProperties 方法。</p>
+<blockquote>
+<p>正常情况下我们不需要使用到，或者说不建议使用，除非业务上确实需要对一个特殊实体初始构造做一个默认属性值配置等处理，其余情况不推荐使用，避免产生不可控风险。</p>
+</blockquote>
+<h5 id="6、plugins（插件）"><a href="#6、plugins（插件）" class="headerlink" title="6、plugins（插件）"></a>6、plugins（插件）</h5><hr>
+<p>MyBatis 允许你在映射语句执行过程中的某一点进行拦截调用。默认情况下，MyBatis 允许使用插件来拦截的方法调用包括：</p>
+<ul>
+<li><strong>Executor</strong> (update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)</li>
+<li><strong>ParameterHandler</strong> (getParameterObject, setParameters)</li>
+<li><strong>ResultSetHandler</strong>  (handleResultSets, handleOutputParameters)</li>
+<li><strong>StatementHandler</strong> (prepare, parameterize, batch, update, query)</li>
+</ul>
+<p>插件功能主要开放拦截的对象就是以上列举的 Mybatis 四大组件，后续我们讲 Mybatis 核心API 的时候或者单独介绍自定义插件的时候会详细说明，这里大家可以先大致了解，包括数据分页、操作日志增强、sql 性能监控等都可以通过插件实现，不过会存储改造的风险，毕竟这些都是核心的 API 。</p>
+<blockquote>
+<p>这四大类中方法具体可以通过查看每个方法的签名来发现，或者直接查看 MyBatis 发行包中的源代码。 如果你想做的不仅仅是监控方法的调用，那么你最好相当了解要重写的方法的行为。 因为在试图修改或重写已有方法的行为时，很可能会破坏 MyBatis 的核心模块。 这些都是更底层的类和方法，所以使用插件的时候要特别当心。</p>
+</blockquote>
+<p>通过 MyBatis 提供的强大机制，使用插件是非常简单的，只需实现 Interceptor 接口，并指定想要拦截的类，方法，参数（由于有多态的情况）即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ExamplePlugin.java</span></span><br><span class="line"><span class="meta">@Intercepts(&#123;</span></span><br><span class="line"><span class="meta">    @Signature(</span></span><br><span class="line"><span class="meta">  		type= Executor.class,</span></span><br><span class="line"><span class="meta">  		method = &quot;update&quot;,</span></span><br><span class="line"><span class="meta">  		args = &#123;MappedStatement.class,Object.class&#125;)&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExamplePlugin</span> <span class="keyword">implements</span> <span class="title class_">Interceptor</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">intercept</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="comment">// implement pre processing if need</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">returnObject</span> <span class="operator">=</span> invocation.proceed();</span><br><span class="line">    <span class="comment">// implement post processing if need</span></span><br><span class="line">    <span class="keyword">return</span> returnObject;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties properties)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.properties = properties;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">&quot;org.mybatis.example.ExamplePlugin&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;someProperty&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面的插件将会拦截在 Executor 实例中所有的 “update” 方法调用， 这里的 Executor 是负责执行底层映射语句的内部对象。</p>
+<p><strong>覆盖配置类</strong> 「 谨慎使用，存在风险 」</p>
+<blockquote>
+<p>除了用插件来修改 MyBatis 核心行为以外，还可以通过完全覆盖配置类来达到目的。只需继承配置类后覆盖其中的某个方法，再把它传递到 SqlSessionFactoryBuilder.build(myConfig) 方法即可。再次重申，这可能会极大影响 MyBatis 的行为，务请慎之又慎。</p>
+</blockquote>
+<h5 id="7、environments（环境配置）"><a href="#7、environments（环境配置）" class="headerlink" title="7、environments（环境配置）"></a>7、environments（环境配置）</h5><hr>
+<p>MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。例如，开发、测试和生产环境需要有不同的配置；或者想在具有相同 Schema 的多个生产数据库中使用相同的 SQL 映射。还有许多类似的使用场景。</p>
+<p><strong>不过要记住：尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境。</strong></p>
+<p>所以，如果你想连接两个数据库，就需要创建两个 SqlSessionFactory 实例，每个数据库对应一个。而如果是三个数据库，就需要三个实例，依此类推，记起来很简单：</p>
+<blockquote>
+<p>每个数据库对应一个 SqlSessionFactory 实例。</p>
+</blockquote>
+<p>为了指定创建哪种环境，只要将它作为可选的参数传递给 SqlSessionFactoryBuilder 即可。可以接受环境配置的两个方法签名是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(reader, environment);</span><br><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(reader, environment, properties);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果忽略了环境参数，那么将会加载默认环境，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(reader);</span><br><span class="line"><span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(reader, properties);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>environments 元素定义了如何配置环境。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;...&quot;</span> <span class="attr">value</span>=<span class="string">&quot;...&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意一些关键点:</p>
+<ul>
+<li>默认使用的环境 ID（比如：default=”development”）。</li>
+<li>每个 environment 元素定义的环境 ID（比如：id=”development”）。</li>
+<li>事务管理器的配置（比如：type=”JDBC”）。</li>
+<li>数据源的配置（比如：type=”POOLED”）。</li>
+</ul>
+<p>默认环境和环境 ID 顾名思义。 环境可以随意命名，但务必保证默认的环境 ID 要匹配其中一个环境 ID。</p>
+<p><strong>事务管理器（transactionManager）</strong></p>
+<p>在 MyBatis 中有两种类型的事务管理器（也就是 type=”[JDBC|MANAGED]”）：</p>
+<ul>
+<li>JDBC – 这个配置直接使用了 JDBC 的提交和回滚设施，它依赖从数据源获得的连接来管理事务作用域。</li>
+<li>MANAGED – 这个配置几乎没做什么。它从不提交或回滚一个连接，而是让容器来管理事务的整个生命周期（比如 JEE 应用服务器的上下文）。 默认情况下它会关闭连接。然而一些容器并不希望连接被关闭，因此需要将 closeConnection 属性设置为 false 来阻止默认的关闭行为。例如:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;MANAGED&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;closeConnection&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>如果你正在使用 Spring + MyBatis，则没有必要配置事务管理器，因为 Spring 模块会使用自带的管理器来覆盖前面的配置。这两种事务管理器类型都不需要设置任何属性。它们其实是类型别名，换句话说，你可以用 TransactionFactory 接口实现类的全限定名或类型别名代替它们。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">TransactionFactory</span> &#123;</span><br><span class="line">  <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties props)</span> &#123; <span class="comment">// 从 3.5.2 开始，该方法为默认方法</span></span><br><span class="line">    <span class="comment">// 空实现</span></span><br><span class="line">  &#125;</span><br><span class="line">  Transaction <span class="title function_">newTransaction</span><span class="params">(Connection conn)</span>;</span><br><span class="line">  Transaction <span class="title function_">newTransaction</span><span class="params">(DataSource dataSource, TransactionIsolationLevel level, <span class="type">boolean</span> autoCommit)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在事务管理器实例化后，所有在 XML 中配置的属性将会被传递给 setProperties() 方法。你的实现还需要创建一个 Transaction 接口的实现类，这个接口也很简单：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Transaction</span> &#123;</span><br><span class="line">  Connection <span class="title function_">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">commit</span><span class="params">()</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">rollback</span><span class="params">()</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">  Integer <span class="title function_">getTimeout</span><span class="params">()</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用这两个接口，你可以完全自定义 MyBatis 对事务的处理。</p>
+<p><strong>数据源（dataSource）</strong></p>
+<p>dataSource 元素使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源。</p>
+<blockquote>
+<p>大多数 MyBatis 应用程序会按示例中的例子来配置数据源。虽然数据源配置是可选的，但如果要启用延迟加载特性，就必须配置数据源。</p>
+</blockquote>
+<p>有三种内建的数据源类型（也就是 type=”[UNPOOLED|POOLED|JNDI]”）：</p>
+<p><strong>UNPOOLED</strong>– 这个数据源的实现会每次请求时打开和关闭连接。虽然有点慢，但对那些数据库连接可用性要求不高的简单应用程序来说，是一个很好的选择。 性能表现则依赖于使用的数据库，对某些数据库来说，使用连接池并不重要，这个配置就很适合这种情形。UNPOOLED 类型的数据源仅仅需要配置以下 5 种属性：</p>
+<ul>
+<li><code>driver</code> – 这是 JDBC 驱动的 Java 类全限定名（并不是 JDBC 驱动中可能包含的数据源类）。</li>
+<li><code>url</code> – 这是数据库的 JDBC URL 地址。</li>
+<li><code>username</code> – 登录数据库的用户名。</li>
+<li><code>password</code> – 登录数据库的密码。</li>
+<li><code>defaultTransactionIsolationLevel</code> – 默认的连接事务隔离级别。</li>
+<li><code>defaultNetworkTimeout</code> – 等待数据库操作完成的默认网络超时时间（单位：毫秒）。查看 <code>java.sql.Connection#setNetworkTimeout()</code> 的 API 文档以获取更多信息。</li>
+</ul>
+<p>作为可选项，你也可以传递属性给数据库驱动。只需在属性名加上“driver.”前缀即可，例如：</p>
+<ul>
+<li><code>driver.encoding=UTF8</code></li>
+</ul>
+<blockquote>
+<p>这将通过 DriverManager.getConnection(url, driverProperties) 方法传递值为 <code>UTF8</code> 的 <code>encoding</code> 属性给数据库驱动。</p>
+</blockquote>
+<p><strong>POOLED</strong>– 这种数据源的实现利用“池”的概念将 JDBC 连接对象组织起来，避免了创建新的连接实例时所必需的初始化和认证时间。 这种处理方式很流行，能使并发 Web 应用快速响应请求。</p>
+<p>除了上述提到 UNPOOLED 下的属性外，还有更多属性用来配置 POOLED 的数据源：</p>
+<ul>
+<li><code>poolMaximumActiveConnections</code> – 在任意时间可存在的活动（正在使用）连接数量，默认值：10</li>
+<li><code>poolMaximumIdleConnections</code> – 任意时间可能存在的空闲连接数。</li>
+<li><code>poolMaximumCheckoutTime</code> – 在被强制返回之前，池中连接被检出（checked out）时间，默认值：20000 毫秒（即 20 秒）</li>
+<li><code>poolTimeToWait</code> – 这是一个底层设置，如果获取连接花费了相当长的时间，连接池会打印状态日志并重新尝试获取一个连接（避免在误配置的情况下一直失败且不打印日志），默认值：20000 毫秒（即 20 秒）。</li>
+<li><code>poolMaximumLocalBadConnectionTolerance</code> – 这是一个关于坏连接容忍度的底层设置， 作用于每一个尝试从缓存池获取连接的线程。 如果这个线程获取到的是一个坏的连接，那么这个数据源允许这个线程尝试重新获取一个新的连接，但是这个重新尝试的次数不应该超过 <code>poolMaximumIdleConnections</code> 与 <code>poolMaximumLocalBadConnectionTolerance</code> 之和。 默认值：3（新增于 3.4.5）</li>
+<li><code>poolPingQuery</code> – 发送到数据库的侦测查询，用来检验连接是否正常工作并准备接受请求。默认是“NO PING QUERY SET”，这会导致多数数据库驱动出错时返回恰当的错误消息。</li>
+<li><code>poolPingEnabled</code> – 是否启用侦测查询。若开启，需要设置 <code>poolPingQuery</code> 属性为一个可执行的 SQL 语句（最好是一个速度非常快的 SQL 语句），默认值：false。</li>
+<li><code>poolPingConnectionsNotUsedFor</code> – 配置 poolPingQuery 的频率。可以被设置为和数据库连接超时时间一样，来避免不必要的侦测，默认值：0（即所有连接每一时刻都被侦测 — 当然仅当 poolPingEnabled 为 true 时适用）。</li>
+</ul>
+<p><strong>JNDI</strong> – 这个数据源实现是为了能在如 EJB 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的数据源引用。这种数据源配置只需要两个属性：</p>
+<ul>
+<li><code>initial_context</code> – 这个属性用来在 InitialContext 中寻找上下文（即，initialContext.lookup(initial_context)）。这是个可选属性，如果忽略，那么将会直接从 InitialContext 中寻找 data_source 属性。</li>
+<li><code>data_source</code> – 这是引用数据源实例位置的上下文路径。提供了 initial_context 配置时会在其返回的上下文中进行查找，没有提供时则直接在 InitialContext 中查找。</li>
+</ul>
+<blockquote>
+<p>JNDI 可理解是一种仿 windows 注册表形式的数据源。</p>
+</blockquote>
+<p>和其他数据源配置类似，可以通过添加前缀“env.”直接把属性传递给 InitialContext。比如：</p>
+<ul>
+<li><code>env.encoding=UTF8</code></li>
+</ul>
+<p>这就会在 InitialContext 实例化时往它的构造方法传递值为 <code>UTF8</code> 的 <code>encoding</code> 属性。</p>
+<p>你可以通过实现接口 <code>org.apache.ibatis.datasource.DataSourceFactory</code> 来使用第三方数据源实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DataSourceFactory</span> &#123;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties props)</span>;</span><br><span class="line">  DataSource <span class="title function_">getDataSource</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory</code> 可被用作父类来构建新的数据源适配器，比如下面这段插入 C3P0 数据源所必需的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;</span><br><span class="line"><span class="keyword">import</span> com.mchange.v2.c3p0.ComboPooledDataSource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">C3P0DataSourceFactory</span> <span class="keyword">extends</span> <span class="title class_">UnpooledDataSourceFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">C3P0DataSourceFactory</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.dataSource = <span class="keyword">new</span> <span class="title class_">ComboPooledDataSource</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为了令其工作，记得在配置文件中为每个希望 MyBatis 调用的 setter 方法增加对应的属性。 下面是一个可以连接至 PostgreSQL 数据库的例子：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;org.myproject.C3P0DataSourceFactory&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.postgresql.Driver&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:postgresql:mydb&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;postgres&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="8、databaseIdProvider（数据库厂商标识）"><a href="#8、databaseIdProvider（数据库厂商标识）" class="headerlink" title="8、databaseIdProvider（数据库厂商标识）"></a>8、databaseIdProvider（数据库厂商标识）</h5><hr>
+<p>MyBatis 可以根据不同的数据库厂商执行不同的语句，这种多厂商的支持是基于映射语句中的 <code>databaseId</code> 属性。 MyBatis 会加载带有匹配当前数据库 <code>databaseId</code> 属性和所有不带 <code>databaseId</code> 属性的语句。 如果同时找到带有 <code>databaseId</code> 和不带 <code>databaseId</code> 的相同语句，则后者会被舍弃。 为支持多厂商特性，只要像下面这样在 mybatis-config.xml 文件中加入 <code>databaseIdProvider</code> 即可：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">databaseIdProvider</span> <span class="attr">type</span>=<span class="string">&quot;DB_VENDOR&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>databaseIdProvider 对应的 DB_VENDOR 实现会将 databaseId 设置为 <code>DatabaseMetaData#getDatabaseProductName()</code> 返回的字符串。 由于通常情况下这些字符串都非常长，而且相同产品的不同版本会返回不同的值，你可能想通过设置属性别名来使其变短：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">databaseIdProvider</span> <span class="attr">type</span>=<span class="string">&quot;DB_VENDOR&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;SQL Server&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlserver&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;DB2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;db2&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;Oracle&quot;</span> <span class="attr">value</span>=<span class="string">&quot;oracle&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">databaseIdProvider</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在提供了属性别名时，databaseIdProvider 的 DB_VENDOR 实现会将 databaseId 设置为数据库产品名与属性中的名称第一个相匹配的值，如果没有匹配的属性，将会设置为 “null”。 在这个例子中，如果 <code>getDatabaseProductName()</code> 返回“Oracle (DataDirect)”，databaseId 将被设置为“oracle”。</p>
+<p>你可以通过实现接口 <code>org.apache.ibatis.mapping.DatabaseIdProvider</code> 并在 mybatis-config.xml 中注册来构建自己的 DatabaseIdProvider：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DatabaseIdProvider</span> &#123;</span><br><span class="line">  <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">setProperties</span><span class="params">(Properties p)</span> &#123; <span class="comment">// 从 3.5.2 开始，该方法为默认方法</span></span><br><span class="line">    <span class="comment">// 空实现</span></span><br><span class="line">  &#125;</span><br><span class="line">  String <span class="title function_">getDatabaseId</span><span class="params">(DataSource dataSource)</span> <span class="keyword">throws</span> SQLException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="9、mappers（映射器）"><a href="#9、mappers（映射器）" class="headerlink" title="9、mappers（映射器）"></a>9、mappers（映射器）</h5><hr>
+<p>既然 MyBatis 的行为已经由上述元素配置完了，我们现在就要来定义 SQL 映射语句了。 但首先，我们需要告诉 MyBatis 到哪里去找到这些语句。 在自动查找资源方面，Java 并没有提供一个很好的解决方案，所以最好的办法是直接告诉 MyBatis 到哪里去找映射文件。 你可以使用相对于类路径的资源引用，或完全限定资源定位符（包括 <code>file:///</code> 形式的 URL），或类名和包名等。例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用相对于类路径的资源引用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/AuthorMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/BlogMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/builder/PostMapper.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用完全限定资源定位符（URL） --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers/AuthorMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers/BlogMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers/PostMapper.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用映射器接口实现类的完全限定类名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.builder.AuthorMapper&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.builder.BlogMapper&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.builder.PostMapper&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 将包内的映射器接口实现全部注册为映射器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.mybatis.builder&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/db1dd6c6d47744407d30070e099b1a64.png"></p>
+<h4 id="XML-映射文件"><a href="#XML-映射文件" class="headerlink" title="XML 映射文件"></a>XML 映射文件</h4><p>在 XML 核心配置文件介绍中，我们介绍了映射文件 mapper.xml 的引入。</p>
+<blockquote>
+<p>对于 Mapper 具体的映射配置文件，是 Mybatis 最复杂、最核心的组件，其中的标签内容体系也是特别详实，包括它的参数类型、动态SQL、定义SQL、缓存信息等等，我们在下一篇文章中再进行梳理讨论，这里我们简单引出。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/f6653ac0bbfb5aa6693964f5dfb2e334.png"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>原本我计划把核心配置文件和映射器 mapper 文件放一块讲，但是发现内容太多太多了，基本核心配置文件就已经讲得有点拖堂了，虽然这几大顶级标签使用起来已经毫不费力。SQL 映射器配置文件，我们后续更新，这块基本是和我们日常打交道最高频的操作。</p>
+<blockquote>
+<p>本篇完，本系列下一篇我们讲《 <strong>Mybatis系列全解（五）：全网最全！详解Mybatis的Mapper映射文件</strong> 》。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/5bec8b162fd54efe4aa59af1a52f82be.png"></p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>Mybatis系列全解（四）：全网最全！Mybatis配置文件XML全貌详解</sharetitle><shareintroduce>上一篇文章《Mybatis系列全解（三）：Mybatis简单CRUD使用介绍》，我们基本上手了 Mybatis 的增删改查操作，也感受到 Mybatis 的简单高效舒美，但是肯定有部分朋友对于 Mybatis 的配置文件只是了解基本组成和大致用法，尚无一套完整的结构记忆，所以本篇文章我们将详细的介绍 Mybatis 的配置全貌，毕竟 Mybatis 的配置文件对于整个 Mybatis 体系的构建与支撑有着深远的影响。
+</shareintroduce><shareimg>https://www.panshenlian.com/images/post/java/mybatis/title/04-title.jpg</shareimg><author></author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/" rel="tag">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/" rel="tag">Mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/family/" rel="tag">一家三口</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/soulmate/" rel="tag">人生伴侣</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trial/" rel="tag">实验</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/report/" rel="tag">汇报</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shenzhen/" rel="tag">深圳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leo/" rel="tag">灏灏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai/" rel="tag">竹白</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zhubai-wiki/" rel="tag">竹白百科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-oriented/" rel="tag">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-03-16.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/biglate-ajax.js"></script><script src="https://www.panshenlian.com/scripts/plugin/jquery-3.6.0.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/biglate-analytics.js"></script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>
