@@ -163,6 +163,7 @@ feed:
   type: atom
   path: atom.xml
   limit: 30
+  template: ./feed-atom.xml
   
  
   
