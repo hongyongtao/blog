@@ -1,7 +1,7 @@
 ---
 title: 生活掠影
 date: 2022-03-02 09:41:40
-preview: /avatars/panshenlian01.png
+preview: /avatars/me.jpg
 introduce: |
     人生匆匆，至少我曾经来过，记录我个人些许浮光掠影。
 ---
