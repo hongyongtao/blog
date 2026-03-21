@@ -39,7 +39,11 @@ mixin article(post)
 
       if page.posts
       else 
-         img.img-visitor(src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog."+url_for(post.path),align="left")
+         img.img-visitor(
+           src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog."+url_for(post.path),
+           align="left",
+           onerror="this.style.display='none';"
+         )
 
       if post.categories
         ul.tags.left

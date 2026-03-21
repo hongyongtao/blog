@@ -114,6 +114,15 @@ html
         crossorigin="anonymous",
         async)
 
+    // Hide any broken image globally to avoid broken icon placeholders.
+    script.
+      document.addEventListener('error', function (e) {
+        var t = e && e.target;
+        if (t && t.tagName === 'IMG') {
+          t.style.display = 'none';
+        }
+      }, true);
+
     if theme.duoshuo
       script.
         window.duoshuoQuery = {short_name: '#{theme.duoshuo}'}
