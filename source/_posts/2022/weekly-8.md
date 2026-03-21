@@ -515,7 +515,6 @@ OpenAI 前不久公开的 DALL-E，可以为每个段落都动态生成一组独
 这里记录每周值得分享的科技内容，周三发布，首发在
 
 - [洪致知个人网站](https://www.hongyongtao.com)
-- 微信公众号：第一次当爸爸吖
 
 本刊开源（GitHub: [hongyongtao/blog](https://github.com/hongyongtao/blog)），欢迎投稿，推荐或自荐文章/软件/资源，请[提交 issue](https://github.com/hongyongtao/blog/issues) 。
 

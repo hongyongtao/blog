@@ -229,14 +229,4 @@ Progress is impossible without change; and those who cannot change their minds c
 
 --[《25年以上的个人知识管理》](https://dsebastien.net/blog/2022-04-03-25-years-of-personal-knowledge-management)
 
-## 订阅
-
-这里记录每周值得分享的科技内容，周三发布，同步更新在[洪致知个人网站](https://www.hongyongtao.com/weekly)和微信公众号：第一次当爸爸吖。
-
-微信搜索“第一次当爸爸吖”或者扫描二维码，即可订阅。
-
-![](https://www.hongyongtao.com/images/post/wechat/v3.jpg)
-
-本刊开源（GitHub: [hongyongtao/blog](https://github.com/hongyongtao/blog)），欢迎投稿，推荐或自荐文章/软件/资源，请[提交 issue](https://github.com/hongyongtao/blog/issues) 。
-
 （完）
