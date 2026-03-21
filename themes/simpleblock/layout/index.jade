@@ -63,7 +63,7 @@ mixin article(post)
     else 
       .markdown-body!= post.content
 
-    if !page.posts && theme.giscus
+    if !page.posts && theme.giscus && post.comments !== false
       share-info
         #qrcode
         .share-card
@@ -72,10 +72,10 @@ mixin article(post)
         shareimg=''
         author=post.author 
 
-    if !page.posts && theme.giscus
+    if !page.posts && theme.giscus && post.comments !== false
       .giscus
 
-    if page.posts && theme.giscus
+    if page.posts && theme.giscus && post.comments !== false
       .giscus-none
         .giscus
 

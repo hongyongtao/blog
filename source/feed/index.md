@@ -1,6 +1,7 @@
 ---
 title: 订阅我
 date: 2022-02-19 15:24:03
+comments: false
 preview: /_media/external/www.hongyongtao.com/images/post/me/share/feed.jpg
 introduce: |
     欢迎订阅我的更新，支持RSS、邮箱，或关注我的微信公众号。
