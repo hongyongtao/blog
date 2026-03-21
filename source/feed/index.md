@@ -9,13 +9,13 @@ introduce: |
 <img src="/_media/external/www.hongyongtao.com/images/post/feed/v2.jpg" width="60%" >
 
 
-❤️  欢迎订阅下面的Feed，您可以及时跟踪我的更新：
+❤️  欢迎订阅下面的博客，您可以及时跟踪我的更新：
 
-- https://www.hongyongtao.com/atom.xml 
+- https://blog.csdn.net/qq_44295125
 
-  （ 大陆 Feed，内地正常访问）
+邮箱:hythyt8989@sina.com
 
 👉  说明：
-- 个人网站暂时不支持**电子邮件订阅**。
+- 有问题可以**电子邮件私信**。
 
 （完）
