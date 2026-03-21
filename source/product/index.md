@@ -1,7 +1,7 @@
 ---
 title: 无聊产品正经事
 date: 2022-04-16 11:51:09
-preview: https://www.hongyongtao.com/images/post/me/share/product.jpg
+preview: /_media/external/www.hongyongtao.com/images/post/me/share/product.jpg
 introduce: |
     创作《无聊产品正经事》半月刊的想法诞生于一个无聊的周六（2022-04-16）早上，当然这个想法有可能最终验证之后不合时宜以致流产。但是不管如何，我认为是个很有趣的想法，值得一试，如果大家有任何建议，欢迎投稿。
 ---

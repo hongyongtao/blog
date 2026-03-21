@@ -7,12 +7,12 @@ tags:
 - 热尔韦原则
 - 呆伯特原则
 - 彼得原则
-preview: https://www.panshenlian.com/images/post/career/2024/11/career-001.jpg
+preview: /_media/external/www.panshenlian.com/images/post/career/2024/11/career-001.jpg
 introduce: |
     今日读到一篇关于职场现象的文章，竟写于十五年前，解惑了我的一些职场迷思，也坚定了我的凡事皆有方法论，很有意思，在此分享中英版内容。
 ---
 
-![](https://www.panshenlian.com/images/post/career/2024/11/career-001.jpg)
+![](/_media/external/www.panshenlian.com/images/post/career/2024/11/career-001.jpg)
 
 ## 前言 
 

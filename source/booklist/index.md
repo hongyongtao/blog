@@ -1,7 +1,7 @@
 ---
 title: 在读书单
 date: 2022-02-14 16:04:20
-preview: https://www.hongyongtao.com/images/post/me/share/booklist.jpg
+preview: /_media/external/www.hongyongtao.com/images/post/me/share/booklist.jpg
 introduce: |
     这里是洪致知的书单，记录自己每年阅读的书，五花八门，还有一些个人阅读感受，以及推荐阅读指数。
 ---

@@ -209,7 +209,7 @@ Meta 的第一家商店于 5 月 9 日在其位于加利福尼亚州伯林盖姆
 
 1、[蘑菇电信号制作出悦耳的灵魂乐曲](https://edm.com/gear-tech/artist-plugs-mushrooms-into-synthesizer-to-make-electronic-music)（英文）
 
-![蘑菇电信号制作出悦耳的灵魂乐曲](http://weekly.panshenlian.com/_media/images/2022/issue-5/linggan-001.jpg)
+![蘑菇电信号制作出悦耳的灵魂乐曲](/_media/images/2022/issue-5/linggan-001.jpg)
 
 蘑菇并不总是因为它们的致幻作用而被使用，它们也被用来 **创作音乐**。
 
@@ -440,7 +440,7 @@ Emoji Mart是一个可定制的 web 表情选择器 HTML 组件。
 
 这款遛鱼水族缸，通过焊接了一个金属底盘作为密封亚克力管的支撑，将其放在轮子上，并添加了一个用于推动的把手。
 
-![移动水族缸](http://weekly.panshenlian.com/_media/images/2022/issue-5/photo-003.jpg)
+![移动水族缸](/_media/images/2022/issue-5/photo-003.jpg)
 
 当然，足智多谋的网友纷纷献策：想在夜间炫耀鱼，可以再配电池供电的过滤系统、氧气泵和照明系统；另外还可以安装，减震系统，让鱼更舒服。
 
@@ -480,7 +480,7 @@ Dmitrii Rybalka（俄罗斯）的极光舞蹈
 
 -- Imad Ahmed，比赛评委兼新月会理事
 
-![天文摄影](http://weekly.panshenlian.com/_media/images/2022/issue-5/photo-009.jpg)
+![天文摄影](/_media/images/2022/issue-5/photo-009.jpg)
 
 ▲ 《月亮冠军》
 
