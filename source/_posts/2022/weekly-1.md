@@ -1,4 +1,4 @@
----
+﻿---
 title: 无聊科技正经事周刊（第 1 期）：裁员毕业潮，你焦虑吗？
 date: 2022-04-06 08:45:17
 author: 洪致知
@@ -6,7 +6,7 @@ tags:
 - 科技周刊
 - 裁员
 - 焦虑
-preview: https://www.hongyongtao.com/_media/images/2022/issue-1/cover-001.jpg
+preview: /_media/images/2022/issue-1/cover-001.jpg
 introduce: |
     作品 《 PEACE PLEASE 》 是 Alexey Kulinkovich 最近发布在 Ins 的艺术作品，主题关于乌克兰。
 ---
@@ -17,7 +17,7 @@ introduce: |
 
 ## 封面图
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/cover-001.jpg)
+![](/_media/images/2022/issue-1/cover-001.jpg)
 
 作品 **《 PEACE  PLEASE 》** 是 `Alexey Kulinkovich` 最近发布在 Ins 的艺术作品，主题关于乌克兰。（[via](https://www.behance.net/gallery/139182997/Ukraine-2022)）
 
@@ -29,7 +29,7 @@ introduce: |
 
 ![](https://www.hongyongtao.com/_media/images/2022/issue-1/topic-002.png)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/topic-003.jpg)
+![](/_media/images/2022/issue-1/topic-003.jpg)
 
 一位财经观察人员[闫曼](https://www.ftchinese.com/story/001095675)认为，早在2019年以前，互联网红利的见顶就已经意味着市场接近饱和，特别是去年的监管风暴后双减、反垄断，以及疫情影响导致全球经济基本面的变化，所以加速了这一过程。
 
@@ -39,18 +39,18 @@ introduce: |
 
 你现在回过头去看看《走到人生边上》里头的阿菊，还有《苦难辉煌》中的长征，相信你会变得更加乐观。
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/topic-004.jpg)
+![](/_media/images/2022/issue-1/topic-004.jpg)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/topic-005.jpg)
+![](/_media/images/2022/issue-1/topic-005.jpg)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/topic-006.jpg)
+![](/_media/images/2022/issue-1/topic-006.jpg)
 
 
 ## 科技动态
 
 1、[谷歌推出新的Chrome操作系统启动器——高仿了Windows的开始菜单](https://gizmodo.com/google-new-chrome-os-launcher-has-serious-windows-vibes-1848726234)（英文）
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/keji-001.jpg)
+![](/_media/images/2022/issue-1/keji-001.jpg)
 
 谷歌多年来首次彻底改造 Chrome 操作系统启动器，这也是 **Chromebook** 操作系统的第 100 次更新。
 
@@ -80,17 +80,17 @@ introduce: |
 
 去年 2 月，美国宇航局的毅力号火星车登陆火星后，它的两个麦克风开始录音，让科学家们第一次听到火星上的情况。
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/keji-005.jpg)
+![](/_media/images/2022/issue-1/keji-005.jpg)
 
 （图片来源：美国宇航局的恒心漫游者记录了火星表面的第一个声音 | 照片：NASA/JPL-CALTECH/法新社/文件）
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/keji-006.jpg)
+![](/_media/images/2022/issue-1/keji-006.jpg)
 
 在周五发表在《自然》杂志上的一项研究中，科学家们对 Perseverance 的麦克风收集的五个小时的声音进行了首次分析。
 
 该研究首次证实，火星上的声速较慢，以每秒 240 米的速度传播，而地球上的声速为每秒 340 米。
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/keji-007.jpg)
+![](/_media/images/2022/issue-1/keji-007.jpg)
 
 研究人员根据录音分析出火星上偶尔有阵风，而且得出两种不同的声速——一种用于高音，如激光的撞击声，另一种用于较低频率的声音，如直升机旋翼的呼啸声，这会对听力产生奇怪的延迟效应，例如会让两个距离仅5米的人交流变得特别困难。
 
@@ -100,11 +100,11 @@ introduce: |
 
 1、[有偿代扫墓、虚拟祭品：当追思成为一门生意](http://china.zjol.com.cn/202204/t20220405_24039174_ext.shtml)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/article-002.jpg)
+![](/_media/images/2022/issue-1/article-002.jpg)
 
 4月3日，根据民政部清明节祭扫工作办公室统计，全国共有2304个网络祭扫平台，网络祭扫群众695万人次，比去年同期增长了275.7%，云祭祀的群众接受度越来越高。
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/article-001.jpg)
+![](/_media/images/2022/issue-1/article-001.jpg)
 
 **云祭祀、代扫墓升温**
 
@@ -141,7 +141,7 @@ introduce: |
 
 1、[shell.how](https://www.shell.how/)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/tools-001.jpg)
+![](/_media/images/2022/issue-1/tools-001.jpg)
 
 有网友分享一个网站，理由是：“平时使用 git 各种命令参数根本记不住。每次还要通过百度 / Google 来查询，非常费事儿，这个网站用简单的一句话描述了命令和参数的含义，使用起来非常方便。”
 
@@ -171,7 +171,7 @@ introduce: |
 
 2、[LCEVC | 一种新的视频压缩方法](https://www.lcevc.org/how-lcevc-works/)
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/source-002.jpg)
+![](/_media/images/2022/issue-1/source-002.jpg)
 
 LCEVC（低复杂度增强视频编码）的工作原理是使用任何现有编解码器（基本编解码器）对源图像的较低分辨率版本进行编码，并使用不同的压缩方法（增强）对重建的低分辨率图像和源图像之间的差异进行编码。
 
@@ -185,7 +185,7 @@ LCEVC（低复杂度增强视频编码）的工作原理是使用任何现有编
 
 2、**你们不要再跟着我了！**
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/photo-002.jpg)
+![](/_media/images/2022/issue-1/photo-002.jpg)
 
 ## 播客
 
@@ -222,7 +222,7 @@ Progress is impossible without change; and those who cannot change their minds c
 -- [George Bernard Shaw（萧伯纳）](https://xueshu.baidu.com/usercenter/paper/show?paperid=84101325b850cf1b77fdd395e6957b1b)
  
 
-![](https://www.hongyongtao.com/_media/images/2022/issue-1/say-001.jpg)
+![](/_media/images/2022/issue-1/say-001.jpg)
 
 2、
 作为一个数字原生代，我的大部分信息都以数字形式存储，这就是我喜欢的方式。但是你拥有的数据越多，组织起来就越重要。
@@ -230,3 +230,4 @@ Progress is impossible without change; and those who cannot change their minds c
 --[《25年以上的个人知识管理》](https://dsebastien.net/blog/2022-04-03-25-years-of-personal-knowledge-management)
 
 （完）
+

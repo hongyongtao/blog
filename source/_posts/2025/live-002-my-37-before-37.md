@@ -1,7 +1,7 @@
 ---
 title: 37岁前的37件事
 date: 2022-03-02 08:49:17
-author: 潘深练
+author: 洪致知
 tags:
 - 人生目标
 preview: https://www.panshenlian.com/images/post/live/37/title.jpg
