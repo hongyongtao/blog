@@ -4,7 +4,7 @@ date: 2022-07-01 22:49:08
 tags:
 - 读书
 - 时间
-preview: /_media/external/www.panshenlian.com/images/post/book/01-darktime.jpg
+preview: /media/external/www.panshenlian.com/images/post/book/01-darktime.jpg
 introduce: |
     初看《暗时间》，以为是一本探讨时间聚焦的书籍。细读之后方才发现，暗时间的提法只是全书的起点，而后作者通过亲身经历和自己总结的大量专业领域知识，跨界结合自身对心理学、认知科学以及数学的研究，对思维、学习、工作、时间、习惯等方面进行了深度思考和深入探讨。本文摘抄《暗时间》，主要片段系关于学习思考、时间效率、阅读方法以及个人核心竞争力。
 ---

@@ -2,12 +2,12 @@
 title: 订阅我
 date: 2022-02-19 15:24:03
 comments: false
-preview: /_media/external/www.hongyongtao.com/images/post/me/share/feed.jpg
+preview: /media/external/www.hongyongtao.com/images/post/me/share/feed.jpg
 introduce: |
     欢迎订阅我的更新，支持RSS、邮箱，或关注我的微信公众号。
 ---
 
-<img src="/_media/external/www.hongyongtao.com/images/post/feed/v2.jpg" width="60%" >
+<img src="/media/external/www.hongyongtao.com/images/post/feed/v2.jpg" width="60%" >
 
 
 ❤️  欢迎订阅下面的博客，您可以及时跟踪我的更新：

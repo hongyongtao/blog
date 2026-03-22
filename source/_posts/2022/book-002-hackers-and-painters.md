@@ -4,7 +4,7 @@ date: 2022-08-13 17:55:11
 tags:
 - 黑客
 - 画家
-preview: /_media/external/www.panshenlian.com/images/post/book/02-hackers-and-painters.jpg
+preview: /media/external/www.panshenlian.com/images/post/book/02-hackers-and-painters.jpg
 introduce: |
     《黑客与画家》一书内容基本为硅谷创业之父保罗·格雷厄姆之文集汇整，亦为其前半生之写照。主要介绍黑客之爱好与动机，又细谈黑客之成长、黑客对世界之贡献、编程语言与黑客工作方法，以及涉教育、技术、管理、道德乃至创业与致富之认知，不一而是。
 ---

@@ -4,7 +4,7 @@ date: 2026-03-02 08:49:17
 author: 洪致知
 tags:
 - 人生目标
-preview: /_media/external/www.panshenlian.com/images/post/live/37/title.jpg
+preview: /media/external/www.panshenlian.com/images/post/live/37/title.jpg
 introduce: |
     以下是我希望在年满35岁之前（2031.1）做到的35件事。有些是目标，有些是体验类的，受陈成老师、Mike Crittenden启发，遂而计划，暂时只梳理出一部分，后续会慢慢补充到37个 ...
 ---

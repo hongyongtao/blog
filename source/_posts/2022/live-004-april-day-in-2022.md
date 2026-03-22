@@ -3,12 +3,12 @@ title: 二〇二二，四月掠影
 date: 2022-05-01 16:25:21
 tags:
 - 生活
-preview: /_media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg
+preview: /media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg
 introduce: |
     二〇二二年四月，匆匆终结，极为丰满，从一号准备孩子的四岁生日会开始，就隐约有种忙碌预感，直到刚刚在公园被疫情防控安保人员撵走，我们一家三口拖着帐篷、书籍、电脑、零食、玩具，顶着三个 26°C 的太阳，走进一家丹尼斯七天地星巴克，坐下，咖啡厅舒缓的音乐，让神经很快松弛，缓过神，想想今天既狼狈又好笑，趁着孩子酣睡，打开电脑，回忆四月。
 ---
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg)
 
 ## 前言
 
@@ -22,11 +22,11 @@ introduce: |
 
 晚上邀请的小客人们陆续到齐，妈妈便统一接待上楼，几位长辈开始围着他们转。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/party-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/party-001.jpg)
 
 我有意识的让他当主人，他还是不擅长接待客人，从一位小客人手里抢过一个自己珍爱的玩具，即使当晚收到很多小客人送的礼物。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/party-003.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/party-003.jpg)
 
 不过，他们玩得很开心。
 
@@ -36,13 +36,13 @@ introduce: |
 
 完美主义的我，时常让我陷入苦恼，过得一点不轻松，特别是对于孩子的每一个作业，我都希望尽善尽美，对现实过于理想化，往往不好。当然，孩子妈妈恰恰与我相反，所以她放手让我去折腾，不干涉，不过问，不参与，但其实偶尔闲暇之余会帮忙打下手。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/homework-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/homework-001.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/homework-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/homework-002.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/homework-003.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/homework-003.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/homework-004.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/homework-004.jpg)
 
 作品一共做了一天一夜，通宵至凌晨 5 点半方才完成，期间昏昏欲睡，精力完全游离，状态很糟糕，好在拖着疲惫完成了。隔天补觉占用了半天，反正对自己坚持的做事标准，从来不后悔付出，只是往往身体会有些吃亏罢了。
 
@@ -50,11 +50,11 @@ introduce: |
 
 疫情下的郑州，大家足不出远门，便就近消遣，公园野外开始热闹起来，又值舒朗四月天，自然，都想换个地方睡觉，当天晴空万里，爽朗得让人愉悦。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/park-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/park-001.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/park-002.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/park-003.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/park-003.jpg)
 
 躺在吊床里，自然看天空，树荫下没有刺眼的阳光，鸟叫声让人精神放松。
 
@@ -62,9 +62,9 @@ introduce: |
 
 四月中旬，这座城市疫情加重了，还好在管控之内，大家长舒一口气，检测全民核酸，好像这就是原始的生活状态，并没有特别惊讶，反倒是心疼医护人员、社区工作者、志愿者。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/collection-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/collection-001.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/collection-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/collection-002.jpg)
 
 他们这一代，有着特殊生活形态，在他们脑海里，核酸检测是一件太正常不过的事。
 
@@ -74,21 +74,21 @@ introduce: |
 
 毕竟是假期第一天，现场人特别多，居多是家长领着孩子，像四岁这般年纪去的，我只看见零星几个。我猜想他们都认为博物馆是个大型游乐城，所以我提前做好心理准备，孩子会不喜欢。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-001.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-002.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-003.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-003.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-004.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-004.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-005.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-005.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-006.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-006.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-007.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-007.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/museum-008.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/museum-008.jpg)
 
 果然不出意料，孩子对夏商周的一切历史文明和出土文物，一点不在乎，反倒是对着一楼的残疾人自动电梯两眼放光，不顾一切跑过去坐了几趟，玩的不亦乐乎，好在没耽误着急的残疾人使用，不然就真的罪过了。
 
@@ -100,13 +100,13 @@ introduce: |
 
 此时坐在星巴克，草草记录四月时光流水账，孩子睡得香甜，刚刚我们才被疫情管控安保人员从公园了驱离出来，听说是附近出现了疫情，周围三个公园都拉起了警戒线，避免人群扎堆，所以原本准备去帐篷中偷个清懒的我，无奈收拾露营装备径直来到丹尼斯七天地星巴克。
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/camping-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/camping-001.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/camping-002.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/camping-002.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/camping-003.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/camping-003.jpg)
 
-![](/_media/external/www.panshenlian.com/images/post/live/april-day/sleep-001.jpg)
+![](/media/external/www.panshenlian.com/images/post/live/april-day/sleep-001.jpg)
 
 ## 后记
 
