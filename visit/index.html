@@ -1,24 +1,98 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>访问统计 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">订阅我</a></nav><nav class="right menus-right"><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">2025-01-14：
-职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/visit%2Findex.md">查看源代码</a></small><h1>访问统计</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2022-06-23</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./visit/index.html" align="left" onerror="this.style.display='none';" class="img-visitor"/></div><div class="markdown-body"><link href="https://www.panshenlian.com/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script type="text/javascript" src="https://www.panshenlian.com/npm/vue@2/dist/vue.js" ></script>
+职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/visit%2Findex.md">查看源代码</a></small><h1>访问统计</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2022-06-23</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./visit/index.html" align="left" onerror="this.style.display='none';" class="img-visitor"/></div><div class="markdown-body"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<script type="text/javascript" src="https://www.panshenlian.com/npm/echarts@old/dist/echarts.min.js" ></script> 
-<script type="text/javascript" src="https://www.panshenlian.com/npm/echarts@old/dist/china.js" ></script> 
-
-
+<blockquote>
+<p><strong>说明</strong>：本页已改为 <strong>纯前端展示</strong>，使用 <code>ECharts</code> 渲染<strong>演示数据</strong>，不连接竹白、<code>open.zhubai.wiki</code> 或任何外部统计接口。<br>若需真实数据，可将下方 <code>DEMO_STATS</code> 换为自建接口返回的 JSON，或部署后由 CI 写入静态 <code>stats.json</code> 再 <code>fetch</code> 加载。</p>
+</blockquote>
 <style>
-    .ec-extension-bmap{
-        width: 910px !important;
-        height: 650px !important;
-    }
+  .visit-wrap { max-width: 960px; }
+  .visit-chart { width: 100%; height: 380px; margin: 1rem 0; }
+  #visit-user-track .table { font-size: 14px; }
 </style>
 
-<h2 id="访客来源"><a href="#访客来源" class="headerlink" title="访客来源"></a>访客来源</h2><div id="visit-user-source"></div>
+<h2 id="访客来源（演示）"><a href="#访客来源（演示）" class="headerlink" title="访客来源（演示）"></a>访客来源（演示）</h2><div class="visit-chart" id="chart-source"></div>
 
-<h2 id="流量趋势"><a href="#流量趋势" class="headerlink" title="流量趋势"></a>流量趋势</h2><div id="visit-user-trend"></div>
+<h2 id="流量趋势（演示）"><a href="#流量趋势（演示）" class="headerlink" title="流量趋势（演示）"></a>流量趋势（演示）</h2><div class="visit-chart" id="chart-trend"></div>
 
-<h2 id="用户轨迹"><a href="#用户轨迹" class="headerlink" title="用户轨迹"></a>用户轨迹</h2><div id="visit-user-track"></div></div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>访问统计</sharetitle><shareintroduce>统计洪致知个人网站的访问流量趋势、用户轨迹、访客来源等。
-</shareintroduce><shareimg></shareimg><author></author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<h2 id="最近访问轨迹（演示）"><a href="#最近访问轨迹（演示）" class="headerlink" title="最近访问轨迹（演示）"></a>最近访问轨迹（演示）</h2><div id="visit-user-track" class="visit-wrap table-responsive"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" crossorigin="anonymous"></script>
+<script>
+(function () {
+  var DEMO_STATS = {
+    source: [
+      { name: '直接访问', value: 42 },
+      { name: '搜索引擎', value: 28 },
+      { name: '外链引荐', value: 18 },
+      { name: 'RSS / 订阅', value: 12 }
+    ],
+    trend: {
+      days: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      ip: [12, 18, 15, 22, 19, 8, 14],
+      pv: [28, 35, 32, 48, 41, 18, 30]
+    },
+    tracks: [
+      { ip: '192.0.2.*', action: '首页', ref: '直接访问', device: 'Desktop / Chrome', time: '2026-03-21 10:12' },
+      { ip: '198.51.100.*', action: '/list/', ref: '搜索引擎', device: 'Mobile / Safari', time: '2026-03-21 09:40' },
+      { ip: '203.0.113.*', action: '/2026/03/21/ai-001-latest-trends/', ref: '技术日志', device: 'Desktop / Edge', time: '2026-03-21 08:05' }
+    ]
+  };
+
+  function pie() {
+    var el = document.getElementById('chart-source');
+    if (!el || typeof echarts === 'undefined') return;
+    var chart = echarts.init(el);
+    chart.setOption({
+      tooltip: { trigger: 'item' },
+      legend: { bottom: 0 },
+      series: [{
+        name: '来源',
+        type: 'pie',
+        radius: ['36%', '68%'],
+        data: DEMO_STATS.source
+      }]
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+  }
+
+  function line() {
+    var el = document.getElementById('chart-trend');
+    if (!el || typeof echarts === 'undefined') return;
+    var chart = echarts.init(el);
+    chart.setOption({
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['独立访客(演示)', '浏览量(演示)'] },
+      xAxis: { type: 'category', data: DEMO_STATS.trend.days },
+      yAxis: { type: 'value' },
+      series: [
+        { name: '独立访客(演示)', type: 'line', smooth: true, data: DEMO_STATS.trend.ip },
+        { name: '浏览量(演示)', type: 'line', smooth: true, data: DEMO_STATS.trend.pv }
+      ]
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+  }
+
+  function table() {
+    var wrap = document.getElementById('visit-user-track');
+    if (!wrap) return;
+    var rows = DEMO_STATS.tracks.map(function (r) {
+      return '<tr><td>' + r.ip + '</td><td>' + r.action + '</td><td>' + r.ref + '</td><td>' + r.device + '</td><td>' + r.time + '</td></tr>';
+    }).join('');
+    wrap.innerHTML =
+      '<table class="table table-striped table-bordered">' +
+      '<thead><tr><th>访问 IP（脱敏）</th><th>页面</th><th>来源</th><th>设备</th><th>时间</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table>' +
+      '<p class="text-muted small mt-2">上表为示例行，非真实日志。接入自有后端时可替换此区域。</p>';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { pie(); line(); table(); });
+  } else {
+    pie(); line(); table();
+  }
+})();
+</script>
+</div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
 <p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
 </div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
 GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
@@ -28,7 +102,7 @@ Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-XWB09PF43E');
-</script><script src="https://www.panshenlian.com/scripts/plugin/biglate-ajax.js"></script><script src="https://www.panshenlian.com/scripts/plugin/jquery-3.6.0.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/biglate-analytics.js"></script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
   var t = e && e.target;
   if (t && t.tagName === 'IMG') {
     t.style.display = 'none';
