@@ -88,12 +88,13 @@ html
         gtag('js', new Date());
         gtag('config', '#{theme.google_analytics}');
 
-    if theme.biglate_ajax 
-      script(src='https://www.panshenlian.com/scripts/plugin/biglate-ajax.js')
-
-    if theme.biglate_analytics 
-      script(src='https://www.panshenlian.com/scripts/plugin/jquery-3.6.0.min.js')
-      script(src='https://www.panshenlian.com/scripts/plugin/biglate-analytics.js')
+    //- 统计脚本：必须先加载 jQuery，再加载 ajax 插件与 analytics（原外链易失效，已改为本地 /scripts）
+    if theme.biglate_ajax || theme.biglate_analytics
+      script(src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js' crossorigin='anonymous')
+    if theme.biglate_ajax
+      script(src='/scripts/biglate-ajax.js')
+    if theme.biglate_analytics
+      script(src='/scripts/biglate-analytics.js')
 
     if theme.share_card 
       script(src='https://www.panshenlian.com/scripts/plugin/qrcode.min.js')

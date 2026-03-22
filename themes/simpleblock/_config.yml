@@ -2,8 +2,9 @@
 google_analytics: 'G-XWB09PF43E'
 giscus: 1
 share_card: 1
-biglate_analytics: 1
-biglate_ajax: 1
+# 已停用：原脚本依赖 open.zhubai.wiki；访问统计页改为本地演示，见 source/visit/index.md
+biglate_analytics: 0
+biglate_ajax: 0
 
 ## Meta
 rss: /atom.xml
