@@ -8,7 +8,8 @@ introduce: |
 
 ### 技术
 
-#### 试验田
+#### AI最新动向
+- [OpenClaw 万字拆解（2026-03-21）](/2026/03/21/ai-001-latest-trends/)
 
 #### Mybatis
 - [Mybatis系列全解（一）：手写一套持久层框架](/2020/11/16/mybatis-001-hand-write-frame/)
@@ -33,6 +34,3 @@ introduce: |
 
 #### 架构视角
 - [【架构视角】一篇文章带你彻底吃透Spring](/2022/04/27/spring-001-spring-core/)
-
-#### AI最新动向
-- [AI最新动向（2026-03-21）](/2026/03/21/ai-001-latest-trends/)

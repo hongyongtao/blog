@@ -1,5 +1,5 @@
 ---
-title: OpenClaw 万字拆解：一条消息如何跑完整个 Agent Runtime
+title: OpenClaw核心流程：一条消息如何跑完整个 Agent
 date: 2026-03-21 22:00:00
 author: 洪致知
 tags:
