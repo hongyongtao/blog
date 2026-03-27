@@ -1,0 +1,219 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>面试专题 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">订阅我</a></nav><nav class="right menus-right"><a href="/interview">面试专题</a><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">2025-01-14：
+职业、家庭、认知之拐点，或成人生关键之转折。</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/interview%2Findex.md">查看源代码</a></small><h1>面试专题</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2026-03-22</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./interview/index.html" align="left" onerror="this.style.display='none';" class="img-visitor"/></div><div class="markdown-body"><h2 id="面试问题汇总（Java-后端为主）"><a href="#面试问题汇总（Java-后端为主）" class="headerlink" title="面试问题汇总（Java 后端为主）"></a>面试问题汇总（Java 后端为主）</h2><p>说明：按“公司 -&gt; 问题清单（含典型追问/考察点）”整理，便于二刷复盘与查漏补缺。</p>
+<hr>
+<h2 id="赢时胜（一面）"><a href="#赢时胜（一面）" class="headerlink" title="赢时胜（一面）"></a>赢时胜（一面）</h2><ol>
+<li>药德 AI 助手团队规模与分工（长沙/苏州、后端/前端/Leader 配比）</li>
+<li>为什么用 Python + LangChain 做应用层开发？<ul>
+<li>对比 Java 生态（LangChain4j / Spring AI 等）在组件成熟度、更新速度、工程化（治理/部署/监控）、人才栈上的权衡</li>
+</ul>
+</li>
+<li>LangChain 选型与核心组件理解<ul>
+<li>Loader / Splitter / Embedding / VectorStore / Retriever / Memory / Tools（联网搜索）分别解决什么问题</li>
+</ul>
+</li>
+<li>Prompt 工程如何做优化？<ul>
+<li>系统角色、约束条件、输出格式（JSON Schema / Pydantic）、防幻觉/敏感过滤、Few-shot 样例、评测与回归</li>
+</ul>
+</li>
+<li>Spring IoC 与 AOP 如何实现？<ul>
+<li>BeanFactory vs ApplicationContext、Bean 生命周期、三级缓存与循环依赖、JDK 动态代理 vs CGLIB、AOP 调用链</li>
+</ul>
+</li>
+<li><code>List.contains</code> vs <code>Map.containsKey/containsValue</code> 复杂度是否一样？<ul>
+<li>数据结构差异（数组/链表/哈希/红黑树）与 equals/hashCode 影响</li>
+</ul>
+</li>
+<li>悲观锁 vs 乐观锁；synchronized 锁升级过程<ul>
+<li>偏向锁/轻量级/重量级（以及自旋）；ReentrantLock 公平/非公平；读写锁适用场景</li>
+</ul>
+</li>
+<li>MySQL 优化：深度分页、索引使用、避免索引失效<ul>
+<li>覆盖索引、索引下推（ICP）、回表、排序（filesort vs index order）、慢 SQL 分析（explain）</li>
+</ul>
+</li>
+<li>“高水位”与回表怎么优化（过滤性/回表成本/下推条件/减少扫描）</li>
+<li>未来职业方向、学习方式（个人学习/同事交流）、周期与选型参与度</li>
+</ol>
+<hr>
+<h2 id="渊亭科技"><a href="#渊亭科技" class="headerlink" title="渊亭科技"></a>渊亭科技</h2><ol>
+<li>记忆模块怎么做？<ul>
+<li>实时对话记忆（会话上下文） vs 文档/页面记忆（长期知识），隔离策略（userId + sessionId）</li>
+</ul>
+</li>
+<li>大模型“用在链路的哪里”？调用流程怎么设计？<ul>
+<li>先检索再生成、工具调用（联网搜索）、Prompt 组装、调用次数/超时/降级</li>
+</ul>
+</li>
+<li>Gateway 做了什么？路由是配置文件写的吗？<ul>
+<li>路由模式（静态配置/服务发现）、鉴权/限流/灰度/熔断落地</li>
+</ul>
+</li>
+<li>权限控制怎么做？（租户/企业/门店/业态）</li>
+<li>Spring Boot 启动过程理解<ul>
+<li>追问：如果要在启动阶段“对所有 class 增加一个 int 全局变量”，你会想到哪些切入点（字节码增强/Instrumentation/容器扩展点）</li>
+</ul>
+</li>
+<li>多线程与线程池：锁升级；线程池调度策略<ul>
+<li>追问：如何实现“核心线程满了先扩容到最大线程，再入队列”（需要自定义 ThreadPoolExecutor/队列）</li>
+</ul>
+</li>
+<li>线程创建与销毁时机（核心线程/非核心线程、keepAliveTime）</li>
+<li>Redis：除缓存外使用场景与基础类型；zset</li>
+<li>MySQL 索引数据结构（B+Tree/Hash 等）与 MVCC</li>
+<li>网络分层：七层模型；Nginx 位于哪一层（常见：应用层 L7；也可做 L4 代理）</li>
+</ol>
+<hr>
+<h2 id="赢时胜（二面）"><a href="#赢时胜（二面）" class="headerlink" title="赢时胜（二面）"></a>赢时胜（二面）</h2><ol>
+<li>文档切割怎么做？chunkSize/overlap 如何确定？<ul>
+<li>按段落/标题/语义切分；不同文档类型策略；A/B 评测与召回-精确权衡</li>
+</ul>
+</li>
+<li>解析 1000 页 PDF 的耗时估算与瓶颈<ul>
+<li>并行解析、IO/CPU 占比、缓存与增量更新、失败重试与断点续传</li>
+</ul>
+</li>
+<li>RAG 的定义、流程与原理；RAG vs 微调区别与适用场景</li>
+<li>模型文件/部署形态与微调是否“改变模型”<ul>
+<li>权重文件、LoRA/QLoRA、合并与回滚、模型升级与兼容迁移</li>
+</ul>
+</li>
+<li>信息抽取（IE）：病历抽取结构化字段（JSON）怎么做<ul>
+<li>约束输出、失败兜底、抽取评测、对抗脏数据</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="绝味鸭脖"><a href="#绝味鸭脖" class="headerlink" title="绝味鸭脖"></a>绝味鸭脖</h2><ol>
+<li>SaaS 多租户数据隔离方案（公共库 vs 大客户独立库）</li>
+<li>MySQL 开发规范：你会写哪些规则？目标是什么？</li>
+<li>表设计：字符集/排序规则（collation）、字段类型选择、索引策略</li>
+<li>InnoDB vs MyISAM（事务/锁粒度/崩溃恢复/索引组织方式/外键）</li>
+<li>DDD 的理解与落地（概念/代码结构/聚合根/领域事件）</li>
+<li>SkyWalking：TraceID 的传播与跨线程问题（TransmittableThreadLocal）</li>
+<li>频繁 Full GC / OOM 排查（GC 日志 + dump + MAT 定位到代码）</li>
+<li>微服务常用组件（注册中心/配置中心/RPC/限流熔断/链路追踪）</li>
+<li>POS 收银相关业务理解（营销/券/支付与对账）</li>
+</ol>
+<hr>
+<h2 id="数字玛丽"><a href="#数字玛丽" class="headerlink" title="数字玛丽"></a>数字玛丽</h2><ol>
+<li>老系统数据迁移：如何过渡、冷备/归档、如何保证一致性与可回滚</li>
+<li>SaaS 0-1 搭建关键点（租户模型、权限体系、运营/实施成本）</li>
+<li>云上网络与安全域：VPC/子网/安全组/多环境隔离、域名与访问控制</li>
+<li>SpringCloud/SpringBoot 版本与组件选型</li>
+<li>多租户表/库切换与定时任务配合</li>
+<li>对接三方平台：鉴权/幂等/重试/回放/对账</li>
+<li>AI 辅助诊断：面向医生/门店人员的推荐链路（非 ToC），权限与合规</li>
+<li>文档切割、模型微调、多模态的理解与落地边界</li>
+<li>会话历史缓存：token/上下文怎么存、怎么摘要、如何控长度与成本</li>
+<li>RocketMQ：解决什么问题（异步解耦/削峰/延时），云服务与自建差异</li>
+<li>顺序消息怎么保证（全局顺序/局部顺序、selector/hash 到队列）</li>
+<li>生产运维：积压排查、位点、扩容、消费并发、死信与重试</li>
+<li>RocketMQ 存储结构：CommitLog/ConsumeQueue/IndexFile、零拷贝（mmap）</li>
+<li>SQL 瓶颈：大事务、编码/排序规则、索引与回表、查询链路优化</li>
+<li>线程池与动态线程池：监控指标、告警、核心/最大线程数为何常配一致（任务型/定时型）</li>
+<li>自研 starter：告警（飞书机器人）、异常过滤、统一配置</li>
+<li>Nacos：注册/配置/鉴权/配置加密（偏运维边界也会问）</li>
+<li>JDK17：了解哪些特性（ZGC/G1、语法特性、性能变化）</li>
+<li>团队与规范：你认为最重要的工程规范是什么（可观测性、发布、回滚、代码质量）</li>
+<li>短链系统：数据规模、分库分表、渠道（channel + 时间戳）</li>
+</ol>
+<hr>
+<h2 id="希尚"><a href="#希尚" class="headerlink" title="希尚"></a>希尚</h2><ol>
+<li>单表过亿/高并发：分库分表/冷热分离/归档（例如 Redis LRU + 两个月热数据）</li>
+<li>高并发落地：缓存策略、限流/降级、热点 key 处理</li>
+<li>ES 存什么数据、规格怎么建模（只存检索字段 vs 全量冗余）</li>
+<li>DDD 落地经验与边界</li>
+</ol>
+<hr>
+<h2 id="外包"><a href="#外包" class="headerlink" title="外包"></a>外包</h2><ol>
+<li>分布式锁未释放导致并发执行：如何定位、如何做幂等/兜底（CAS/版本号）</li>
+<li>RocketMQ：MessageQueue 异常、消息丢失排查与补偿</li>
+</ol>
+<hr>
+<h2 id="科创信息"><a href="#科创信息" class="headerlink" title="科创信息"></a>科创信息</h2><ol>
+<li>迁移（方案、节奏、回滚）</li>
+<li>组长如何提高产能/研发效率（流程/规范/工具/评审/自动化）</li>
+<li>agent 开发经验</li>
+<li>国产化/信创相关经验</li>
+<li>安全相关经历</li>
+<li>聚合根之间通信：领域事件/最终一致性</li>
+</ol>
+<hr>
+<h2 id="益丰（一面）"><a href="#益丰（一面）" class="headerlink" title="益丰（一面）"></a>益丰（一面）</h2><ol>
+<li>业务体量</li>
+<li>单租户单表新增数据（约 3w/日）、存量（约 1000 万）</li>
+<li>SQL 优化：深度分页、避免 <code>select *</code>、JSON/TEXT 字段存储与查询代价</li>
+<li>索引不命中场景：联合索引、<code>order by id</code> 的坑</li>
+<li>联合索引：<code>order by id + 0</code>、强制指定索引（hint）</li>
+<li>SpringBoot/Cloud 版本与最新特性</li>
+<li>事务管理与常见坑</li>
+<li>RocketMQ</li>
+<li>顺序消息</li>
+<li>消息挤压处理</li>
+</ol>
+<hr>
+<h2 id="科创（二面）"><a href="#科创（二面）" class="headerlink" title="科创（二面）"></a>科创（二面）</h2><p>（待补充：你当前汇总里没有落下具体问题，可从 <code>科创2面.md</code> 抽取补齐）</p>
+<hr>
+<h2 id="益丰（二面）"><a href="#益丰（二面）" class="headerlink" title="益丰（二面）"></a>益丰（二面）</h2><ol>
+<li>代码质量保障（规范、review、测试、可观测性与发布回滚）</li>
+<li>事务默认隔离级别</li>
+<li>Redis：集群高可用/为什么快（一致性 hash/零拷贝/事件驱动 Reactor）</li>
+<li>智能体</li>
+<li>Netty</li>
+<li>RocketMQ 事务消息（二阶段提交失败处理、版本 4.9）</li>
+<li>本地事务表（Outbox）设计</li>
+<li>偏业务还是偏技术，为什么</li>
+</ol>
+<hr>
+<h2 id="货拉拉"><a href="#货拉拉" class="headerlink" title="货拉拉"></a>货拉拉</h2><ol>
+<li>MySQL / Redis 规范</li>
+<li>大 key 定义与治理</li>
+<li>Redis hash 使用场景，为什么不用 string</li>
+<li>Netty 连接数限制：单点 vs 集群</li>
+<li>集群长连接在线监控、多通道（userId + deviceId）如何建模（hash/bitmap/set）</li>
+<li>MyBatis-Plus 批量：批量插入/更新性能、更新条数统计<ul>
+<li>字段未变化时 update 返回值；updateTime 是否变化</li>
+</ul>
+</li>
+<li>包装类型 vs 基本类型使用场景</li>
+<li><code>Integer a=100; a==100</code> 的结果与原因（自动拆箱/缓存池）</li>
+<li><code>final</code> 修饰的 JDK 类（如 String），字符串常量池与重新赋值</li>
+<li>字符串拼接方式与日志打印：占位符 vs 拼接</li>
+</ol>
+<ul>
+<li>如何把业务 ID 放入日志头（MDC/Logback pattern）</li>
+</ul>
+<ol start="11">
+<li>下划线字段与驼峰映射：Jackson/Fastjson 配置与注解；string/list 混用兼容（自定义反序列化）</li>
+<li>泛型：使用场景；运行期擦除下如何保留类型信息（TypeReference/ParameterizedType）</li>
+<li>异步聚合：CompletableFuture 阻塞等待、对子任务设置超时</li>
+<li>超时配置：下游 HTTP 超时、MyBatis SQL 超时（全局 vs 单 SQL）</li>
+<li>Spring 条件装配：profile、@Conditional/@ConditionalOnProperty/@ConditionalOnMissingBean</li>
+<li>Kafka：分区与消费者数匹配；ack 配置；梯度重试（重试框架/延迟队列）</li>
+<li>PHP 转 Java：如何保证一致性（对比结果、回放流量、关键中间数据校验）</li>
+</ol>
+<hr>
+<h2 id="毒物-通用补充"><a href="#毒物-通用补充" class="headerlink" title="毒物 / 通用补充"></a>毒物 / 通用补充</h2><ol>
+<li>SaaS 如何分表</li>
+<li>Milvus/向量检索：流量数据、推荐场景（降低空车率/推荐货单）</li>
+<li>MQ 积压处理</li>
+<li>40 亿级数据迁移：事前/事中/事后、数据生命周期、分批迁移、可操作/可回滚</li>
+<li>线程池原理（加强自信与表达）</li>
+</ol>
+</div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/" rel="tag">技术日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-03-27.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+  var t = e && e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+  }
+}, true);
+</script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>
