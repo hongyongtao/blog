@@ -27,6 +27,7 @@ menus:
   '订阅我': /feed
   
 right_menus:
+  '面试专题': /interview
   '科技周刊': /weekly
   '访问统计': /visit
   'Github':
