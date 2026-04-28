@@ -1,0 +1,130 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>Skills 的工程化心法 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">管理架构</a></nav><nav class="right menus-right"><a href="/interview">面试专题</a><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">“情况明，决心大，方法对”   --  毛泽东</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2026%2Fai-005-skills-engineering.md">查看源代码</a></small><h1>Skills 的工程化心法</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2026-04-01</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2026/04/01/ai-005-skills-engineering/" align="left" onerror="this.style.display='none';" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/AI/">AI</a></li><li><a href="/tags/Agent/">Agent</a></li><li><a href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/">技术日志</a></li><li><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">上下文工程</a></li></ul></div><div class="markdown-body"><h2 id="阅读导航"><a href="#阅读导航" class="headerlink" title="阅读导航"></a>阅读导航</h2><ul>
+<li>先看「一、为什么 Skills 是核心」，建立问题意识</li>
+<li>再看「三、Skill 包的技术结构」，理解目录级能力单元</li>
+<li>最后看「五~七」，掌握分类法、治理与度量闭环</li>
+</ul>
+<h2 id="3-分钟结论"><a href="#3-分钟结论" class="headerlink" title="3 分钟结论"></a>3 分钟结论</h2><ol>
+<li>Skills 的本质不是提示词增强，而是 Workflow 的迁移与工程封装。  </li>
+<li>一个成熟 Skill 至少包含：索引与路由、知识补充、模板约束、脚本执行、Hook 治理。  </li>
+<li>组织级落地必须走闭环：<strong>分类 -&gt; 设计 -&gt; 分发 -&gt; 度量 -&gt; 迭代</strong>。</li>
+</ol>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-01.png"></p>
+<h2 id="一、为什么-Skills-是核心"><a href="#一、为什么-Skills-是核心" class="headerlink" title="一、为什么 Skills 是核心"></a>一、为什么 Skills 是核心</h2><p>在 Agent 实践里，记忆系统和上下文工程很重要，但真正决定“任务是否可复用落地”的往往是 Skills。</p>
+<p>原因很直接：</p>
+<ul>
+<li>记忆更像系统内部机制，外部可操作性弱</li>
+<li>Skills 可以直接承载团队方法与执行流程</li>
+<li>同一问题能否稳定复现，取决于 Skill 质量</li>
+</ul>
+<p>一句话：记忆解决“知道什么”，Skills 解决“按什么方法做”。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-02.png"></p>
+<h2 id="二、Skills-是什么"><a href="#二、Skills-是什么" class="headerlink" title="二、Skills 是什么"></a>二、Skills 是什么</h2><p>Skill 不是单个提示词文件，而是一个可维护的能力包。<br>它可以携带文档、模板、脚本、配置、数据与钩子，在不撑爆上下文的前提下提供渐进式能力展开。</p>
+<p>可把它理解为：</p>
+<blockquote>
+<p>给 Agent 使用的 SOP 包 + 约束包 + 资产包。</p>
+</blockquote>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-03.png"></p>
+<h2 id="三、Skill-包的技术结构"><a href="#三、Skill-包的技术结构" class="headerlink" title="三、Skill 包的技术结构"></a>三、Skill 包的技术结构</h2><p>典型结构：</p>
+<p><code>&lt;skill-name&gt;/ SKILL.md + references/ + assets/ + scripts/ + hooks/config/data</code></p>
+<p>其中各层职责清晰：</p>
+<ul>
+<li><code>SKILL.md</code>：入口与路由</li>
+<li><code>references/</code>：知识层</li>
+<li><code>assets/</code>：模板层</li>
+<li><code>scripts/</code>：确定性执行层</li>
+<li><code>hooks</code>：约束与埋点层</li>
+</ul>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-04.png"></p>
+<h3 id="1-SKILL-md：入口页而非知识大全"><a href="#1-SKILL-md：入口页而非知识大全" class="headerlink" title="1) SKILL.md：入口页而非知识大全"></a>1) SKILL.md：入口页而非知识大全</h3><p><code>SKILL.md</code> 的核心是调度，不是堆知识。应明确四件事：</p>
+<ol>
+<li>解决什么任务  </li>
+<li>什么场景触发  </li>
+<li>触发后按什么顺序展开  </li>
+<li>输出结果应长成什么样</li>
+</ol>
+<p>如果把所有背景都塞进入口，反而会增加误触发与理解噪音。</p>
+<h3 id="2-description：触发协议"><a href="#2-description：触发协议" class="headerlink" title="2) description：触发协议"></a>2) description：触发协议</h3><p>很多 Skill 失效不是内容差，而是 description 写成“产品简介”。<br>高质量 description 要同时回答：</p>
+<ul>
+<li>任务边界</li>
+<li>触发语义</li>
+<li>适用场景</li>
+<li>不适用场景</li>
+</ul>
+<p>这样模型才能在“该触发时触发，不该触发时克制”。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-05.png"></p>
+<h3 id="3-references-：重知识按需加载"><a href="#3-references-：重知识按需加载" class="headerlink" title="3) references/：重知识按需加载"></a>3) references/：重知识按需加载</h3><p>把低频但关键的背景知识（规则解释、历史翻车案例、字段口径）从主流程拆出，实现渐进披露。</p>
+<h3 id="4-assets-：稳定输出"><a href="#4-assets-：稳定输出" class="headerlink" title="4) assets/：稳定输出"></a>4) assets/：稳定输出</h3><p>模板、骨架、样例能显著降低“每次都写得不一样”的波动，特别适合报告、复盘、分析等固定产物场景。</p>
+<h3 id="5-scripts-：把确定性下沉"><a href="#5-scripts-：把确定性下沉" class="headerlink" title="5) scripts/：把确定性下沉"></a>5) scripts/：把确定性下沉</h3><p>模型擅长规划，不擅长机械重复。<br>凡是“可脚本化”的步骤（校验、转换、抓取、聚合）应优先下沉到脚本，模型负责调度。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-06.png"></p>
+<h3 id="6-Hook：治理与可观测关键点"><a href="#6-Hook：治理与可观测关键点" class="headerlink" title="6) Hook：治理与可观测关键点"></a>6) Hook：治理与可观测关键点</h3><p>Hook 让 Skill 从“好用”进化到“可管”：</p>
+<ul>
+<li>危险操作前拦截</li>
+<li>工具参数前置检查</li>
+<li>结果格式后置校验</li>
+<li>调用日志自动记录</li>
+</ul>
+<p>这层是组织级落地的分水岭。</p>
+<h2 id="四、运行机制：索引-gt-展开-gt-按需读取"><a href="#四、运行机制：索引-gt-展开-gt-按需读取" class="headerlink" title="四、运行机制：索引 -&gt; 展开 -&gt; 按需读取"></a>四、运行机制：索引 -&gt; 展开 -&gt; 按需读取</h2><p>Skill 不应在会话启动时全量注入，而应分层运行：</p>
+<ol>
+<li><strong>索引层</strong>：先暴露轻量目录（名称 + description）  </li>
+<li><strong>主说明层</strong>：命中后读取 <code>SKILL.md</code>  </li>
+<li><strong>按需深入层</strong>：再读取 references/assets 或执行 scripts/hooks</li>
+</ol>
+<p>该机制的核心价值是：在正确时机给正确信息，降低上下文成本。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-07.png"></p>
+<h2 id="五、九类技能分类法（组织治理视角）"><a href="#五、九类技能分类法（组织治理视角）" class="headerlink" title="五、九类技能分类法（组织治理视角）"></a>五、九类技能分类法（组织治理视角）</h2><p>为便于团队治理，可按用途将 Skill 分为九类：</p>
+<ol>
+<li>参考型（规则/文档/口径）  </li>
+<li>验证型（验收/回归/检查）  </li>
+<li>数据获取分析型（拉取/清洗/聚合）  </li>
+<li>团队流程型（SOP 迁移）  </li>
+<li>模板脚手架型（标准产物生成）  </li>
+<li>代码质量评审型（研发规范沉淀）  </li>
+<li>部署与运行保障型（高风险执行）  </li>
+<li>Runbook 型（故障处置路径）  </li>
+<li>基础设施运维型（强权限、强审计）</li>
+</ol>
+<p>分类价值不在“好看”，而在后续设计、分发、权限、测试与度量策略都可差异化。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-08.png"></p>
+<h2 id="六、设计与分发：从好用到可规模化"><a href="#六、设计与分发：从好用到可规模化" class="headerlink" title="六、设计与分发：从好用到可规模化"></a>六、设计与分发：从好用到可规模化</h2><h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ul>
+<li>不写常识，优先写 gotchas（易错点/反常识/历史坑）</li>
+<li>能脚本化的动作，别让模型用语言硬做</li>
+<li>主流程短而清晰，复杂知识外置</li>
+</ul>
+<h3 id="分发治理"><a href="#分发治理" class="headerlink" title="分发治理"></a>分发治理</h3><p>个人阶段可放项目目录；团队规模扩大后必须分层分发：</p>
+<ul>
+<li>项目专属 Skill</li>
+<li>跨项目插件 Skill</li>
+<li>组织级托管 Skill</li>
+</ul>
+<p>并建立准入门槛，避免“谁写都进主目录”造成触发冲突和上下文污染。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-09.png"></p>
+<h2 id="七、可观测闭环：让-Skill-可迭代"><a href="#七、可观测闭环：让-Skill-可迭代" class="headerlink" title="七、可观测闭环：让 Skill 可迭代"></a>七、可观测闭环：让 Skill 可迭代</h2><p>没有度量，就无法知道 Skill 是否真的创造价值。<br>建议至少监控三个核心指标：</p>
+<ol>
+<li><strong>触发率</strong>：该触发时是否命中  </li>
+<li><strong>误触发率</strong>：不该触发时是否乱触发  </li>
+<li><strong>成功率</strong>：触发后是否完成目标</li>
+</ol>
+<p>可通过 Hook（如工具调用前后埋点）建立基础观测，形成从“感觉好用”到“数据驱动优化”的转变。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-10.png"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>Skill 不是更长的提示词，而是一种新型工程单元。<br>它承载的不只是语言说明，而是知识、模板、脚本、约束与度量。</p>
+<p>当团队把工作流逐步迁移进 Skills 体系后，Agent 才会从“偶尔聪明”走向“稳定交付”。<br>这也是 Skills 在 Agent 工程里长期成为核心的根本原因。</p>
+<p><img src="/media/images/2026/ai-005-skills-engineering/img-11.png"></p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>Skills 的工程化心法</sharetitle><shareintroduce>从工程视角系统拆解 Skills：它不是“更长提示词”，而是可维护、可复用、可治理、可度量的能力包。文章覆盖 Skill 包结构、触发机制、九类分类法、组织级治理与可观测闭环。
+</shareintroduce><shareimg></shareimg><author>洪致知</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" rel="tag">上下文工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/" rel="tag">技术日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-04-28.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+  var t = e && e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+  }
+}, true);
+</script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>

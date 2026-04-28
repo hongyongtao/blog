@@ -1,0 +1,211 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>OpenClaw 上下文工程与记忆系统全解析 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">管理架构</a></nav><nav class="right menus-right"><a href="/interview">面试专题</a><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">“情况明，决心大，方法对”   --  毛泽东</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2026%2Fai-002-wechat-latest-update.md">查看源代码</a></small><h1>OpenClaw 上下文工程与记忆系统全解析</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2026-04-28</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2026/04/28/ai-002-wechat-latest-update/" align="left" onerror="this.style.display='none';" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/AI/">AI</a></li><li><a href="/tags/Agent/">Agent</a></li><li><a href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/">技术日志</a></li><li><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">上下文工程</a></li></ul></div><div class="markdown-body"><h2 id="一、什么是上下文工程"><a href="#一、什么是上下文工程" class="headerlink" title="一、什么是上下文工程"></a>一、什么是上下文工程</h2><p>很多人把“上下文”简单理解成提示词或 RAG。这个理解不算错，但不完整。</p>
+<p>更准确地说，上下文工程是一套系统化的方法：持续构建、管理、筛选、注入任务相关信息，让大模型在有限预算里稳定输出。</p>
+<p>可以抽象为：</p>
+<p><code>Context = System Prompt + User Input + 历史对话 + 工具结果 + 检索内容 + 长期记忆</code></p>
+<p>模型在当前轮次看到的所有信息，决定了它能否做出正确决策。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-01.jpg"></p>
+<h2 id="二、上下文工程要解决的三类问题"><a href="#二、上下文工程要解决的三类问题" class="headerlink" title="二、上下文工程要解决的三类问题"></a>二、上下文工程要解决的三类问题</h2><h3 id="1-减少幻觉与泛化回答"><a href="#1-减少幻觉与泛化回答" class="headerlink" title="1) 减少幻觉与泛化回答"></a>1) 减少幻觉与泛化回答</h3><p>模型训练数据不是实时和专属的。要通过外部知识注入，把最新、准确、任务相关的信息喂给模型。</p>
+<h3 id="2-应对上下文窗口限制"><a href="#2-应对上下文窗口限制" class="headerlink" title="2) 应对上下文窗口限制"></a>2) 应对上下文窗口限制</h3><p>模型有固定 token 上限。任务越复杂，越容易超限。需要在预算内做选择、压缩、截断。</p>
+<h3 id="3-提升信息可读性"><a href="#3-提升信息可读性" class="headerlink" title="3) 提升信息可读性"></a>3) 提升信息可读性</h3><p>输入若杂乱无序，模型难以理解。要把数据整理成结构化、可解释、可执行的格式。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-02.jpg"></p>
+<h2 id="三、上下文工程与提示词工程的关系"><a href="#三、上下文工程与提示词工程的关系" class="headerlink" title="三、上下文工程与提示词工程的关系"></a>三、上下文工程与提示词工程的关系</h2><ul>
+<li>提示词工程：如何提问，如何写更好的指令模板</li>
+<li>上下文工程：给模型什么背景信息，如何检索、筛选、注入</li>
+</ul>
+<p>标准流程通常是：</p>
+<ol>
+<li>上下文工程先行：先把相关知识找全、筛干净  </li>
+<li>提示词工程收尾：把“资料+问题”按模板组织后再发送</li>
+</ol>
+<p><img src="/media/images/2026/ai-002-wechat/img-03.jpg"></p>
+<h2 id="四、OpenClaw-的上下文工程分层"><a href="#四、OpenClaw-的上下文工程分层" class="headerlink" title="四、OpenClaw 的上下文工程分层"></a>四、OpenClaw 的上下文工程分层</h2><p>OpenClaw 采用流水线式设计，按职责可分为三层：</p>
+<h3 id="1-资源管理层"><a href="#1-资源管理层" class="headerlink" title="1) 资源管理层"></a>1) 资源管理层</h3><p>负责管理上下文来源与冲突处理，包括：</p>
+<ul>
+<li>用户配置</li>
+<li>工作区文档（如 <code>AGENTS.md</code>、<code>TOOLS.md</code>）</li>
+<li>对话历史</li>
+<li>工具清单</li>
+<li>长期记忆</li>
+</ul>
+<h3 id="2-组装层"><a href="#2-组装层" class="headerlink" title="2) 组装层"></a>2) 组装层</h3><p>负责把信息按固定顺序和格式装配，并处理：</p>
+<ul>
+<li>模型格式兼容</li>
+<li>历史消息清洗</li>
+<li>token 预算内取舍</li>
+</ul>
+<h3 id="3-保护层"><a href="#3-保护层" class="headerlink" title="3) 保护层"></a>3) 保护层</h3><p>负责稳定性与安全性：</p>
+<ul>
+<li>上下文溢出检测</li>
+<li>自动压缩触发</li>
+<li>过载保护，避免会话崩溃</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-04.jpg"></p>
+<h2 id="五、上下文引擎与核心构建流程"><a href="#五、上下文引擎与核心构建流程" class="headerlink" title="五、上下文引擎与核心构建流程"></a>五、上下文引擎与核心构建流程</h2><p>OpenClaw 定义了可插拔的上下文引擎接口，使默认实现可用、定制实现可扩展。</p>
+<p>典型流程如下。</p>
+<h3 id="1-系统提示词构建"><a href="#1-系统提示词构建" class="headerlink" title="1) 系统提示词构建"></a>1) 系统提示词构建</h3><p>系统提示词会定义 Agent 的身份、能力边界、可用工具和行为规则，核心包括：</p>
+<ul>
+<li>身份声明（你是什么）</li>
+<li>工具列表与调用风格</li>
+<li>安全规则</li>
+<li>Skills 引导</li>
+<li>记忆召回指令</li>
+<li>工作区与运行时元数据</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-05.jpg"></p>
+<h3 id="2-Bootstrap-文件加载"><a href="#2-Bootstrap-文件加载" class="headerlink" title="2) Bootstrap 文件加载"></a>2) Bootstrap 文件加载</h3><p>通过工作区文件注入项目级上下文，常见文件：</p>
+<ul>
+<li><code>AGENTS.md</code></li>
+<li><code>TOOLS.md</code></li>
+<li><code>MEMORY.md</code> / <code>memory.md</code></li>
+<li><code>SOUL.md</code></li>
+<li><code>IDENTITY.md</code></li>
+<li><code>USER.md</code></li>
+<li><code>HEARTBEAT.md</code></li>
+<li><code>BOOTSTRAP.md</code></li>
+</ul>
+<p>并且支持：</p>
+<ul>
+<li>单文件大小上限</li>
+<li>总加载上限</li>
+<li>会话键过滤</li>
+<li><code>full / lightweight / none</code> 三种上下文模式</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-06.jpg"></p>
+<h3 id="3-会话历史清理"><a href="#3-会话历史清理" class="headerlink" title="3) 会话历史清理"></a>3) 会话历史清理</h3><p>历史消息不能直接复用，需要清洗与修复：</p>
+<ul>
+<li>删除无效工具调用</li>
+<li>修复工具调用与结果配对</li>
+<li>处理图像超限</li>
+<li>修复跨会话标记与消息顺序</li>
+<li>提供商特定兼容处理（如不同 API 的格式限制）</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-07.jpg"></p>
+<h3 id="4-最终组装与验证"><a href="#4-最终组装与验证" class="headerlink" title="4) 最终组装与验证"></a>4) 最终组装与验证</h3><p>组装后还要做预算与格式验证：</p>
+<ul>
+<li>估算总 token</li>
+<li>超限时触发压缩或截断</li>
+<li>优先保留最近轮次</li>
+<li>按目标提供商做 schema 和顺序校验</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-08.jpg"></p>
+<h2 id="六、上下文窗口与预算策略"><a href="#六、上下文窗口与预算策略" class="headerlink" title="六、上下文窗口与预算策略"></a>六、上下文窗口与预算策略</h2><p>OpenClaw 的上下文窗口值按优先级确定：</p>
+<ol>
+<li>模型配置中的显式 <code>contextWindow</code></li>
+<li>模型元数据</li>
+<li>默认值（200000）</li>
+<li>全局上限（<code>agents.defaults.contextTokens</code>）</li>
+</ol>
+<p>保护阈值通常包括：</p>
+<ul>
+<li>硬性最小值：低于阈值直接阻止运行</li>
+<li>警告阈值：低于阈值记录告警但允许继续</li>
+</ul>
+<p>这套机制用于避免误配置导致的 OOM 或频繁溢出。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-09.jpg"></p>
+<h2 id="七、OpenClaw-记忆系统的两层结构"><a href="#七、OpenClaw-记忆系统的两层结构" class="headerlink" title="七、OpenClaw 记忆系统的两层结构"></a>七、OpenClaw 记忆系统的两层结构</h2><p>记忆并不是“一股脑塞进上下文”，而是“持久化存储 + 按需检索”。</p>
+<h3 id="第一层：Markdown-记忆源"><a href="#第一层：Markdown-记忆源" class="headerlink" title="第一层：Markdown 记忆源"></a>第一层：Markdown 记忆源</h3><ul>
+<li><code>MEMORY.md</code>：长期记忆（约定、决策、持久事实）</li>
+<li><code>memory/YYYY-MM-DD.md</code>：每日记忆（当天过程、临时讨论）</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-10.jpg"></p>
+<h3 id="第二层：向量与关键词索引"><a href="#第二层：向量与关键词索引" class="headerlink" title="第二层：向量与关键词索引"></a>第二层：向量与关键词索引</h3><p>系统会把记忆切块后构建索引，检索时采用混合检索：</p>
+<ul>
+<li>向量检索：语义相关</li>
+<li>BM25 检索：关键词精确匹配</li>
+</ul>
+<p>常见做法还包括：</p>
+<ul>
+<li>向量/关键词加权融合</li>
+<li>时间衰减（新信息权重更高）</li>
+<li>MMR 去重（避免返回重复片段）</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-11.jpg"></p>
+<h3 id="记忆访问策略"><a href="#记忆访问策略" class="headerlink" title="记忆访问策略"></a>记忆访问策略</h3><ul>
+<li>主会话自动注入长期记忆（<code>MEMORY.md</code>）</li>
+<li>每日记忆通过工具按需读取（如语义搜索 + 精确行读取）</li>
+</ul>
+<p>目标是在不爆 token 的前提下，保留“长期一致性 + 近期相关性”。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-12.jpg"></p>
+<h2 id="八、工具与-Skills-的上下文注入策略"><a href="#八、工具与-Skills-的上下文注入策略" class="headerlink" title="八、工具与 Skills 的上下文注入策略"></a>八、工具与 Skills 的上下文注入策略</h2><h3 id="工具注入"><a href="#工具注入" class="headerlink" title="工具注入"></a>工具注入</h3><p>工具来源可来自核心、插件、渠道，但不会全量注入。系统会按策略筛选：</p>
+<ul>
+<li>Profile（minimal/coding/messaging）</li>
+<li>Allow/Deny</li>
+<li>沙箱限制</li>
+<li>子 Agent 限制</li>
+<li>群组策略</li>
+</ul>
+<p>最终只把“当前可用且允许调用”的工具描述写入系统提示词。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-13.jpg"></p>
+<h3 id="Skills-注入"><a href="#Skills-注入" class="headerlink" title="Skills 注入"></a>Skills 注入</h3><p>Skills 来自内置、用户、插件、项目等多源，按优先级合并去重。并在 token 不足时降级展示格式，确保在预算内保留最关键的 skill 信息。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-14.jpg"></p>
+<h2 id="九、上下文压缩机制"><a href="#九、上下文压缩机制" class="headerlink" title="九、上下文压缩机制"></a>九、上下文压缩机制</h2><p>长期会话一定会触发压缩，典型触发方式：</p>
+<ol>
+<li>API 返回上下文溢出（自动触发）</li>
+<li>上下文达到预算阈值（自动触发）</li>
+<li>用户手动触发（命令触发）</li>
+</ol>
+<p>压缩策略分三级：</p>
+<ul>
+<li>摘要压缩：保留关键任务、决策、标识符</li>
+<li>截断压缩：直接丢弃更早历史，速度快</li>
+<li>混合压缩：摘要与截断组合，平衡质量与性能</li>
+</ul>
+<p>执行流程通常是：</p>
+<ol>
+<li>计算当前 token 使用量  </li>
+<li>设定目标（例如压到预算的 80%）  </li>
+<li>生成摘要并重构历史  </li>
+<li>原子替换历史，避免写坏会话  </li>
+<li>超时与异常保护，失败可回滚</li>
+</ol>
+<p><img src="/media/images/2026/ai-002-wechat/img-15.jpg"></p>
+<h2 id="十、可扩展架构：ContextEngine-接口"><a href="#十、可扩展架构：ContextEngine-接口" class="headerlink" title="十、可扩展架构：ContextEngine 接口"></a>十、可扩展架构：ContextEngine 接口</h2><p>上下文引擎接口覆盖完整生命周期：</p>
+<ul>
+<li><code>bootstrap</code></li>
+<li><code>ingest / ingestBatch</code></li>
+<li><code>assemble</code></li>
+<li><code>compact</code></li>
+<li><code>afterTurn</code></li>
+<li><code>prepareSubagentSpawn / onSubagentEnded</code></li>
+<li><code>dispose</code></li>
+</ul>
+<p>默认传统引擎保持向后兼容：多数方法透传或空实现，仅在压缩阶段委托到既有逻辑。这样可以让团队逐步替换成更智能的上下文引擎，而不必一次性重写系统。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-16.jpg"></p>
+<h2 id="十一、配置与调优建议"><a href="#十一、配置与调优建议" class="headerlink" title="十一、配置与调优建议"></a>十一、配置与调优建议</h2><p>常用配置项：</p>
+<ul>
+<li><code>contextTokens</code>：上下文 token 预算</li>
+<li><code>bootstrapMaxChars</code>：单个 Bootstrap 文件字符上限</li>
+<li><code>bootstrapTotalMaxChars</code>：Bootstrap 总字符上限</li>
+<li><code>compaction.mode</code>：压缩模式（auto/manual/off）</li>
+<li><code>compaction.target</code>：压缩目标（budget/threshold）</li>
+</ul>
+<p><img src="/media/images/2026/ai-002-wechat/img-17.jpg"></p>
+<p>工程实践建议：</p>
+<ol>
+<li>持续监控 token 使用，减少溢出重试  </li>
+<li>精简 Bootstrap 文件，删冗余、保关键约束  </li>
+<li>复杂任务交给子 Agent，降低主会话压力  </li>
+<li>按业务场景调压缩阈值，平衡连续性与性能</li>
+</ol>
+<p><img src="/media/images/2026/ai-002-wechat/img-18.jpg"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>OpenClaw 的核心价值不是“能聊天”，而是把上下文作为工程系统来治理：有预算、有策略、有保护、有扩展接口。</p>
+<p>本质上，它在做一件事：用有限 token，把模型最该看到的信息稳定地组织出来，并在长周期运行中保持可控与可演进。</p>
+<p><img src="/media/images/2026/ai-002-wechat/img-19.jpg"></p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>OpenClaw 上下文工程与记忆系统全解析</sharetitle><shareintroduce>聚焦 OpenClaw 的上下文工程与记忆系统设计，覆盖上下文组装、Bootstrap 注入、历史清理、压缩策略与可插拔 ContextEngine 架构。
+</shareintroduce><shareimg></shareimg><author>洪致知</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" rel="tag">上下文工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/" rel="tag">技术日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-04-28.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+  var t = e && e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+  }
+}, true);
+</script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>

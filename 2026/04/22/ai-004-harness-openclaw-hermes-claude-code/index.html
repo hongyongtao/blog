@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>Harness 到底是什么？看看 OpenClaw、Hermes、Claude Code 的演绎吧 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">管理架构</a></nav><nav class="right menus-right"><a href="/interview">面试专题</a><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">“情况明，决心大，方法对”   --  毛泽东</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2026%2Fai-004-harness-openclaw-hermes-claude-code.md">查看源代码</a></small><h1>Harness 到底是什么？看看 OpenClaw、Hermes、Claude Code 的演绎吧</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2026-04-22</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2026/04/22/ai-004-harness-openclaw-hermes-claude-code/" align="left" onerror="this.style.display='none';" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/AI/">AI</a></li><li><a href="/tags/Agent/">Agent</a></li><li><a href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/">技术日志</a></li><li><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">上下文工程</a></li></ul></div><div class="markdown-body"><h2 id="阅读导航"><a href="#阅读导航" class="headerlink" title="阅读导航"></a>阅读导航</h2><ul>
+<li>先看「一、为什么 Harness 会出现」，建立问题背景</li>
+<li>再看「三、Prompt -&gt; Context -&gt; Harness」，理解演进路径</li>
+<li>最后看「五、用 OpenClaw 理解 Harness」，落到工程实现</li>
+</ul>
+<h2 id="3-分钟结论"><a href="#3-分钟结论" class="headerlink" title="3 分钟结论"></a>3 分钟结论</h2><ol>
+<li>Harness 不是一个 SDK，也不是提示词技巧，而是让 Agent 稳定执行的系统工程集合。  </li>
+<li>Prompt 工程解决“怎么问”，上下文工程解决“喂什么”，Harness 解决“怎么持续、可控、可验证地做完”。  </li>
+<li>OpenClaw、Hermes、Claude Code 虽路线不同，但都在朝同一个方向收敛：把模型能力包进完整的运行时壳子。</li>
+</ol>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-01.png"></p>
+<h2 id="一、为什么-Harness-会出现"><a href="#一、为什么-Harness-会出现" class="headerlink" title="一、为什么 Harness 会出现"></a>一、为什么 Harness 会出现</h2><p>随着 Agent 从 Demo 走向真实任务，工程问题会集中暴露：</p>
+<ul>
+<li>工具调用不稳定</li>
+<li>长任务推进容易漂移</li>
+<li>结果看似完成但不可验证</li>
+<li>会话中断后难以续跑</li>
+</ul>
+<p>这意味着“模型更强”并不自动等于“系统更稳”。<br>Harness 的出现，本质是对这类工程现实的回应。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-02.png"></p>
+<h2 id="二、什么是-Harness"><a href="#二、什么是-Harness" class="headerlink" title="二、什么是 Harness"></a>二、什么是 Harness</h2><p>一个容易理解的映射是：</p>
+<ul>
+<li>模型 = 大脑</li>
+<li>Harness = 身体 + 工作台 + 操作规程 + 监督机制</li>
+</ul>
+<p>从工程定义看：</p>
+<blockquote>
+<p>Harness 是把模型能力转化为持续、稳定、可验证产品能力的系统集合。</p>
+</blockquote>
+<p>它关注的不再是“模型会不会答”，而是“系统能不能把任务稳定做完，并且可追溯、可恢复”。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-03.png"></p>
+<h2 id="三、Prompt-gt-Context-gt-Harness"><a href="#三、Prompt-gt-Context-gt-Harness" class="headerlink" title="三、Prompt -&gt; Context -&gt; Harness"></a>三、Prompt -&gt; Context -&gt; Harness</h2><h3 id="1-Prompt-Engineering"><a href="#1-Prompt-Engineering" class="headerlink" title="1) Prompt Engineering"></a>1) Prompt Engineering</h3><p>核心是指令设计：角色、few-shot、输出格式、模板约束等。<br>解决的是“如何让模型更好地理解当前问题”。</p>
+<h3 id="2-Context-Engineering"><a href="#2-Context-Engineering" class="headerlink" title="2) Context Engineering"></a>2) Context Engineering</h3><p>核心是信息组织：历史保留、检索注入、压缩策略、上下文预算。<br>解决的是“模型这一轮到底该看到什么”。</p>
+<h3 id="3-Harness-Engineering"><a href="#3-Harness-Engineering" class="headerlink" title="3) Harness Engineering"></a>3) Harness Engineering</h3><p>当 Agent 进入工具调用、长链任务、子任务委派、错误恢复后，问题升级为：</p>
+<ul>
+<li>如何推进任务而不失控</li>
+<li>如何验证是否真的完成</li>
+<li>如何中断后恢复</li>
+<li>如何沉淀经验并复用</li>
+</ul>
+<p>这时就必须从“输入工程”上升到“运行时工程”。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-04.png"></p>
+<h2 id="四、三种框架的-Harness-取向"><a href="#四、三种框架的-Harness-取向" class="headerlink" title="四、三种框架的 Harness 取向"></a>四、三种框架的 Harness 取向</h2><h2 id="1-OpenClaw：先把-Agent-管住"><a href="#1-OpenClaw：先把-Agent-管住" class="headerlink" title="1) OpenClaw：先把 Agent 管住"></a>1) OpenClaw：先把 Agent 管住</h2><p>OpenClaw 更强调边界、权限、沙箱、技能治理与运行时控制。<br>工程目标偏“受控执行”：先把风险和能力平面约束好，再放任务推进。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-05.png"></p>
+<h2 id="2-Hermes：先让-Agent-长本事"><a href="#2-Hermes：先让-Agent-长本事" class="headerlink" title="2) Hermes：先让 Agent 长本事"></a>2) Hermes：先让 Agent 长本事</h2><p>Hermes 的重心是学习闭环：</p>
+<ul>
+<li>从经验生成技能</li>
+<li>使用中持续修订</li>
+<li>通过记忆与会话检索增强跨会话能力</li>
+</ul>
+<p>工程目标偏“持续成长”：先让个体 Agent 越用越强，再逐步补治理层。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-06.png"></p>
+<h2 id="3-Claude-Code：把工程壳子产品化"><a href="#3-Claude-Code：把工程壳子产品化" class="headerlink" title="3) Claude Code：把工程壳子产品化"></a>3) Claude Code：把工程壳子产品化</h2><p>Claude Code 的价值不止在模型效果，而在“工具链 + agent loop + context management”的完整产品化。<br>其公开方法论持续强调 long-running agents 与 harness design，说明工程壳子本身已成为一等能力。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-07.png"></p>
+<h2 id="五、拆解-Harness：七层能力模型"><a href="#五、拆解-Harness：七层能力模型" class="headerlink" title="五、拆解 Harness：七层能力模型"></a>五、拆解 Harness：七层能力模型</h2><h2 id="1-角色与规则层"><a href="#1-角色与规则层" class="headerlink" title="1) 角色与规则层"></a>1) 角色与规则层</h2><p>先定义身份、边界、职责与异常策略，避免任务开始即失控。</p>
+<h2 id="2-记忆系统层"><a href="#2-记忆系统层" class="headerlink" title="2) 记忆系统层"></a>2) 记忆系统层</h2><p>保留任务过程、偏好、决策与经验，支持跨会话接续。</p>
+<h2 id="3-上下文加载层"><a href="#3-上下文加载层" class="headerlink" title="3) 上下文加载层"></a>3) 上下文加载层</h2><p>每轮只给模型最相关信息，避免“看太少像失忆、看太多变迟钝”。</p>
+<h2 id="4-稳定执行层"><a href="#4-稳定执行层" class="headerlink" title="4) 稳定执行层"></a>4) 稳定执行层</h2><p>把语言判断稳定转成真实动作：工具调用、文件操作、外部系统交互。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-08.png"></p>
+<h2 id="5-有效循环层"><a href="#5-有效循环层" class="headerlink" title="5) 有效循环层"></a>5) 有效循环层</h2><p>管理“理解 -&gt; 执行 -&gt; 反馈 -&gt; 再决策”的循环效率，防止空耗 token。</p>
+<h2 id="6-评分与可观测层"><a href="#6-评分与可观测层" class="headerlink" title="6) 评分与可观测层"></a>6) 评分与可观测层</h2><p>引入测试、日志、验收、指标与人工审查，避免“模型自评完成”。</p>
+<h2 id="7-中断修复层"><a href="#7-中断修复层" class="headerlink" title="7) 中断修复层"></a>7) 中断修复层</h2><p>支持超时、失败、切会话后的恢复续跑，保证长任务可达终点。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-09.png"></p>
+<h2 id="六、用-OpenClaw-进一步理解-Harness"><a href="#六、用-OpenClaw-进一步理解-Harness" class="headerlink" title="六、用 OpenClaw 进一步理解 Harness"></a>六、用 OpenClaw 进一步理解 Harness</h2><h3 id="1-MCP-工具链层"><a href="#1-MCP-工具链层" class="headerlink" title="1) MCP / 工具链层"></a>1) MCP / 工具链层</h3><p>Skills 决定“怎么做”，工具链决定“能不能做”。<br>外部 API、权限和插件天然不稳定，因此必须纳入受控运行时平面处理。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-10.png"></p>
+<h3 id="2-Skills-方法层"><a href="#2-Skills-方法层" class="headerlink" title="2) Skills 方法层"></a>2) Skills 方法层</h3><p>Skills 是高频方法沉淀机制，但也会引入污染风险。<br>所以需要受控加载、来源优先级、路径约束与覆盖策略做兜底。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-11.png"></p>
+<h3 id="3-Runtime-推进层"><a href="#3-Runtime-推进层" class="headerlink" title="3) Runtime 推进层"></a>3) Runtime 推进层</h3><p>复杂任务必须靠循环推进与状态治理：</p>
+<ul>
+<li>当前做到哪一步</li>
+<li>下一步谁执行</li>
+<li>什么时候暂停/打回/重试</li>
+</ul>
+<p>这层决定 Agent 是“会做几步”还是“能完整收口”。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-12.png"></p>
+<h2 id="七、工程视角的最终判断"><a href="#七、工程视角的最终判断" class="headerlink" title="七、工程视角的最终判断"></a>七、工程视角的最终判断</h2><p>Harness 的本质不是新术语，而是工程系统自然演进结果：</p>
+<ol>
+<li>先接工具  </li>
+<li>发现不稳，补规则  </li>
+<li>规则不够，补技能  </li>
+<li>技能不够，补运行时与工作流  </li>
+<li>结果不可证，补可观测与评分  </li>
+<li>任务可中断，补恢复与接续</li>
+</ol>
+<p>当这些能力都必须一起工作时，Harness 就从概念变成了必选项。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-13.png"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>Harness 不是某个单点优化，而是一条工程化路径：<br>让 Agent 从“会答”走到“会做”，再走到“稳定做完”。</p>
+<p>未来它可能不叫 Harness，但这条路不会消失。<br>任何想做生产级 Agent 的团队，最终都要走到这一步。</p>
+<p><img src="/media/images/2026/ai-004-harness-openclaw-hermes-claude-code/img-14.png"></p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>Harness 到底是什么？看看 OpenClaw、Hermes、Claude Code 的演绎吧</sharetitle><shareintroduce>从工程实践视角拆解 Harness 的真实含义：它不是单一模块，而是让 Agent 从“会答”走向“稳定做完”的系统集合。文中结合 OpenClaw、Hermes、Claude Code 的设计路径，梳理 Prompt、Context 到 Harness 的演进逻辑。
+</shareintroduce><shareimg></shareimg><author>洪致知</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" rel="tag">上下文工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/" rel="tag">技术日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-04-28.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+  var t = e && e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+  }
+}, true);
+</script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>

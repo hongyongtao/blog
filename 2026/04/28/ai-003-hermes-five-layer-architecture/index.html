@@ -1,0 +1,147 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/avatars/v1.ico"><link rel="alternate" type="application/rss+xml" title="洪致知的个人网站" href="/atom.xml"><link rel="stylesheet" href="/styles.css"><title>OpenClaw vs Hermes：拆解 Hermes Agent 五层架构 | 洪致知的个人网站</title><meta name="generator" content="Hexo 5.4.1"></head><body><div class="container"><div class="columns page-header"><h1>洪致知的个人网站</h1></div><div class="columns"><div class="navigation"><nav class="menus-main"><a href="/" class="favicon"><img alt="洪致知的个人网站" src="/avatars/v1.ico"></a><a href="/about">关于我</a><a href="/resume">简历</a><a href="/booklist">在读书单</a><a href="/podcasts">在听播客</a><a href="/list">技术日志</a><a href="/live">生活掠影</a><a href="/happened">日常叨叨叨</a><a href="/feed">管理架构</a></nav><nav class="right menus-right"><a href="/interview">面试专题</a><a href="/weekly">科技周刊</a><a href="/visit">访问统计</a><a target="_blank" href="https://github.com/hongyongtao/blog">Github</a></nav></div></div><div class="columns"><div class="block-body column three-fourths"><div class="article-widget">“情况明，决心大，方法对”   --  毛泽东</div><article><header><small class="right"><a target="_blank" href="https://github.com/hongyongtao/blog/blob/master/source/_posts%2F2026%2Fai-003-hermes-five-layer-architecture.md">查看源代码</a></small><h1>OpenClaw vs Hermes：拆解 Hermes Agent 五层架构</h1></header><div class="article-meta clearfix"><div class="post-meta-avatars"><figure class="post-meta-avatar"><a target="_blank" href="/about"><img src="/avatars/me.jpg"/></a></figure></div><author class="left">洪致知</author><time class="left">2026-04-28</time><img src="https://visitor-badge.glitch.me/badge?page_id=hongyongtao.blog./2026/04/28/ai-003-hermes-five-layer-architecture/" align="left" onerror="this.style.display='none';" class="img-visitor"/><ul class="tags left"></ul><ul class="tags right"><li><a href="/tags/AI/">AI</a></li><li><a href="/tags/Agent/">Agent</a></li><li><a href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/">技术日志</a></li><li><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">上下文工程</a></li></ul></div><div class="markdown-body"><h2 id="阅读导航"><a href="#阅读导航" class="headerlink" title="阅读导航"></a>阅读导航</h2><ul>
+<li>先看「二、五层架构总览」，建立全局认知</li>
+<li>再看「四~七」，掌握主循环、提示词、记忆与故障恢复</li>
+<li>最后看「八~九」，理解返回链路与自进化机制</li>
+</ul>
+<h2 id="3-分钟结论"><a href="#3-分钟结论" class="headerlink" title="3 分钟结论"></a>3 分钟结论</h2><ol>
+<li>Hermes 的主线价值是把多平台接入、运行时治理、工具执行与持久化串成一条稳定链路。  </li>
+<li>与 OpenClaw 相比，Hermes 在 Profile 隔离、脚本型工具预算策略、后台技能复盘上更激进。  </li>
+<li>其核心工程取舍是：<strong>缓存命中优先、会话可追溯优先、错误分流优先、主任务延迟优先</strong>。</li>
+</ol>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-01.jpg"></p>
+<h2 id="一、分析方法：跟一条消息走完整链路"><a href="#一、分析方法：跟一条消息走完整链路" class="headerlink" title="一、分析方法：跟一条消息走完整链路"></a>一、分析方法：跟一条消息走完整链路</h2><p>要读懂 Agent 源码，最有效的方法不是先看模块图，而是跟一条消息从输入到输出完整走一遍。</p>
+<p>示例任务：</p>
+<blockquote>
+<p>帮我搜集今天的热点新闻，每条新闻要分类并附简要分析。</p>
+</blockquote>
+<p>这类请求会触发检索、抽取、归类、摘要、结构化输出，天然会覆盖工具调用、并行执行、上下文更新、错误恢复等关键路径。</p>
+<h2 id="二、五层架构总览"><a href="#二、五层架构总览" class="headerlink" title="二、五层架构总览"></a>二、五层架构总览</h2><p>Hermes 的整体结构可抽象为五层：</p>
+<ol>
+<li><strong>入口层</strong>：CLI + 多平台适配器  </li>
+<li><strong>网关层</strong>：GatewayRunner（连接、会话、命令）  </li>
+<li><strong>执行层</strong>：AIAgent 主循环（推理、工具、恢复）  </li>
+<li><strong>扩展层</strong>：工具注册、技能系统、子 Agent、MCP、外部记忆  </li>
+<li><strong>存储层</strong>：SQLite/FTS、记忆文件、配置与密钥</li>
+</ol>
+<p>消息主链路：</p>
+<p><code>终端输入 -&gt; 解析与路由 -&gt; 会话加载 -&gt; 上下文组装 -&gt; 模型推理 -&gt; 工具执行 -&gt; 流式返回 -&gt; 状态落盘</code></p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-02.jpg"></p>
+<h2 id="三、入口统一：适配器模式"><a href="#三、入口统一：适配器模式" class="headerlink" title="三、入口统一：适配器模式"></a>三、入口统一：适配器模式</h2><p>Hermes 支持多平台，不同平台消息格式和传输机制差异很大。其策略是：</p>
+<ul>
+<li>平台侧各自监听和解析原始事件</li>
+<li>统一映射成内部消息对象（如 <code>MessageEvent</code>）</li>
+<li>核心执行层只面对统一协议，不关心来源平台细节</li>
+</ul>
+<p>这是典型适配器模式：入口收敛格式，出口再按平台反向展开。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-03.jpg"></p>
+<h2 id="四、网关隔离：Profile-级环境切换"><a href="#四、网关隔离：Profile-级环境切换" class="headerlink" title="四、网关隔离：Profile 级环境切换"></a>四、网关隔离：Profile 级环境切换</h2><p>Gateway 启动会完成证书探测、环境变量加载、配置桥接、适配器启动等步骤。<br>真正有工程价值的是 <strong>Profile 隔离</strong>：</p>
+<ul>
+<li>每个 Profile 拥有独立配置、密钥、记忆、会话历史</li>
+<li>通过环境变量统一切换主目录</li>
+<li>一台机器可并行运行“工作 Agent / 个人 Agent”且互不污染</li>
+</ul>
+<p>删除 Profile 时，会连带清理进程与相关注册，保证状态闭环。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-04.jpg"></p>
+<h2 id="五、执行核心：AIAgent-主循环"><a href="#五、执行核心：AIAgent-主循环" class="headerlink" title="五、执行核心：AIAgent 主循环"></a>五、执行核心：AIAgent 主循环</h2><p>主循环本质上是“推理 -&gt; 判定是否调工具 -&gt; 执行 -&gt; 再推理”的迭代：</p>
+<ul>
+<li>有 <code>tool_calls</code>：执行工具并继续循环</li>
+<li>无 <code>tool_calls</code>：返回最终文本</li>
+<li>预算耗尽或中断：安全退出并落盘</li>
+</ul>
+<h3 id="迭代预算设计"><a href="#迭代预算设计" class="headerlink" title="迭代预算设计"></a>迭代预算设计</h3><ul>
+<li>父 Agent 与子 Agent 有独立轮次预算</li>
+<li>每轮推理消耗一次预算</li>
+<li>当本轮只执行脚本型工具（<code>execute_code</code>）时可触发 refund 机制</li>
+</ul>
+<p>这个设计在“脚本密集任务”中能显著减少预算浪费，把预算留给真正推理轮次。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-05.jpg"></p>
+<h3 id="工具并行执行策略"><a href="#工具并行执行策略" class="headerlink" title="工具并行执行策略"></a>工具并行执行策略</h3><p>Hermes 按工具风险分组：</p>
+<ul>
+<li>明确不可并行（涉及用户交互）</li>
+<li>只读工具可并行</li>
+<li>路径相关工具按目标路径冲突检测并行/串行</li>
+</ul>
+<p>这样能在保证一致性的前提下压缩总耗时。</p>
+<h3 id="子-Agent-委托（delegate-task）"><a href="#子-Agent-委托（delegate-task）" class="headerlink" title="子 Agent 委托（delegate_task）"></a>子 Agent 委托（<code>delegate_task</code>）</h3><p>子 Agent 拥有独立上下文与预算，但受严格边界限制（工具白名单、深度限制、并发上限、级联中断），目的是“并行扩展能力”而非“无限递归”。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-06.jpg"></p>
+<h2 id="六、系统提示词组装与安全扫描"><a href="#六、系统提示词组装与安全扫描" class="headerlink" title="六、系统提示词组装与安全扫描"></a>六、系统提示词组装与安全扫描</h2><p>系统提示词通常按以下顺序拼装：</p>
+<p><code>身份 -&gt; 工具行为引导 -&gt; 外部指令 -&gt; 记忆 -&gt; 技能索引 -&gt; 项目上下文 -&gt; 运行时元数据</code></p>
+<p>关键点：</p>
+<ul>
+<li>稳定内容放前，动态内容放后，提高前缀缓存命中率</li>
+<li>针对不同模型家族注入不同工具使用约束</li>
+<li>项目上下文文件注入前做安全扫描，拦截注入与外泄模式</li>
+</ul>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-07.jpg"></p>
+<h2 id="七、记忆系统：快照一致性与按需检索"><a href="#七、记忆系统：快照一致性与按需检索" class="headerlink" title="七、记忆系统：快照一致性与按需检索"></a>七、记忆系统：快照一致性与按需检索</h2><p>Hermes 采用“文件持久化 + 冻结快照 + 外部 Provider”的组合方案：</p>
+<ul>
+<li><code>MEMORY.md</code>：Agent 长期工作事实</li>
+<li><code>USER.md</code>：用户偏好与习惯</li>
+<li>会话开始时注入快照，会话内写入磁盘但不重建系统提示词</li>
+</ul>
+<p>这样做的代价是“会话内记忆不是强实时”，收益是“缓存命中稳定、响应成本可控”。</p>
+<p>同时，记忆写入也有安全扫描，避免把恶意指令固化成长期后门。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-08.jpg"></p>
+<h2 id="八、自我修复：压缩、分类恢复、可中断"><a href="#八、自我修复：压缩、分类恢复、可中断" class="headerlink" title="八、自我修复：压缩、分类恢复、可中断"></a>八、自我修复：压缩、分类恢复、可中断</h2><p>Hermes 不靠单一大异常处理，而是将错误先分类，再映射到动作标记：</p>
+<ul>
+<li>是否可重试</li>
+<li>是否先压缩上下文</li>
+<li>是否轮换凭证</li>
+<li>是否切换后备模型</li>
+</ul>
+<h3 id="上下文压缩"><a href="#上下文压缩" class="headerlink" title="上下文压缩"></a>上下文压缩</h3><p>压缩流程通常包括：</p>
+<ol>
+<li>先裁掉旧工具输出  </li>
+<li>保护系统提示词与最近有效轮次  </li>
+<li>中间历史摘要化  </li>
+<li>触发后重建系统提示词与记忆快照</li>
+</ol>
+<h3 id="会话链"><a href="#会话链" class="headerlink" title="会话链"></a>会话链</h3><p>压缩不是覆盖原会话，而是：</p>
+<ul>
+<li>保留原会话全文</li>
+<li>新建会话承接摘要</li>
+<li>用 <code>parent_session_id</code> 形成可追溯链</li>
+</ul>
+<p>这样模型层可控，数据层不丢历史。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-09.jpg"></p>
+<h2 id="九、返回链路与技能自进化"><a href="#九、返回链路与技能自进化" class="headerlink" title="九、返回链路与技能自进化"></a>九、返回链路与技能自进化</h2><h3 id="流式返回与平台回写"><a href="#流式返回与平台回写" class="headerlink" title="流式返回与平台回写"></a>流式返回与平台回写</h3><p>生成结果通过流式机制回传，网关层做节流与平台格式适配。<br>附件走统一指令格式，在出口侧转为各平台附件 API。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-10.jpg"></p>
+<h3 id="自进化机制"><a href="#自进化机制" class="headerlink" title="自进化机制"></a>自进化机制</h3><p>Hermes 将技能增长拆成两路信号：</p>
+<ol>
+<li>系统提示词引导模型在合适时机主动沉淀技能  </li>
+<li>后台周期性复盘，判断是否新增/更新技能</li>
+</ol>
+<p>而且复盘在用户响应完成后异步执行，避免与主任务争抢延迟预算。</p>
+<p><img src="/media/images/2026/ai-003-hermes-five-layer-architecture/img-11.png"></p>
+<h2 id="十、与-OpenClaw-的工程对比（要点）"><a href="#十、与-OpenClaw-的工程对比（要点）" class="headerlink" title="十、与 OpenClaw 的工程对比（要点）"></a>十、与 OpenClaw 的工程对比（要点）</h2><ul>
+<li><strong>共同点</strong>：都重视上下文治理、工具路由、记忆体系、可恢复性  </li>
+<li><strong>Hermes 强项</strong>：Profile 隔离、脚本工具预算优化、后台技能复盘  </li>
+<li><strong>OpenClaw 强项</strong>：运行时链路治理粒度更细，层次边界更清晰</li>
+</ul>
+<p>本质上，两者都在回答同一问题：如何让 Agent 在长周期、多工具、跨平台条件下持续稳定工作。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>Hermes 的可取之处不只在“功能多”，而在其工程化取舍：</p>
+<ul>
+<li>让核心链路保持统一协议</li>
+<li>让错误恢复可分类、可调度</li>
+<li>让上下文和记忆分层治理</li>
+<li>让经验沉淀在后台持续发生</li>
+</ul>
+<p>如果你正在做生产级 Agent，最值得借鉴的不是某个单点技巧，而是这种“稳定性优先”的运行时思维。</p>
+</div><share-info><div id="qrcode"></div><div class="share-card"></div><sharetitle>OpenClaw vs Hermes：拆解 Hermes Agent 五层架构</sharetitle><shareintroduce>以一条真实任务链路为主线，拆解 Hermes Agent 的五层架构与关键运行机制，重点覆盖适配器统一、网关隔离、主循环预算、记忆快照、压缩恢复与技能自进化，并与 OpenClaw 做工程视角对比。
+</shareintroduce><shareimg></shareimg><author>洪致知</author></share-info><div class="giscus"></div></article></div><div class="block-sidebar column one-fourth"><div class="widget text-content"><p>Hi, 我是洪致知，一名软件工程师，坚定不移热爱技术，平时喜欢捣鼓一些小创意，有很多理想，也有点理想主义。</p>
+<p>CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">我要去腾讯</a></p>
+</div><div class="widget text-content"><p>欢迎通过以下方式联系我：<br/>
+GitHub: <a href="https://github.com/hongyongtao/blog" target="_blank">hongyongtao/blog</a><br/>
+CSDN: <a href="https://blog.csdn.net/qq_44295125" target="_blank">博客主页</a><br/>
+Email: <a href="mailto:hythyt8989@sina.com">hythyt8989@sina.com</a> </p>
+</div><div class="widget tags"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aop/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/" rel="tag">CAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioc/" rel="tag">IOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volatile/" rel="tag">volatile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy-to-read/" rel="tag">一文读懂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" rel="tag">上下文工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/midlife-crisis/" rel="tag">中年危机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/artificial-intelligence/" rel="tag">人工智能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life-goal/" rel="tag">人生目标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vacation/" rel="tag">假期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%AE%A4/" rel="tag">办公室</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-proxy/" rel="tag">动态代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%86%E4%BC%AF%E7%89%B9%E5%8E%9F%E5%88%99/" rel="tag">呆伯特原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ar/" rel="tag">增强现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multithreading/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent-programming/" rel="tag">并发编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/parallelism/" rel="tag">并行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%BC%E5%BE%97%E5%8E%9F%E5%88%99/" rel="tag">彼得原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%BF%97/" rel="tag">技术日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travel/" rel="tag">旅游</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/" rel="tag">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/momsday/" rel="tag">母亲节</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E5%B0%94%E9%9F%A6%E5%8E%9F%E5%88%99/" rel="tag">热尔韦原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anxious/" rel="tag">焦虑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rational/" rel="tag">理性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/painter/" rel="tag">画家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekly/" rel="tag">科技周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programmer/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meituan/" rel="tag">美团</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vr/" rel="tag">虚拟现实</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layoffs/" rel="tag">裁员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/translation/" rel="tag">译文集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/runnning/" rel="tag">跑步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/marathon/" rel="tag">马拉松</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hacker/" rel="tag">黑客</a></li></ul></div><div class="widget archives"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">2</span></li></ul></div><div class="widget text-content"><p>该博客使用基于 &nbsp;<a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>&nbsp; 的 &nbsp;<a target="_blank" rel="noopener" href="https://github.com/jysperm/hexo-theme-simpleblock">simpleblock</a>&nbsp; 主题。博客内容使用 &nbsp;<a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn">CC BY-NC-SA 3.0</a>&nbsp; 授权发布。最后生成于 2026-04-28.</p></div></div></div></div><script src="https://www.googletagmanager.com/gtag/js?G-XWB09PF43E"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XWB09PF43E');
+</script><script src="https://www.panshenlian.com/scripts/plugin/qrcode.min.js"></script><script src="https://www.panshenlian.com/scripts/plugin/share-card.js"></script><script src="https://giscus.app/client.js" data-repo="senlypan/blog" data-repo-id="R_kgDOG2Hl5g" data-category="General" data-category-id="DIC_kwDOG2Hl5s4COi-5" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="zh-CN" crossorigin="anonymous" async></script><!-- Hide any broken image globally to avoid broken icon placeholders.--><script>document.addEventListener('error', function (e) {
+  var t = e && e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+  }
+}, true);
+</script><div class="columns footer-copyright"><p>© 2020 - 2024 潘深练个人网站 · <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">豫ICP备2020034308号-1</a><img src="https://visitor-badge.glitch.me/badge?page_id=senlypan.blog" class="img-visitor-home"></p></div></body></html>
